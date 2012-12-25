@@ -126,17 +126,7 @@ public class ExecutionContext implements ExecutionEventProvider {
 		 * Locus initialization
 		 */
 		this.locus = new Locus();
-		this.locus.setFactory(new ExecutionFactoryL3() {
-			@Override
-			public OpaqueBehaviorExecution instantiateOpaqueBehaviorExecution(
-					OpaqueBehavior behavior) {
-				if (behavior.language.contains(ALF_LANGUAGE_NAME)) {
-					return new ALFBehaviorExecution(behavior);
-				} else {
-					return super.instantiateOpaqueBehaviorExecution(behavior);
-				}
-			}
-		});
+		this.locus.setFactory(createALFEnabledExecutionFactory());
 		this.locus.setExecutor(new Executor());
 
 		this.locus.factory.setStrategy(new RedefinitionBasedDispatchStrategy());
@@ -149,6 +139,20 @@ public class ExecutionContext implements ExecutionEventProvider {
 		typeUnlimitedNatural = this.createPrimitiveType("UnlimitedNatural");
 
 		initializeProvidedBehaviors();
+	}
+
+	private ExecutionFactoryL3 createALFEnabledExecutionFactory() {
+		return new ExecutionFactoryL3() {
+			@Override
+			public OpaqueBehaviorExecution instantiateOpaqueBehaviorExecution(
+					OpaqueBehavior behavior) {
+				if (behavior.language.contains(ALF_LANGUAGE_NAME)) {
+					return new ALFBehaviorExecution(behavior);
+				} else {
+					return super.instantiateOpaqueBehaviorExecution(behavior);
+				}
+			}
+		};
 	}
 
 	private void initializeProvidedBehaviors() {
