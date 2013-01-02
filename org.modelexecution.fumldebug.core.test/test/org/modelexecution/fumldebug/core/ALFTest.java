@@ -21,16 +21,16 @@ public class ALFTest {
 		Parameter inParameter = ActivityFactory.createParameter("input",
 				ParameterDirectionKind.in,
 				executionContext.getPrimitivIntegerType());
-		Parameter outParameter = ActivityFactory.createParameter("output",
-				ParameterDirectionKind.out,
+		Parameter outParameter = ActivityFactory.createParameter("",
+				ParameterDirectionKind.return_,
 				executionContext.getPrimitivIntegerType());
 		OpaqueBehavior alfBehavior = new OpaqueBehavior();
 		alfBehavior.ownedParameter.add(inParameter);
 		alfBehavior.ownedParameter.add(outParameter);
 		alfBehavior.setName("IncreaseInteger");
 		alfBehavior.language.add(ALF_LANGUAGE_NAME);
-		String alfCode = "activity increaseInteger(in input: Integer, out output: Integer) {"
-				+ "\n" + "output = input + 1" + "\n" + "}";
+		String alfCode = "activity increaseInteger(in input: Integer): Integer {"
+				+ "if (input > 0) { return input + 1; } else {return 0;}" + "}";
 		alfBehavior.body.add(alfCode);
 
 		ParameterValue parameterValue = new ParameterValue();
