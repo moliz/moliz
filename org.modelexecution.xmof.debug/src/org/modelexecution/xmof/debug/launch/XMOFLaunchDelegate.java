@@ -9,6 +9,7 @@
  */
 package org.modelexecution.xmof.debug.launch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -71,12 +72,14 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 			throws CoreException {
 
 		Collection<EObject> inputModelElements = loadInputModelElements(configuration);
+		Collection<EObject> initializationModelElements = loadInitializationModelElements(configuration);
 
 		if (useConfigurationMetamodel(configuration)) {
 			String confMetamodelPath = getConfigurationMetamodelPath(configuration);
 			Collection<EPackage> configurationPackages = loadConfigurationMetamodel(confMetamodelPath);
 			configurationMap = new ConfigurationObjectMap(inputModelElements,
-					configurationPackages);
+					configurationPackages, initializationModelElements);
+
 			return new XMOFBasedModel(
 					configurationMap.getConfigurationObjects());
 		} else {
@@ -103,10 +106,27 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 		Collection<EPackage> confMMPackages = new ArrayList<EPackage>();
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof EPackage) {
-				confMMPackages.add((EPackage) eObject);
+				EPackage ePackage = (EPackage) eObject;
+				if (EPackage.Registry.INSTANCE.containsKey(ePackage.getNsURI())) {
+					EPackage registeredPackage = (EPackage) EPackage.Registry.INSTANCE
+							.get(ePackage.getNsURI());
+					reloadPackage(registeredPackage);
+					confMMPackages.add(registeredPackage);
+				} else {
+					confMMPackages.add(ePackage);
+				}
 			}
 		}
 		return confMMPackages;
+	}
+
+	private void reloadPackage(EPackage registeredPackage) {
+		try {
+			registeredPackage.eResource().unload();
+			registeredPackage.eResource().load(null);
+		} catch (IOException e) {
+			// do not reload if IO exception
+		}
 	}
 
 	private Resource loadResource(String path) {
@@ -119,6 +139,27 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 		String modelPath = getModelPath(configuration);
 		Collection<EObject> inputModelElements = getInputModelElements(modelPath);
 		return inputModelElements;
+	}
+
+	private Collection<EObject> loadInitializationModelElements(
+			ILaunchConfiguration configuration) throws CoreException {
+		String modelPath = getInitializationModelPath(configuration);
+		Collection<EObject> initializationModelElements = getInitializationModelElements(modelPath);
+		return initializationModelElements;
+	}
+
+	private String getInitializationModelPath(ILaunchConfiguration configuration)
+			throws CoreException {
+		return configuration.getAttribute(XMOFDebugPlugin.ATT_INIT_MODEL_PATH,
+				(String) null);
+	}
+
+	private Collection<EObject> getInitializationModelElements(String modelPath) {
+		if (modelPath == null || modelPath == "") {
+			return null;
+		}
+		Resource resource = loadResource(modelPath);
+		return resource.getContents();
 	}
 
 	private String getModelPath(ILaunchConfiguration configuration)
@@ -146,12 +187,14 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 		Collection<Profile> configurationProfiles = getConfigurationProfile(
 				configuration, xMOFProcess.getModel());
 		if (configurationProfiles.size() > 0 && configurationMap != null) {
-			Resource profileApplicationResource = loadConfigurationProfileApplicationResource(
-					configuration, xMOFProcess.getModel());
 			ProfileApplicationGenerator generator = new ProfileApplicationGenerator(
 					xMOFProcess.getModel(), configurationProfiles,
-					configurationMap);
-			generator.setProfileApplicationResource(profileApplicationResource);
+					configurationMap, xMOFProcess.getVirtualMachine()
+							.getInstanceMap());
+			URI profileApplicationURI = getConfigurationProfileApplicationURI(
+					configuration, xMOFProcess.getModel());
+			generator.setProfileApplicationURI(profileApplicationURI);
+			generator.setResourceSet(resourceSet);
 			xMOFProcess.getVirtualMachine()
 					.addVirtualMachineListener(generator);
 		}
@@ -161,7 +204,7 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 			ILaunchConfiguration configuration, XMOFBasedModel model) {
 		// TODO decide based on a user selection in the launch config UI and
 		// don't take all
-		Collection<Profile> profiles = IProfileRegistry.eINSTANCE
+		Collection<Profile> profiles = IProfileRegistry.INSTANCE
 				.getRegisteredProfiles();
 		Collection<Profile> configProfiles = new ArrayList<Profile>();
 		for (Profile profile : profiles) {
@@ -188,14 +231,14 @@ public class XMOFLaunchDelegate extends LaunchConfigurationDelegate {
 		return profile.getName().equals(ePackage.getName() + "Profile");
 	}
 
-	private Resource loadConfigurationProfileApplicationResource(
+	private URI getConfigurationProfileApplicationURI(
 			ILaunchConfiguration configuration, XMOFBasedModel model)
 			throws CoreException {
 		URI uri = getConfigurationProfileApplicationURI(configuration);
 		if (uri == null) {
 			uri = createConfigurationProfileApplicationURI(configuration);
 		}
-		return resourceSet.createResource(uri);
+		return uri;
 	}
 
 	private URI getConfigurationProfileApplicationURI(
