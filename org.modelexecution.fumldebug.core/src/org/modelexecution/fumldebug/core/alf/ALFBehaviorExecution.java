@@ -13,35 +13,26 @@ import java.io.ByteArrayInputStream;
 import java.util.Collection;
 
 import org.modeldriven.alf.fuml.impl.execution.Locus;
-import org.modeldriven.alf.fuml.impl.mapping.FumlMappingFactory;
-import org.modeldriven.alf.fuml.impl.units.RootNamespaceImpl;
 import org.modeldriven.alf.fuml.mapping.FumlMapping;
+import org.modeldriven.alf.fuml.mapping.FumlMappingFactory;
 import org.modeldriven.alf.fuml.mapping.common.ElementReferenceMapping;
 import org.modeldriven.alf.fuml.mapping.units.ClassifierDefinitionMapping;
-import org.modeldriven.alf.mapping.Mapping;
 import org.modeldriven.alf.mapping.MappingError;
 import org.modeldriven.alf.parser.ParseException;
 import org.modeldriven.alf.parser.Parser;
 import org.modeldriven.alf.syntax.common.ElementReference;
 import org.modeldriven.alf.syntax.expressions.QualifiedName;
-import org.modeldriven.alf.syntax.statements.Block;
-import org.modeldriven.alf.syntax.statements.IfStatement;
-import org.modeldriven.alf.syntax.statements.Statement;
 import org.modeldriven.alf.syntax.units.ActivityDefinition;
 import org.modeldriven.alf.syntax.units.RootNamespace;
-import org.modeldriven.alf.syntax.units.UnitDefinition;
 import org.modeldriven.alf.syntax.units.impl.ModelNamespaceImpl;
 import org.modeldriven.alf.uml.Class_;
 import org.modeldriven.alf.uml.Classifier;
-import org.modeldriven.alf.uml.DataType;
 import org.modeldriven.alf.uml.Element;
 import org.modeldriven.alf.uml.ElementFactory;
 import org.modeldriven.fuml.library.channel.StandardInputChannelObject;
 import org.modeldriven.fuml.library.channel.StandardOutputChannelObject;
-import org.modeldriven.fuml.library.common.Status;
 import org.modeldriven.fuml.library.libraryclass.ImplementationObject;
 
-import fUML.Semantics.Classes.Kernel.Object_;
 import fUML.Semantics.Classes.Kernel.Value;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.Execution;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.OpaqueBehaviorExecution;
@@ -85,7 +76,7 @@ public class ALFBehaviorExecution extends OpaqueBehaviorExecution {
 			// activityDefinition.print(true);
 
 			alfLocus = createALFLocus();
-			FumlMapping.setExecutionFactory(alfLocus.getFactory());
+			//FumlMapping.setExecutionFactory(alfLocus.getFactory());
 			FumlMapping.setFumlFactory(createFumlFactory());
 			FumlMapping.setElementFactory(createElementFactory());
 			// FumlMapping mapping = FumlMapping.getMapping(RootNamespace
@@ -149,7 +140,7 @@ public class ALFBehaviorExecution extends OpaqueBehaviorExecution {
 	}
 
 	private FumlMappingFactory createFumlFactory() {
-		return new org.modeldriven.alf.fuml.impl.mapping.FumlMappingFactory();
+		return new FumlMappingFactory();
 	}
 
 	private ElementFactory createElementFactory() {
