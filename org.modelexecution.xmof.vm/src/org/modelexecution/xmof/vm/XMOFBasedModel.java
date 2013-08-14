@@ -33,7 +33,7 @@ import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
  */
 public class XMOFBasedModel {
 
-	protected final static String MAIN = "main";
+	public final static String MAIN = "main";
 
 	private List<EObject> modelElements;
 	private List<ParameterValue> parameterValues;

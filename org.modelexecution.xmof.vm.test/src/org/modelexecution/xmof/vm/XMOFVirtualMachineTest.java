@@ -19,7 +19,7 @@ import fUML.Semantics.Classes.Kernel.FeatureValue;
 import fUML.Semantics.Classes.Kernel.IntegerValue;
 import fUML.Semantics.Classes.Kernel.Object_;
 
-public class XMOFVirtualMachineTest {
+public class XMOFVirtualMachineTest implements IXMOFVirtualMachineListener {
 
 	@Test
 	public void runSimpleModel() {
@@ -76,5 +76,25 @@ public class XMOFVirtualMachineTest {
 		return null;
 	}
 	
-	
+	@Test
+	public void debugSimpleModel() {
+		SimpleStudentSystemFactory factory = new SimpleStudentSystemFactory();
+		factory.createMetamodelResource();
+		Resource modelResource = factory.createModelResource();
+		XMOFBasedModel simpleModel = new XMOFBasedModel(
+				modelResource.getContents());
+		XMOFVirtualMachine vm = new XMOFVirtualMachine(simpleModel);
+		vm.addVirtualMachineListener(this);
+		assertTrue(vm.mayRun());
+		vm.debug();
+		vm.step();
+		vm.step();
+		vm.step();
+	}
+
+	@Override
+	public void notify(XMOFVirtualMachineEvent event) {
+		System.out.println("event: " + event.getType());
+		
+	}
 }
