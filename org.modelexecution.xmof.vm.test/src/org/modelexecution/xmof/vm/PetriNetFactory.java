@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -28,48 +27,33 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.modelexecution.xmof.Syntax.Actions.BasicActions.BasicActionsFactory;
 import org.modelexecution.xmof.Syntax.Actions.BasicActions.CallBehaviorAction;
 import org.modelexecution.xmof.Syntax.Actions.BasicActions.CallOperationAction;
-import org.modelexecution.xmof.Syntax.Actions.BasicActions.InputPin;
-import org.modelexecution.xmof.Syntax.Actions.BasicActions.OutputPin;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.AddStructuralFeatureValueAction;
-import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.IntermediateActionsFactory;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ReadSelfAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ReadStructuralFeatureAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ValueSpecificationAction;
-import org.modelexecution.xmof.Syntax.Activities.CompleteStructuredActivities.StructuredActivityNode;
 import org.modelexecution.xmof.Syntax.Activities.ExtraStructuredActivities.ExpansionKind;
-import org.modelexecution.xmof.Syntax.Activities.ExtraStructuredActivities.ExpansionNode;
 import org.modelexecution.xmof.Syntax.Activities.ExtraStructuredActivities.ExpansionRegion;
-import org.modelexecution.xmof.Syntax.Activities.ExtraStructuredActivities.ExtraStructuredActivitiesFactory;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.Activity;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ActivityNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ActivityParameterNode;
-import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ControlFlow;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.DecisionNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ForkNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.InitialNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.IntermediateActivitiesFactory;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.MergeNode;
-import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ObjectFlow;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.DirectedParameter;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.KernelFactory;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.LiteralBoolean;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.LiteralInteger;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.ParameterDirectionKind;
-import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 
 public class PetriNetFactory extends VMTestFactory{
 
 	private final static EcoreFactory ECORE = EcoreFactory.eINSTANCE;
 	private final static KernelFactory KERNEL = KernelFactory.eINSTANCE;
 	private final static IntermediateActivitiesFactory INTERMED_ACTIVITIES = IntermediateActivitiesFactory.eINSTANCE;
-	private final static IntermediateActionsFactory INTERMED_ACTIONS = IntermediateActionsFactory.eINSTANCE;
-	private final static BasicActionsFactory BASIC_ACTIONS = BasicActionsFactory.eINSTANCE;
-	private final static ExtraStructuredActivitiesFactory EXTRASTRUCT_ACTIVITIES = ExtraStructuredActivitiesFactory.eINSTANCE;
 		
 	private EPackage rootPackage;
 	private BehavioredEClass netClass;
@@ -430,276 +414,6 @@ public class PetriNetFactory extends VMTestFactory{
 		placeClass.getOwnedBehavior().add(activity);
 		
 		return placeOperationRemoveToken;
-	}
-	
-	private InitialNode createInitialNode(Activity activity) {
-		InitialNode initialNode = INTERMED_ACTIVITIES.createInitialNode();
-		initialNode.setName("initial");
-		activity.getNode().add(initialNode);
-		return initialNode;
-	}
-	
-	private ForkNode createForkNode(Activity activity, String name) {
-		ForkNode forknode = INTERMED_ACTIVITIES.createForkNode();	
-		forknode.setName(name);
-		forknode.setActivity(activity);
-		activity.getNode().add(forknode);
-		return forknode;
-	}	
-
-	private ReadSelfAction createReadSelfAction(Activity activity, String name) {
-		ReadSelfAction action = INTERMED_ACTIONS.createReadSelfAction();
-		action.setName(name);
-		
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name) {
-		ValueSpecificationAction action = INTERMED_ACTIONS.createValueSpecificationAction();
-		action.setName(name);
-		
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name, int value) {
-		ValueSpecificationAction action = createValueSpecificationAction(activity, name);		
-		LiteralInteger valueliteral = KERNEL.createLiteralInteger();
-		valueliteral.setValue(value);
-		action.setValue(valueliteral);		
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name, boolean value) {
-		ValueSpecificationAction action = createValueSpecificationAction(activity, name);		
-		LiteralBoolean valueliteral = KERNEL.createLiteralBoolean();
-		valueliteral.setValue(value);
-		action.setValue(valueliteral);		
-		return action;
-	}
-	
-	private ReadStructuralFeatureAction createReadStructuralFeatureAction(Activity activity, String name, EStructuralFeature feature) {
-		ReadStructuralFeatureAction action = INTERMED_ACTIONS.createReadStructuralFeatureAction();
-		action.setName(name);
-			
-		action.setStructuralFeature(feature);
-		
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		
-		return action;
-	}
-	
-	private AddStructuralFeatureValueAction createAddStructuralFeatureValueAction(Activity activity, String name, EStructuralFeature feature, boolean isReplace) {
-		AddStructuralFeatureValueAction action = INTERMED_ACTIONS.createAddStructuralFeatureValueAction();
-		action.setName(name);
-		
-		action.setStructuralFeature(feature);
-		
-		action.setReplaceAll(isReplace);
-		
-		action.setActivity(activity);
-		activity.getNode().add(action);		
-		return action;
-	}		
-	
-	private CallBehaviorAction createCallBehaviorAction(Activity activity, String name, Behavior behavior) {
-		CallBehaviorAction action = BASIC_ACTIONS.createCallBehaviorAction();
-		action.setName(name);
-		
-		action.setBehavior(behavior);				
-		
-		int amountinputpins = 0;
-		int amountoutputpins = 0;
-		for(DirectedParameter param : behavior.getOwnedParameter()) {
-			if(param.getDirection() == ParameterDirectionKind.IN || param.getDirection() == ParameterDirectionKind.INOUT) {
-				InputPin pin = BASIC_ACTIONS.createInputPin();
-				pin.setName("InputPin " + (++amountinputpins) + " (" + name + ")");
-				pin.setLowerBound(param.getLowerBound());
-				pin.setUpperBound(param.getUpperBound());
-				action.getArgument().add(pin);
-			}
-			if(param.getDirection() == ParameterDirectionKind.OUT || param.getDirection() == ParameterDirectionKind.INOUT || param.getDirection() == ParameterDirectionKind.RETURN) {
-				OutputPin pin = BASIC_ACTIONS.createOutputPin();
-				pin.setName("OutputPin " + (++amountoutputpins) + " (" + name + ")");
-				action.getResult().add(pin);
-			}
-		}						
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}		
-	
-	private CallOperationAction createCallOperationAction(Activity activity, String name, BehavioredEOperation operation) {
-		CallOperationAction action = BASIC_ACTIONS.createCallOperationAction();
-		action.setName(name);
-	
-		action.setOperation(operation);
-		
-		InputPin targetpin = BASIC_ACTIONS.createInputPin();
-		targetpin.setName("InputPin " + " target (" + name + ")");
-		action.setTarget(targetpin);
-		
-		for(EParameter param : operation.getEParameters()) {
-			InputPin inputpin = BASIC_ACTIONS.createInputPin();
-			inputpin.setName("InputPin " + param.getName() + " (" + name + " )");
-			action.getArgument().add(inputpin);
-		}
-		
-		if(operation.getEType() != null) {
-			OutputPin outputpin = BASIC_ACTIONS.createOutputPin();
-			outputpin.setName("OutputPin return (" + name + ")");
-			action.getResult().add(outputpin);
-		}
-		
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-
-	private DirectedParameter createDirectedParameter(String name, ParameterDirectionKind direction) {
-		DirectedParameter param = KERNEL.createDirectedParameter();
-		param.setName(name);
-		param.setDirection(direction);		
-		return param;
-	}
-	
-	private ExpansionRegion createExpansionRegion(Activity activity, String name, ExpansionKind mode, EList<ActivityNode> nodes, int inexpansionnodes, int outexpansionnodes) {
-		ExpansionRegion region = EXTRASTRUCT_ACTIVITIES.createExpansionRegion();
-		region.setName(name);		
-		region.setMode(mode);
-		
-		region.getNode().addAll(nodes);
-		
-		for(int i=0;i<(inexpansionnodes + outexpansionnodes);++i) {
-			ExpansionNode expnode = EXTRASTRUCT_ACTIVITIES.createExpansionNode();			
-			expnode.setLowerBound(1);
-			expnode.setUpperBound(-1);
-			
-			if(i<inexpansionnodes) {
-				expnode.setName("ExpansionNode input " + (i+1) + " (" + name + ")");
-				region.getInputElement().add(expnode);
-				expnode.setRegionAsInput(region);
-			} else {
-				expnode.setName("ExpansionNode output " + (i-inexpansionnodes+1) + " (" + name + ")");
-				region.getOutputElement().add(expnode);
-				expnode.setRegionAsOutput(region);
-			}			
-			expnode.setActivity(activity);
-			activity.getNode().add(expnode);
-		}
-		region.setActivity(activity);
-		activity.getNode().add(region);
-		return region;
-	}
-	
-	private DecisionNode createDecisionNode(Activity activity, String name) {
-		DecisionNode decisionnode = INTERMED_ACTIVITIES.createDecisionNode();		
-		decisionnode.setName(name);
-		decisionnode.setActivity(activity);
-		activity.getNode().add(decisionnode);						
-		return decisionnode;
-	}	
-	
-	private DecisionNode createDecisionNode(Activity activity, String name, Behavior decisionBehavior) {
-		DecisionNode decisionnode = createDecisionNode(activity, name);		
-		decisionnode.setDecisionInput(decisionBehavior);
-		return decisionnode;
-	}
-	
-	private MergeNode createMergeNode(Activity activity, String name) {
-		MergeNode mergenode = INTERMED_ACTIVITIES.createMergeNode();	
-		mergenode.setName(name);
-		mergenode.setActivity(activity);
-		activity.getNode().add(mergenode);
-		return mergenode;
-	}	
-	
-	private ActivityParameterNode createActivityParameterNode(Activity activity, String name, DirectedParameter parameter) {
-		ActivityParameterNode paramnode = INTERMED_ACTIVITIES.createActivityParameterNode();
-		paramnode.setName(name + " (activity=" + activity.getName() + " parameter=" + parameter.getName() + ")");
-		paramnode.setActivity(activity);
-		paramnode.setParameter(parameter);
-		activity.getNode().add(paramnode);
-		return paramnode;
-	}
-	
-	private ControlFlow createControlFlow(Activity activity,
-			ActivityNode source, ActivityNode target) {
-		ControlFlow cflow = INTERMED_ACTIVITIES.createControlFlow();
-		cflow.setName("ControlFlow " + source.getName() + " --> "
-				+ target.getName());
-		cflow.setSource(source);
-		cflow.setTarget(target);
-		source.getOutgoing().add(cflow);
-		target.getIncoming().add(cflow);
-		cflow.setActivity(activity);
-		activity.getEdge().add(cflow);
-		return cflow;
-	}
-	
-	private ControlFlow createControlFlow(Activity activity,
-			ActivityNode source, ActivityNode target, boolean guard) {
-		ControlFlow cflow = createControlFlow(activity, source, target);
-		LiteralBoolean guardliteral = KERNEL.createLiteralBoolean();
-		guardliteral.setValue(guard);
-		cflow.setGuard(guardliteral);
-		return cflow;
-	}
-	
-	private ObjectFlow createObjectFlow(Activity activity, ActivityNode source, ActivityNode target) {
-		ObjectFlow oflow = INTERMED_ACTIVITIES.createObjectFlow();
-		oflow.setName("ObjectFlow " + source.getName() + " --> " + target.getName());
-		oflow.setSource(source);
-		oflow.setTarget(target);
-		
-		source.getOutgoing().add(oflow);
-		target.getIncoming().add(oflow);
-				
-		oflow.setActivity(activity);
-		activity.getEdge().add(oflow);
-		
-		return oflow;
-	}
-	
-	private ObjectFlow createObjectFlow(StructuredActivityNode node, ActivityNode source, ActivityNode target) {
-		ObjectFlow oflow = createObjectFlow(node.getActivity(), source, target);
-		//source.setInStructuredNode(node);
-		//target.setInStructuredNode(node);
-		node.getEdge().add(oflow);		
-
-		return oflow;
-	}
-	
-	private ObjectFlow createObjectFlow(StructuredActivityNode node, ActivityNode source, ActivityNode target, boolean guard) {
-		ObjectFlow oflow = createObjectFlow(node, source, target);
-		LiteralBoolean guardliteral = KERNEL.createLiteralBoolean();
-		guardliteral.setValue(guard);
-		oflow.setGuard(guardliteral);
-		return oflow;
-	}
-	
-	private ObjectFlow createObjectFlow(StructuredActivityNode node, ActivityNode source, ActivityNode target, int guard) {
-		ObjectFlow oflow = createObjectFlow(node, source, target);
-		LiteralInteger guardliteral = KERNEL.createLiteralInteger();
-		guardliteral.setValue(guard);
-		oflow.setGuard(guardliteral);
-		return oflow;
-	}
-	
-	private ObjectFlow createDecisionInputFlow(Activity activity, OutputPin source, DecisionNode target) {
-		ObjectFlow oflow = createObjectFlow(activity, source, target);
-		target.setDecisionInputFlow(oflow);
-		return oflow;
-	}	
-	
-	private ObjectFlow createDecisionInputFlow(StructuredActivityNode node, OutputPin source, DecisionNode target) {
-		ObjectFlow oflow = createObjectFlow(node, source, target);
-		target.setDecisionInputFlow(oflow);
-		return oflow;
 	}
 	
 	public Resource createModelResource() {

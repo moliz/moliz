@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -33,12 +32,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.modelexecution.xmof.Syntax.Actions.BasicActions.BasicActionsFactory;
 import org.modelexecution.xmof.Syntax.Actions.BasicActions.CallBehaviorAction;
 import org.modelexecution.xmof.Syntax.Actions.BasicActions.InputPin;
-import org.modelexecution.xmof.Syntax.Actions.BasicActions.OutputPin;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.AddStructuralFeatureValueAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ClearStructuralFeatureAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.CreateObjectAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.DestroyObjectAction;
-import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.IntermediateActionsFactory;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ReadSelfAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ReadStructuralFeatureAction;
 import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.RemoveStructuralFeatureValueAction;
@@ -46,22 +43,14 @@ import org.modelexecution.xmof.Syntax.Actions.IntermediateActions.ValueSpecifica
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.Activity;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ActivityFinalNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ActivityNode;
-import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ControlFlow;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ForkNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.InitialNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.IntermediateActivitiesFactory;
-import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ObjectFlow;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.DirectedParameter;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.EEnumLiteralSpecification;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.InstanceValue;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.KernelFactory;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.LiteralInteger;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.LiteralString;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.LiteralUnlimitedNatural;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.ParameterDirectionKind;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.ValueSpecification;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 
 public class SimpleStudentSystemFactory extends VMTestFactory{
@@ -74,8 +63,6 @@ public class SimpleStudentSystemFactory extends VMTestFactory{
 	private final static EcoreFactory ECORE = EcoreFactory.eINSTANCE;
 	private final static KernelFactory KERNEL = KernelFactory.eINSTANCE;
 	private final static IntermediateActivitiesFactory INTERMED_ACTIVITIES = IntermediateActivitiesFactory.eINSTANCE;
-	private final static IntermediateActionsFactory INTERMED_ACTIONS = IntermediateActionsFactory.eINSTANCE;	
-	private final static BasicActionsFactory BASIC_ACTIONS = BasicActionsFactory.eINSTANCE;	
 
 	private BehavioredEClass studentSystemClass;
 	private EPackage rootPackage;
@@ -741,220 +728,6 @@ public class SimpleStudentSystemFactory extends VMTestFactory{
 		studentClass.getEStructuralFeatures().add(createNicknameAttribute());
 		studentClass.getEStructuralFeatures().add(createNicknameNotUniqueAttribute());
 		return studentClass;
-	}
-
-	private InitialNode createInitialNode(Activity activity) {
-		InitialNode initialNode = INTERMED_ACTIVITIES.createInitialNode();
-		activity.getNode().add(initialNode);
-		return initialNode;
-	}
-
-	private CreateObjectAction createCreateObjectAction(Activity activity,
-			String name, EClass eClass) {
-		CreateObjectAction action = INTERMED_ACTIONS.createCreateObjectAction();
-		action.setName(name);
-		action.setClassifier(eClass);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-
-	private ReadSelfAction createReadSelfAction(Activity activity, String name) {
-		ReadSelfAction action = INTERMED_ACTIONS.createReadSelfAction();
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name, int value, boolean unlimitedNatural) {
-		ValueSpecificationAction action = createValueSpecificationAction(activity, name);
-		
-		ValueSpecification valueSpecification = null;
-		if(!unlimitedNatural) {
-			valueSpecification = KERNEL.createLiteralInteger();
-			((LiteralInteger)valueSpecification).setValue(value);
-			
-		} else {
-			valueSpecification = KERNEL.createLiteralUnlimitedNatural();
-			((LiteralUnlimitedNatural)valueSpecification).setValue(value);
-		}
-		action.setValue(valueSpecification);
-		
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name, String value) {
-		ValueSpecificationAction action = createValueSpecificationAction(activity, name);
-		
-		LiteralString valueSpecification = KERNEL.createLiteralString();
-		valueSpecification.setValue(value);
-		action.setValue(valueSpecification);
-
-		return action;
-	}
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name, EEnumLiteral value) {
-		ValueSpecificationAction action = createValueSpecificationAction(activity, name);
-		
-		EEnumLiteralSpecification valueSpecification = KERNEL.createEEnumLiteralSpecification();
-		valueSpecification.setEEnumLiteral(value);
-		valueSpecification.getClassifier().add(value.getEEnum());
-		
-		InstanceValue instanceValue = KERNEL.createInstanceValue();
-		instanceValue.setInstance(valueSpecification);
-		action.setValue(instanceValue);
-		
-		return action;
-	}
-
-	private AddStructuralFeatureValueAction createAddStructuralFeatureValueAction(
-			Activity activity, String name, EStructuralFeature eStructuralFeature, boolean insertAt, boolean replaceAll) {
-		AddStructuralFeatureValueAction action = INTERMED_ACTIONS.createAddStructuralFeatureValueAction();
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		
-		action.setStructuralFeature(eStructuralFeature);
-		
-		if(insertAt) {
-			InputPin inputPin = BasicActionsFactory.eINSTANCE.createInputPin();
-			inputPin.setName("insertAt"); //$NON-NLS-1$
-			inputPin.setLowerBound(1);
-			inputPin.setUpperBound(1);		
-			action.setInsertAt(inputPin);
-		}
-		
-		action.setReplaceAll(replaceAll);
-		
-		return action;
-	}
-	
-	private CallBehaviorAction createCallBehaviorAction(Activity activity, String name, Behavior behavior) {
-		CallBehaviorAction action = BASIC_ACTIONS.createCallBehaviorAction();
-		action.setName(name);
-		
-		action.setBehavior(behavior);				
-		
-		int amountinputpins = 0;
-		int amountoutputpins = 0;
-		for(DirectedParameter param : behavior.getOwnedParameter()) {
-			if(param.getDirection() == ParameterDirectionKind.IN || param.getDirection() == ParameterDirectionKind.INOUT) {
-				InputPin pin = BASIC_ACTIONS.createInputPin();
-				pin.setName("InputPin " + (++amountinputpins) + " (" + name + ")");
-				pin.setLowerBound(param.getLowerBound());
-				pin.setUpperBound(param.getUpperBound());
-				action.getArgument().add(pin);
-			}
-			if(param.getDirection() == ParameterDirectionKind.OUT || param.getDirection() == ParameterDirectionKind.INOUT || param.getDirection() == ParameterDirectionKind.RETURN) {
-				OutputPin pin = BASIC_ACTIONS.createOutputPin();
-				pin.setName("OutputPin " + (++amountoutputpins) + " (" + name + ")");
-				action.getResult().add(pin);
-			}
-		}						
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}		
-	
-	private ValueSpecificationAction createValueSpecificationAction(Activity activity, String name) {
-		ValueSpecificationAction action = INTERMED_ACTIONS.createValueSpecificationAction();
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);		
-		return action;
-	}
-	
-	private DestroyObjectAction createDestroyObjectAction(Activity activity,
-			String name) {
-		DestroyObjectAction action = INTERMED_ACTIONS
-				.createDestroyObjectAction();
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-	
-	private ReadStructuralFeatureAction createReadStructuralFeatureValueAction(
-			Activity activity, String name, EStructuralFeature structuralFeature) {
-		ReadStructuralFeatureAction action = INTERMED_ACTIONS.createReadStructuralFeatureAction();
-		action.setStructuralFeature(structuralFeature);		
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		return action;
-	}
-
-	private ClearStructuralFeatureAction createClearStructuralFeatureAction(Activity activity, String name, EStructuralFeature structuralFeature) {
-		ClearStructuralFeatureAction action = INTERMED_ACTIONS.createClearStructuralFeatureAction();
-		
-		action.setStructuralFeature(structuralFeature);
-		
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		
-		return action;
-	}
-	
-	private RemoveStructuralFeatureValueAction createRemoveStructuralFeatureValueAction(Activity activity, String name, EStructuralFeature structuralFeature, boolean removeAt, boolean isRemoveDuplicates, boolean value) {
-		RemoveStructuralFeatureValueAction action = INTERMED_ACTIONS.createRemoveStructuralFeatureValueAction();
-
-		if(!value) {
-			action.setValue(null);
-		}
-		action.setStructuralFeature(structuralFeature);
-		action.setRemoveDuplicates(isRemoveDuplicates);
-		
-		if(removeAt) {
-			InputPin inputPin = BasicActionsFactory.eINSTANCE.createInputPin();
-			inputPin.setName("removeAt"); //$NON-NLS-1$
-			inputPin.setLowerBound(1);
-			inputPin.setUpperBound(1);		
-			action.setRemoveAt(inputPin);
-		}
-		
-		action.setName(name);
-		action.setActivity(activity);
-		activity.getNode().add(action);
-		
-		return action;
-	}
-	
-	private ForkNode createForkNode(Activity activity, String name) {
-		ForkNode fork = INTERMED_ACTIVITIES.createForkNode();;
-		fork.setName(name);
-		fork.setActivity(activity);
-		activity.getNode().add(fork);
-		return fork;
-	}
-
-	private ControlFlow createControlFlow(Activity activity,
-			ActivityNode source, ActivityNode target) {
-		ControlFlow cflow = INTERMED_ACTIVITIES.createControlFlow();
-		cflow.setName("ControlFlow " + source.getName() + " --> " //$NON-NLS-1$ $NON-NLS-2$
-				+ target.getName());
-		cflow.setSource(source);
-		cflow.setTarget(target);
-		source.getOutgoing().add(cflow);
-		target.getIncoming().add(cflow);
-		cflow.setActivity(activity);
-		activity.getEdge().add(cflow);
-		return cflow;
-	}
-
-	private ObjectFlow createObjectFlow(Activity activity, ActivityNode source,
-			ActivityNode target) {
-		ObjectFlow oflow = INTERMED_ACTIVITIES.createObjectFlow();
-		oflow.setName("ObjectFlow " + source.getName() + " --> " //$NON-NLS-1$ $NON-NLS-2$
-				+ target.getName());
-		oflow.setSource(source);
-		oflow.setTarget(target);
-		source.getOutgoing().add(oflow);
-		target.getIncoming().add(oflow);
-		oflow.setActivity(activity);
-		activity.getEdge().add(oflow);
-		return oflow;
 	}
 
 	public Resource createModelResource() {
