@@ -10,7 +10,6 @@
 package org.modelexecution.fumldebug.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -92,24 +91,17 @@ public class ExecutionContext {
 		this.locus.factory.setStrategy(new RedefinitionBasedDispatchStrategy());
 		this.locus.factory.setStrategy(new FIFOGetNextEventStrategy());
 		this.locus.factory.setStrategy(new FirstChoiceStrategy());
-
-		this.addBuiltInType("Boolean");
-		this.addBuiltInType("String");
-		this.addBuiltInType("Integer");
-		this.addBuiltInType("Real");
-		this.addBuiltInType("UnlimitedNatural");
-
-		initializeProvidedBehaviors();
 	}
 
 	/**
-	 * Creates an {@link ExecutionFactory} that also handles the execution of
-	 * ALF {@link OpaqueBehavior opaque behaviors}.
+	 * Creates an {@link ExecutionFactoryInitializer initialized}
+	 * {@link ExecutionFactory} that also handles the execution of ALF
+	 * {@link OpaqueBehavior opaque behaviors}.
 	 * 
 	 * @return the created {@link ExecutionFactoryL3}
 	 */
 	private ExecutionFactory createExecutionFactory() {
-		return new ExecutionFactoryL3() {
+		ExecutionFactory executionFactory = new ExecutionFactoryL3() {
 			public OpaqueBehaviorExecution instantiateOpaqueBehaviorExecution(
 					OpaqueBehavior behavior) {
 				for (String language : behavior.language) {
@@ -122,32 +114,11 @@ public class ExecutionContext {
 				return super.instantiateOpaqueBehaviorExecution(behavior);
 			}
 		};
-	}
-
-	private PrimitiveType addBuiltInType(String name) {
-		PrimitiveType type = (PrimitiveType) Repository.INSTANCE
-				.getClassifierByName(name).getDelegate();
-		this.locus.factory.addBuiltInType(type);
-		return type;
-	}
-
-	/**
-	 * Adds opaque behaviors which are by default available.
-	 */
-	private void initializeProvidedBehaviors() {
-		OpaqueBehaviorFactory behaviorFactory = new OpaqueBehaviorFactory();
-		behaviorFactory.initialize();
-
-		addOpaqueBehavior(behaviorFactory.getListgetBehavior());
-		addOpaqueBehavior(behaviorFactory.getListsizeBehavior());
-		addOpaqueBehavior(behaviorFactory.getAddBehavior());
-		addOpaqueBehavior(behaviorFactory.getSubtractBehavior());
-		addOpaqueBehavior(behaviorFactory.getGreaterBehavior());
-		addOpaqueBehavior(behaviorFactory.getLessBehavior());
-		addOpaqueBehavior(behaviorFactory.getLessOrEqualsBehavior());
-		addOpaqueBehavior(behaviorFactory.getMultiplyBehavior());
-		addOpaqueBehavior(behaviorFactory.getDivideBehavior());
-		addOpaqueBehavior(behaviorFactory.getListindexofBehavior());
+		ExecutionFactoryInitializer initializer = new ExecutionFactoryInitializer(
+				executionFactory, Repository.INSTANCE);
+		initializer.addBuiltInTypes();
+		initializer.addPrimitiveBehaviorExecutions();
+		return executionFactory;
 	}
 
 	/**
