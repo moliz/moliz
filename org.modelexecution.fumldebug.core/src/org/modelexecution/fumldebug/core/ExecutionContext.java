@@ -35,58 +35,65 @@ import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
 public class ExecutionContext {
 
+	/**
+	 * The language name to be used in opaque behaviors and expressions
+	 * containing ALF code
+	 */
+	public static final String ALF_LANGUAGE_NAME = "Alf";
+
 	protected static final String exception_illegalexecutionid = "Illegal execution id.";
 	protected static final String exception_noenablednodes = "No enabled nodes available.";
 	protected static final String exception_illegalactivitynode = "Illegal activity node. Activity node is not enabled.";
-	
-	private static ExecutionContext instance;	
-	
+
+	private static ExecutionContext instance;
+
 	private Locus locus = null;
-		
+
 	private Hashtable<String, OpaqueBehavior> opaqueBehaviors = new Hashtable<String, OpaqueBehavior>();
-	
-	private NodeSelectionStrategy nextNodeStrategy = new NodeSelectionStrategyImpl(); 
-	
+
+	private NodeSelectionStrategy nextNodeStrategy = new NodeSelectionStrategyImpl();
+
 	private HashMap<Integer, ParameterValueList> activityExecutionOutput = new HashMap<Integer, ParameterValueList>();
-		
-	private HashMap<ActivityNode, Breakpoint> breakpoints = new HashMap<ActivityNode, Breakpoint>();  					
-	 
+
+	private HashMap<ActivityNode, Breakpoint> breakpoints = new HashMap<ActivityNode, Breakpoint>();
+
 	protected ExecutionStatus executionStatus = new ExecutionStatus();
-	
+
 	private TraceHandler traceHandler = new TraceHandler(executionStatus);
-	
+
 	protected EventHandler eventHandler = new EventHandler(executionStatus);
-	
-	protected ExecutionContext()
-	{
+
+	protected ExecutionContext() {
 		eventHandler.addPrimaryEventListener(traceHandler);
-		
+
 		/*
 		 * Locus initialization
-		 */				
+		 */
 		this.locus = new Locus();
-		this.locus.setFactory(new ExecutionFactoryL3());  // Uses local subclass for ExecutionFactory
+		this.locus.setFactory(new ExecutionFactoryL3()); // Uses local subclass
+															// for
+															// ExecutionFactory
 		this.locus.setExecutor(new Executor());
 
 		this.locus.factory.setStrategy(new RedefinitionBasedDispatchStrategy());
 		this.locus.factory.setStrategy(new FIFOGetNextEventStrategy());
 		this.locus.factory.setStrategy(new FirstChoiceStrategy());
-	
+
 		this.createPrimitiveType("Boolean");
 		this.createPrimitiveType("String");
 		this.createPrimitiveType("Integer");
 		this.createPrimitiveType("UnlimitedNatural");
-		
+
 		initializeProvidedBehaviors();
-	}	
-	
+	}
+
 	/**
 	 * Adds opaque behaviors which are by default available.
 	 */
 	private void initializeProvidedBehaviors() {
 		OpaqueBehaviorFactory behaviorFacotry = new OpaqueBehaviorFactory();
 		behaviorFacotry.initialize();
-		
+
 		addOpaqueBehavior(behaviorFacotry.getListgetBehavior());
 		addOpaqueBehavior(behaviorFacotry.getListsizeBehavior());
 		addOpaqueBehavior(behaviorFacotry.getAddBehavior());
@@ -104,13 +111,13 @@ public class ExecutionContext {
 	 * 
 	 * @return singleton instance
 	 */
-	public static ExecutionContext getInstance(){
-		if(instance == null) {
+	public static ExecutionContext getInstance() {
+		if (instance == null) {
 			instance = new ExecutionContext();
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Creates a primitive type.
 	 * 
@@ -124,7 +131,7 @@ public class ExecutionContext {
 		this.locus.factory.addBuiltInType(type);
 		return type;
 	}
-	
+
 	/**
 	 * Executed an behavior.
 	 * 
@@ -135,13 +142,14 @@ public class ExecutionContext {
 	 * @param inputs
 	 *            input to the execution
 	 */
-	public void execute(Behavior behavior, Object_ context, ParameterValueList inputs) {
-		if(inputs == null) {
+	public void execute(Behavior behavior, Object_ context,
+			ParameterValueList inputs) {
+		if (inputs == null) {
 			inputs = new ParameterValueList();
-		}		
-		this.locus.executor.execute(behavior, context, inputs);		
+		}
+		this.locus.executor.execute(behavior, context, inputs);
 	}
-	
+
 	/**
 	 * Executes a behavior stepwise.
 	 * 
@@ -152,13 +160,14 @@ public class ExecutionContext {
 	 * @param inputs
 	 *            input to the execution
 	 */
-	public void executeStepwise(Behavior behavior, Object_ context, ParameterValueList inputs) {
-		if(inputs == null) {
+	public void executeStepwise(Behavior behavior, Object_ context,
+			ParameterValueList inputs) {
+		if (inputs == null) {
 			inputs = new ParameterValueList();
 		}
 		this.locus.executor.execute(behavior, context, inputs);
 	}
-	
+
 	/**
 	 * Performs the next step of an execution.
 	 * 
@@ -168,10 +177,10 @@ public class ExecutionContext {
 	 * @throws IllegalArgumentException
 	 *             if an invalid executionID was provided
 	 */
-	public void nextStep(int executionID) throws IllegalArgumentException  {
+	public void nextStep(int executionID) throws IllegalArgumentException {
 		nextStep(executionID, null);
 	}
-	
+
 	/**
 	 * Performs the next step of an execution by executing the provided node.
 	 * 
@@ -184,38 +193,46 @@ public class ExecutionContext {
 	 *             if the executionID is invalid or the provided node is invalid
 	 *             (i.e., null or not enabled in this execution)
 	 */
-	public void nextStep(int executionID, ActivityNode node) throws IllegalArgumentException {
+	public void nextStep(int executionID, ActivityNode node)
+			throws IllegalArgumentException {
 		ActivityNodeChoice nextnode = null;
-		
-		if(node == null) {
+
+		if (node == null) {
 			nextnode = getNextNode(executionID);
 		} else {
 			nextnode = new ActivityNodeChoice(executionID, node);
 		}
-		
-		ActivityExecutionStatus activityExecutionStatus = executionStatus.getActivityExecutionStatus(nextnode.getExecutionID());
-		
-		boolean activityNodeWasEnabled = activityExecutionStatus.isNodeEnabled(nextnode.getActivityNode());
-		if(!activityNodeWasEnabled) {
+
+		ActivityExecutionStatus activityExecutionStatus = executionStatus
+				.getActivityExecutionStatus(nextnode.getExecutionID());
+
+		boolean activityNodeWasEnabled = activityExecutionStatus
+				.isNodeEnabled(nextnode.getActivityNode());
+		if (!activityNodeWasEnabled) {
 			throw new IllegalArgumentException(exception_illegalactivitynode);
 		}
 
-		activityExecutionStatus.addExecutingActivation(nextnode.getActivityNode());
-		ActivityNodeActivation activation = activityExecutionStatus.getEnabledActivation(nextnode.getActivityNode());
-		TokenList tokens = activityExecutionStatus.getTokens(nextnode.getActivityNode());
-		
-		if(activation == null || tokens == null) {
-			activityExecutionStatus.removeExecutingActivation(nextnode.getActivityNode());
-			throw new IllegalArgumentException(exception_noenablednodes); 
+		activityExecutionStatus.addExecutingActivation(nextnode
+				.getActivityNode());
+		ActivityNodeActivation activation = activityExecutionStatus
+				.getEnabledActivation(nextnode.getActivityNode());
+		TokenList tokens = activityExecutionStatus.getTokens(nextnode
+				.getActivityNode());
+
+		if (activation == null || tokens == null) {
+			activityExecutionStatus.removeExecutingActivation(nextnode
+					.getActivityNode());
+			throw new IllegalArgumentException(exception_noenablednodes);
 		}
-		
-		activation.fire(tokens);		
-		
-		if(executionStatus.isExecutionRunning(executionID) && activityExecutionStatus.isInResumeMode()) {
+
+		activation.fire(tokens);
+
+		if (executionStatus.isExecutionRunning(executionID)
+				&& activityExecutionStatus.isInResumeMode()) {
 			nextStep(executionID);
 		}
-	}			
-	
+	}
+
 	/**
 	 * Selects the next node to be executed.
 	 * 
@@ -225,21 +242,23 @@ public class ExecutionContext {
 	 * @throws IllegalArgumentException
 	 *             if the executionID is invalid
 	 */
-	private ActivityNodeChoice getNextNode(int executionID) throws IllegalArgumentException {		
-		if(!executionStatus.isExecutionRunning(executionID)) {
-			if(!activityExecutionOutput.containsKey(executionID)) {
+	private ActivityNodeChoice getNextNode(int executionID)
+			throws IllegalArgumentException {
+		if (!executionStatus.isExecutionRunning(executionID)) {
+			if (!activityExecutionOutput.containsKey(executionID)) {
 				throw new IllegalArgumentException(exception_illegalexecutionid);
 			}
 		}
 
-		ActivityNodeChoice nextnode = this.nextNodeStrategy.chooseNextNode(executionID, executionStatus);
-		
-		if(nextnode == null) {
+		ActivityNodeChoice nextnode = this.nextNodeStrategy.chooseNextNode(
+				executionID, executionStatus);
+
+		if (nextnode == null) {
 			throw new IllegalArgumentException(exception_noenablednodes);
 		}
 		return nextnode;
 	}
-		
+
 	/**
 	 * Resumes an execution.
 	 * 
@@ -248,12 +267,13 @@ public class ExecutionContext {
 	 * @throws IllegalArgumentException
 	 *             if the executionID is invalid
 	 */
-	public void resume(int executionID)  throws IllegalArgumentException {
-		ActivityExecutionStatus activityExecutionStatus = executionStatus.getActivityExecutionStatus(executionID);
+	public void resume(int executionID) throws IllegalArgumentException {
+		ActivityExecutionStatus activityExecutionStatus = executionStatus
+				.getActivityExecutionStatus(executionID);
 		activityExecutionStatus.setWholeExecutionInResumeMode(true);
 		nextStep(executionID);
 	}
-	
+
 	/**
 	 * Returns the provided opaque behavior with the given name.
 	 * 
@@ -262,12 +282,12 @@ public class ExecutionContext {
 	 * @return provided opaque behavior, null if it is not provided
 	 */
 	public OpaqueBehavior getOpaqueBehavior(String name) {
-		if(opaqueBehaviors.containsKey(name)) {
+		if (opaqueBehaviors.containsKey(name)) {
 			return opaqueBehaviors.get(name);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the extensional values held by the locus of this execution
 	 * context.
@@ -277,20 +297,20 @@ public class ExecutionContext {
 	public ExtensionalValueList getExtensionalValues() {
 		return locus.extensionalValues;
 	}
-	
+
 	/**
 	 * Resets the execution context.
 	 */
 	public void reset() {
 		locus.extensionalValues = new ExtensionalValueList();
 		breakpoints = new HashMap<ActivityNode, Breakpoint>();
-		activityExecutionOutput = new HashMap<Integer, ParameterValueList>(); 
+		activityExecutionOutput = new HashMap<Integer, ParameterValueList>();
 		executionStatus = new ExecutionStatus();
-		traceHandler = new TraceHandler(executionStatus);	
+		traceHandler = new TraceHandler(executionStatus);
 		eventHandler = new EventHandler(executionStatus);
 		eventHandler.addPrimaryEventListener(traceHandler);
 	}
-	
+
 	/**
 	 * Returns the nodes enabled in an execution.
 	 * 
@@ -301,15 +321,16 @@ public class ExecutionContext {
 	 */
 	public List<ActivityNode> getEnabledNodes(int executionID) {
 		List<ActivityNode> enablednodes = new ArrayList<ActivityNode>();
-		
-		ActivityExecutionStatus activityExecutionStatus = executionStatus.getActivityExecutionStatus(executionID);
-		if(activityExecutionStatus != null) {			
+
+		ActivityExecutionStatus activityExecutionStatus = executionStatus
+				.getActivityExecutionStatus(executionID);
+		if (activityExecutionStatus != null) {
 			enablednodes.addAll(activityExecutionStatus.getEnabledNodes());
 		}
-		
+
 		return enablednodes;
 	}
-	
+
 	/**
 	 * Returns the output of an execution.
 	 * 
@@ -320,7 +341,7 @@ public class ExecutionContext {
 	public ParameterValueList getActivityOutput(int executionID) {
 		return activityExecutionOutput.get(executionID);
 	}
-	
+
 	/**
 	 * Returns the trace of an execution.
 	 * 
@@ -328,10 +349,10 @@ public class ExecutionContext {
 	 *            executionID of the execution for which the trace is provided
 	 * @return trace of the execution
 	 */
-	public Trace getTrace(int executionID) {		
-		return traceHandler.getTrace(executionID);		 
+	public Trace getTrace(int executionID) {
+		return traceHandler.getTrace(executionID);
 	}
-	
+
 	/**
 	 * Adds a breakpoint for the specified activity node.
 	 * 
@@ -339,17 +360,17 @@ public class ExecutionContext {
 	 *            Breakpoint that shall be added
 	 */
 	public void addBreakpoint(Breakpoint breakpoint) {
-		if(breakpoint == null) {
+		if (breakpoint == null) {
 			return;
 		}
 		ActivityNode activitynode = breakpoint.getActivityNode();
-		if(activitynode == null || activitynode.activity == null) {
+		if (activitynode == null || activitynode.activity == null) {
 			return;
 		}
-		
-		breakpoints.put(activitynode, breakpoint);			
+
+		breakpoints.put(activitynode, breakpoint);
 	}
-	
+
 	/**
 	 * Provides information if a breakpoint is set for the given activity node.
 	 * 
@@ -358,13 +379,13 @@ public class ExecutionContext {
 	 * @return breakpoint that is set for the given activity node, null if no
 	 *         breakpoint is set
 	 */
-	public Breakpoint getBreakpoint(ActivityNode activitynode) {		
-		if(activitynode == null || activitynode.activity == null) {
+	public Breakpoint getBreakpoint(ActivityNode activitynode) {
+		if (activitynode == null || activitynode.activity == null) {
 			return null;
-		}				
-		return this.breakpoints.get(activitynode);		
+		}
+		return this.breakpoints.get(activitynode);
 	}
-	
+
 	/**
 	 * Removes a breakpoint.
 	 * 
@@ -372,16 +393,16 @@ public class ExecutionContext {
 	 *            breakpoint to be removed
 	 */
 	public void removeBreakpoint(Breakpoint breakpoint) {
-		if(breakpoint == null) {
+		if (breakpoint == null) {
 			return;
 		}
 		ActivityNode activitynode = breakpoint.getActivityNode();
-		if(activitynode == null || activitynode.activity == null) {
+		if (activitynode == null || activitynode.activity == null) {
 			return;
-		}				
-		this.breakpoints.remove(activitynode);				
+		}
+		this.breakpoints.remove(activitynode);
 	}
-	
+
 	/**
 	 * Sets the used strategy for selecting nodes to be executed.
 	 * 
@@ -391,7 +412,7 @@ public class ExecutionContext {
 	public void setNextNodeStrategy(NodeSelectionStrategy nextNodeStrategy) {
 		this.nextNodeStrategy = nextNodeStrategy;
 	}
-	
+
 	/**
 	 * Returns the primitive type String.
 	 * 
@@ -400,7 +421,7 @@ public class ExecutionContext {
 	public PrimitiveType getPrimitiveStringType() {
 		return this.locus.factory.getBuiltInType("String");
 	}
-	
+
 	/**
 	 * Returns the primitive type Integer.
 	 * 
@@ -409,7 +430,7 @@ public class ExecutionContext {
 	public PrimitiveType getPrimitivIntegerType() {
 		return this.locus.factory.getBuiltInType("Integer");
 	}
-	
+
 	/**
 	 * Returns the primitive type Boolean.
 	 * 
@@ -418,7 +439,7 @@ public class ExecutionContext {
 	public PrimitiveType getPrimitiveBooleanType() {
 		return this.locus.factory.getBuiltInType("Boolean");
 	}
-	
+
 	/**
 	 * Returns the primitive type UnlimitedNatural.
 	 * 
@@ -427,7 +448,7 @@ public class ExecutionContext {
 	public PrimitiveType getPrimitiveUnlimitedNaturalType() {
 		return this.locus.factory.getBuiltInType("UnlimitedNatural");
 	}
-	
+
 	/**
 	 * Terminates an execution. Also all called and all calling activities are
 	 * terminated.
@@ -435,28 +456,32 @@ public class ExecutionContext {
 	 * @param executionID
 	 *            executionID of the execution that is terminated.
 	 */
-	public void terminate(int executionID) {		
-		ActivityExecutionStatus activityExecutionStatus = executionStatus.getActivityExecutionStatus(executionID);
-		if(activityExecutionStatus == null) {
+	public void terminate(int executionID) {
+		ActivityExecutionStatus activityExecutionStatus = executionStatus
+				.getActivityExecutionStatus(executionID);
+		if (activityExecutionStatus == null) {
 			// activity execution has been terminated already
 			return;
 		}
-		ActivityExecutionStatus rootActivityExecutionStatus = activityExecutionStatus.getRootCallerExecutionStatus();
-		executionStatus.removeActivityExecution(rootActivityExecutionStatus.getExecutionID());
+		ActivityExecutionStatus rootActivityExecutionStatus = activityExecutionStatus
+				.getRootCallerExecutionStatus();
+		executionStatus.removeActivityExecution(rootActivityExecutionStatus
+				.getExecutionID());
 	}
-	
+
 	/**
 	 * Adds a provided opaque behavior.
 	 * 
 	 * @param behaviorexecution
 	 *            opaque behavior to be provided
 	 */
-	public void addOpaqueBehavior(OpaqueBehaviorExecution behaviorexecution){
+	public void addOpaqueBehavior(OpaqueBehaviorExecution behaviorexecution) {
 		locus.factory.addPrimitiveBehaviorPrototype(behaviorexecution);
-		OpaqueBehavior behavior = (OpaqueBehavior)behaviorexecution.types.get(0);
-		this.opaqueBehaviors.put(behavior.name, behavior);	
+		OpaqueBehavior behavior = (OpaqueBehavior) behaviorexecution.types
+				.get(0);
+		this.opaqueBehaviors.put(behavior.name, behavior);
 	}
-	
+
 	/**
 	 * Returns the locus of the execution context.
 	 * 
@@ -465,7 +490,7 @@ public class ExecutionContext {
 	public Locus getLocus() {
 		return this.locus;
 	}
-	
+
 	/**
 	 * Sets the output of an execution.
 	 * 
@@ -474,10 +499,11 @@ public class ExecutionContext {
 	 * @param output
 	 *            output that is set
 	 */
-	protected void setActivityExecutionOutput(int executionID, ParameterValueList output) {
+	protected void setActivityExecutionOutput(int executionID,
+			ParameterValueList output) {
 		this.activityExecutionOutput.put(executionID, output);
 	}
-	
+
 	public void addEventListener(ExecutionEventListener listener) {
 		eventHandler.addEventListener(listener);
 	}

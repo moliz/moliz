@@ -12,7 +12,7 @@ import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
 public class ALFTest {
 
-	private static final String ALF_LANGUAGE_NAME = "ALF"; // TODO replace
+	private static final String ALF_LANGUAGE_NAME = ExecutionContext.ALF_LANGUAGE_NAME;
 	private static ExecutionContext executionContext = ExecutionContext
 			.getInstance();
 
