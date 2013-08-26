@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+import org.modeldriven.fuml.library.Library;
 import org.modelexecution.fumldebug.core.trace.tracemodel.Trace;
 
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
@@ -24,6 +26,7 @@ import fUML.Semantics.Classes.Kernel.RedefinitionBasedDispatchStrategy;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.OpaqueBehaviorExecution;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValueList;
 import fUML.Semantics.CommonBehaviors.Communications.FIFOGetNextEventStrategy;
+import fUML.Semantics.Loci.LociL1.ExecutionFactory;
 import fUML.Semantics.Loci.LociL1.Executor;
 import fUML.Semantics.Loci.LociL1.FirstChoiceStrategy;
 import fUML.Semantics.Loci.LociL1.Locus;
@@ -65,14 +68,11 @@ public class ExecutionContext {
 
 	protected ExecutionContext() {
 		eventHandler.addPrimaryEventListener(traceHandler);
+		
+		Library.getInstance();
 
-		/*
-		 * Locus initialization
-		 */
 		this.locus = new Locus();
-		this.locus.setFactory(new ExecutionFactoryL3()); // Uses local subclass
-															// for
-															// ExecutionFactory
+		this.locus.setFactory(createExecutionFactory());
 		this.locus.setExecutor(new Executor());
 
 		this.locus.factory.setStrategy(new RedefinitionBasedDispatchStrategy());
@@ -85,6 +85,28 @@ public class ExecutionContext {
 		this.createPrimitiveType("UnlimitedNatural");
 
 		initializeProvidedBehaviors();
+	}
+
+	/**
+	 * Creates {@link ExecutionFactory} that also handles the execution of ALF
+	 * {@link OpaqueBehavior opaque behaviors}.
+	 * 
+	 * @return the created {@link ExecutionFactoryL3}
+	 */
+	private ExecutionFactory createExecutionFactory() {
+		return new ExecutionFactoryL3() {
+			public OpaqueBehaviorExecution instantiateOpaqueBehaviorExecution(
+					OpaqueBehavior behavior) {
+				for (String language : behavior.language) {
+					if (language.equals(ALF_LANGUAGE_NAME)) {
+						OpaqueBehaviorExecution execution = new AlfOpaqueBehaviorExecution();
+						execution.types.add(behavior);
+						return execution;
+					}
+				}
+				return super.instantiateOpaqueBehaviorExecution(behavior);
+			}
+		};
 	}
 
 	/**
