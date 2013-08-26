@@ -10,12 +10,14 @@
 package org.modelexecution.fumldebug.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
 import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
 import org.modeldriven.fuml.library.Library;
+import org.modeldriven.fuml.repository.Repository;
 import org.modelexecution.fumldebug.core.trace.tracemodel.Trace;
 
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
@@ -66,9 +68,21 @@ public class ExecutionContext {
 
 	protected EventHandler eventHandler = new EventHandler(executionStatus);
 
+	/**
+	 * Returns the singleton instance.
+	 * 
+	 * @return singleton instance
+	 */
+	public static ExecutionContext getInstance() {
+		if (instance == null) {
+			instance = new ExecutionContext();
+		}
+		return instance;
+	}
+
 	protected ExecutionContext() {
 		eventHandler.addPrimaryEventListener(traceHandler);
-		
+
 		Library.getInstance();
 
 		this.locus = new Locus();
@@ -79,17 +93,18 @@ public class ExecutionContext {
 		this.locus.factory.setStrategy(new FIFOGetNextEventStrategy());
 		this.locus.factory.setStrategy(new FirstChoiceStrategy());
 
-		this.createPrimitiveType("Boolean");
-		this.createPrimitiveType("String");
-		this.createPrimitiveType("Integer");
-		this.createPrimitiveType("UnlimitedNatural");
+		this.addBuiltInType("Boolean");
+		this.addBuiltInType("String");
+		this.addBuiltInType("Integer");
+		this.addBuiltInType("Real");
+		this.addBuiltInType("UnlimitedNatural");
 
 		initializeProvidedBehaviors();
 	}
 
 	/**
-	 * Creates {@link ExecutionFactory} that also handles the execution of ALF
-	 * {@link OpaqueBehavior opaque behaviors}.
+	 * Creates an {@link ExecutionFactory} that also handles the execution of
+	 * ALF {@link OpaqueBehavior opaque behaviors}.
 	 * 
 	 * @return the created {@link ExecutionFactoryL3}
 	 */
@@ -109,49 +124,30 @@ public class ExecutionContext {
 		};
 	}
 
+	private PrimitiveType addBuiltInType(String name) {
+		PrimitiveType type = (PrimitiveType) Repository.INSTANCE
+				.getClassifierByName(name).getDelegate();
+		this.locus.factory.addBuiltInType(type);
+		return type;
+	}
+
 	/**
 	 * Adds opaque behaviors which are by default available.
 	 */
 	private void initializeProvidedBehaviors() {
-		OpaqueBehaviorFactory behaviorFacotry = new OpaqueBehaviorFactory();
-		behaviorFacotry.initialize();
+		OpaqueBehaviorFactory behaviorFactory = new OpaqueBehaviorFactory();
+		behaviorFactory.initialize();
 
-		addOpaqueBehavior(behaviorFacotry.getListgetBehavior());
-		addOpaqueBehavior(behaviorFacotry.getListsizeBehavior());
-		addOpaqueBehavior(behaviorFacotry.getAddBehavior());
-		addOpaqueBehavior(behaviorFacotry.getSubtractBehavior());
-		addOpaqueBehavior(behaviorFacotry.getGreaterBehavior());
-		addOpaqueBehavior(behaviorFacotry.getLessBehavior());
-		addOpaqueBehavior(behaviorFacotry.getLessOrEqualsBehavior());
-		addOpaqueBehavior(behaviorFacotry.getMultiplyBehavior());
-		addOpaqueBehavior(behaviorFacotry.getDivideBehavior());
-		addOpaqueBehavior(behaviorFacotry.getListindexofBehavior());
-	}
-
-	/**
-	 * Returns the singleton instance.
-	 * 
-	 * @return singleton instance
-	 */
-	public static ExecutionContext getInstance() {
-		if (instance == null) {
-			instance = new ExecutionContext();
-		}
-		return instance;
-	}
-
-	/**
-	 * Creates a primitive type.
-	 * 
-	 * @param name
-	 *            name of the primitive type to be created
-	 * @return created primitive type
-	 */
-	private PrimitiveType createPrimitiveType(String name) {
-		PrimitiveType type = new PrimitiveType();
-		type.name = name;
-		this.locus.factory.addBuiltInType(type);
-		return type;
+		addOpaqueBehavior(behaviorFactory.getListgetBehavior());
+		addOpaqueBehavior(behaviorFactory.getListsizeBehavior());
+		addOpaqueBehavior(behaviorFactory.getAddBehavior());
+		addOpaqueBehavior(behaviorFactory.getSubtractBehavior());
+		addOpaqueBehavior(behaviorFactory.getGreaterBehavior());
+		addOpaqueBehavior(behaviorFactory.getLessBehavior());
+		addOpaqueBehavior(behaviorFactory.getLessOrEqualsBehavior());
+		addOpaqueBehavior(behaviorFactory.getMultiplyBehavior());
+		addOpaqueBehavior(behaviorFactory.getDivideBehavior());
+		addOpaqueBehavior(behaviorFactory.getListindexofBehavior());
 	}
 
 	/**
