@@ -29,8 +29,7 @@ public class ALFTest {
 		alfBehavior.ownedParameter.add(outParameter);
 		alfBehavior.setName("IncreaseInteger");
 		alfBehavior.language.add(ALF_LANGUAGE_NAME);
-		String alfCode = "activity increaseInteger(in input: Integer): Integer {"
-				+ "if (input > 0) { return input + 1; } else {return 0;}" + "}";
+		String alfCode = "return input + 1;";
 		alfBehavior.body.add(alfCode);
 
 		ParameterValue parameterValue = new ParameterValue();
