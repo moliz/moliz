@@ -130,13 +130,14 @@ public class ExecutionContext {
 	 *            context of the execution
 	 * @param inputs
 	 *            input to the execution
+	 * @return the output of the execution
 	 */
-	public void execute(Behavior behavior, Object_ context,
+	public ParameterValueList execute(Behavior behavior, Object_ context,
 			ParameterValueList inputs) {
 		if (inputs == null) {
 			inputs = new ParameterValueList();
 		}
-		this.locus.executor.execute(behavior, context, inputs);
+		return this.locus.executor.execute(behavior, context, inputs);
 	}
 
 	/**
