@@ -417,7 +417,7 @@ public class ExecutionContext {
 	 * 
 	 * @return primitive type Integer
 	 */
-	public PrimitiveType getPrimitivIntegerType() {
+	public PrimitiveType getPrimitiveIntegerType() {
 		return this.locus.factory.getBuiltInType("Integer");
 	}
 
