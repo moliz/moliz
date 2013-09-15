@@ -87,7 +87,7 @@ public class XMOFVirtualMachine implements ExecutionEventListener {
 	private List<Integer> startedActivityIDs = new ArrayList<Integer>();
 	private List<Integer> finishedActivityIDs = new ArrayList<Integer>();
 	private int startedActivityCount = 0;
-
+	
 	public XMOFVirtualMachine(XMOFBasedModel modelToBeExecuted) {
 		super();
 		this.model = modelToBeExecuted;
@@ -382,7 +382,7 @@ public class XMOFVirtualMachine implements ExecutionEventListener {
 			} else if (event instanceof ActivityExitEvent) {
 				finishedActivityIDs.add(((ActivityExitEvent) event).getActivityExecutionID());
 				if(shouldTerminate()) {
-					cleanUpAfterExecution();
+					terminate();					
 				}
 			} else if(event instanceof SuspendEvent) {
 				executionID = ((SuspendEvent) event).getActivityExecutionID();
@@ -402,6 +402,10 @@ public class XMOFVirtualMachine implements ExecutionEventListener {
 			return true;
 		}
 		return false;
+	}
+	
+	private void terminate() {
+		cleanUpAfterExecution();		
 	}
 
 	private boolean concernsCurrentExecution(Event event) {
