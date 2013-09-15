@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="xMOF Diagram" name="getInitialEnabledActivations" snapToGrid="true" pictogramLinks="//@children.0/@link //@children.0/@children.0/@link //@children.1/@link //@children.1/@children.0/@link //@children.2/@link //@children.2/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.2/@link //@children.0/@children.1/@children.0/@link //@children.0/@children.1/@children.0/@children.0/@link //@children.0/@children.1/@children.0/@children.1/@link //@children.0/@children.1/@children.1/@link //@children.0/@children.1/@children.1/@children.0/@link //@children.0/@children.1/@children.2/@link //@children.0/@children.1/@children.2/@children.0/@link //@children.0/@children.1/@children.3/@link //@children.0/@children.1/@children.3/@children.0/@link //@children.0/@children.1/@children.3/@children.1/@link //@children.0/@children.1/@children.4/@link //@children.0/@children.1/@children.4/@children.0/@link //@children.0/@children.1/@children.5/@link //@children.0/@children.1/@children.5/@children.0/@link //@children.0/@children.1/@children.6/@link //@children.0/@children.1/@children.6/@children.0/@link //@children.0/@children.1/@children.6/@children.1/@link //@children.0/@children.1/@children.7/@link //@children.0/@children.1/@children.7/@children.0/@link //@children.0/@children.1/@children.8/@link //@children.0/@children.1/@children.8/@children.0/@link //@children.0/@children.1/@children.9/@link //@connections.0/@link //@connections.1/@link //@connections.2/@link //@connections.3/@link //@children.0/@children.1/@children.10/@link //@children.0/@children.1/@children.11/@link //@children.0/@children.1/@children.12/@link //@connections.4/@link //@connections.5/@link //@connections.6/@link //@children.0/@children.3/@link //@children.0/@children.1/@children.13/@link //@children.0/@children.1/@children.14/@link //@children.0/@children.1/@children.14/@children.0/@link //@children.0/@children.1/@children.14/@children.1/@link //@children.0/@children.1/@children.15/@link //@children.0/@children.1/@children.15/@children.0/@link //@connections.7/@link //@connections.8/@link //@connections.9/@link //@connections.10/@link //@connections.11/@link //@children.0/@children.4/@link //@connections.12/@link //@connections.13/@link //@children.0/@children.1/@children.16/@link //@children.0/@children.1/@children.16/@children.0/@link //@children.0/@children.1/@children.16/@children.1/@link //@children.0/@children.1/@children.17/@link //@children.0/@children.1/@children.17/@children.0/@link //@children.0/@children.1/@children.18/@link //@children.0/@children.1/@children.18/@children.0/@link //@children.0/@children.1/@children.19/@link //@children.0/@children.1/@children.19/@children.0/@link //@children.0/@children.1/@children.20/@link //@children.0/@children.1/@children.20/@children.0/@link //@children.0/@children.1/@children.21/@link //@children.0/@children.1/@children.21/@children.0/@link //@children.0/@children.1/@children.21/@children.1/@link //@children.0/@children.1/@children.22/@link //@children.0/@children.1/@children.22/@children.0/@link //@children.0/@children.1/@children.23/@link //@children.0/@children.1/@children.23/@children.0/@link //@children.0/@children.5/@link //@connections.14/@link //@connections.15/@link //@connections.16/@link //@connections.17/@link //@connections.18/@link //@connections.19/@link //@children.0/@children.1/@children.24/@link //@connections.20/@link //@connections.21/@link //@connections.22/@link //@connections.23/@link" version="0.9.2">
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="3" transparency="0.0" width="1499" height="416" x="102" y="5" cornerHeight="20" cornerWidth="20"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1"/>
+    </link>
+    <anchors xsi:type="pi:ChopboxAnchor"/>
+    <children visible="true">
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="1479" height="416" x="10" font="//@fonts.1" verticalAlignment="ALIGNMENT_TOP" value="getInitialEnabledActivations"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1"/>
+      </link>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" lineStyle="DASH" transparency="0.0" width="1284" height="286" x="145" y="75" cornerHeight="15" cornerWidth="15"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor"/>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="160" height="50" x="140" y="59" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="150" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="ReadIsClassifiedObjectAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="150" height="50" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="instanceof ActionActivation"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="42" height="30" x="298" y="64">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="42" height="15" x="15" font="//@fonts.0" value="result"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/result"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/result"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="59" height="30" x="98" y="64">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="44" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="object"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/object"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="29" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/object"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="194" height="50" x="140" y="125" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.7"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="184" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="ReadIsClassifiedObjectAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="184" height="50" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="instanceof ControlNodeActivation"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="42" height="30" x="332" y="130">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="42" height="15" x="15" font="//@fonts.0" value="result"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/result"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/result"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.5"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="59" height="30" x="98" y="130">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="44" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="object"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/object"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="29" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/object"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="251" height="50" x="140" y="199" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.8"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="241" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="ReadIsClassifiedObjectAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="241" height="50" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="instanceof ActivityParameterNodeActivation"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="42" height="30" x="389" y="204">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="42" height="15" x="15" font="//@fonts.0" value="result"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/result"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/result"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.6"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="59" height="30" x="98" y="204">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="44" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="object"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/object"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="29" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/object"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3"/>
+        </children>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" width="5" height="30" x="30" y="30"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1 //@connections.2 //@connections.3 //@connections.16 //@connections.22" incomingConnections="//@connections.0"/>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.3" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" x="478" y="74">
+          <points x="15"/>
+          <points x="30" y="15"/>
+          <points x="15" y="30"/>
+          <points y="15"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.1"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.7 //@connections.9" incomingConnections="//@connections.4"/>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.3" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" x="478" y="134">
+          <points x="15"/>
+          <points x="30" y="15"/>
+          <points x="15" y="30"/>
+          <points y="15"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.2"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.8 //@connections.10" incomingConnections="//@connections.5"/>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.3" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" x="478" y="208">
+          <points x="15"/>
+          <points x="30" y="15"/>
+          <points x="15" y="30"/>
+          <points y="15"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.3"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.11" incomingConnections="//@connections.6"/>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.3" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" x="583" y="74">
+          <points x="15"/>
+          <points x="30" y="15"/>
+          <points x="15" y="30"/>
+          <points y="15"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.4"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.19" incomingConnections="//@connections.9 //@connections.10 //@connections.11"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="85" height="50" x="750" y="125" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="75" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="ReadSelfAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="75" height="50" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="this"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="42" height="30" x="833" y="130">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="42" height="15" x="15" font="//@fonts.0" value="result"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this/result"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this/result"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.18"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="operation" value="checkIncomingEdges"/>
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="128" height="120" x="966" y="45" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="118" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="CallOperationAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="118" height="120" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="checkIncomingEdges"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="43" height="30" x="1092" y="50">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="43" height="15" x="15" font="//@fonts.0" value="found"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/notfound"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/notfound"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.21"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="102" height="30" x="881" y="50">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="87" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="incomingEdges"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/incomingEdges"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="72" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/incomingEdges"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.17"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="102" height="30" x="881" y="90">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="87" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="activations"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/activations"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="72" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/activations"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.15"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="102" height="30" x="881" y="130">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="87" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="target"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/target"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="72" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/target"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.18"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="150" height="50" x="686" y="40" cornerHeight="15" cornerWidth="15"/>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.19"/>
+        <children visible="true">
+          <properties key="textkind" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="140" height="20" x="5" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_MIDDLE" value="ReadStructuralFeatureAction"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges"/>
+          </link>
+        </children>
+        <children visible="true">
+          <properties key="textkind" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="140" height="50" x="5" font="//@fonts.1" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_MIDDLE" value="incomingEdges"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges"/>
+          </link>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="42" height="30" x="834" y="45">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="42" height="15" x="15" font="//@fonts.0" value="result"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/result"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/result"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.17"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="59" height="30" x="644" y="45">
+          <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="44" height="15" x="-15" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="object"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/object"/>
+        </link>
+        <children visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="29" y="15"/>
+          <link>
+            <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/object"/>
+          </link>
+          <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.16"/>
+        </children>
+      </children>
+      <children visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.3" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" x="1170" y="60">
+          <points x="15"/>
+          <points x="30" y="15"/>
+          <points x="15" y="30"/>
+          <points y="15"/>
+        </graphicsAlgorithm>
+        <link>
+          <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.5"/>
+        </link>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.20" incomingConnections="//@connections.21 //@connections.22"/>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="45" x="138" y="80"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" incomingConnections="//@connections.13"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points y="15"/>
+          <points x="15" y="15"/>
+        </graphicsAlgorithm>
+      </children>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points y="30"/>
+          <points x="15" y="30"/>
+        </graphicsAlgorithm>
+      </children>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="45" x="1422" y="80"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.23" incomingConnections="//@connections.20"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points y="15"/>
+          <points x="15" y="15"/>
+        </graphicsAlgorithm>
+      </children>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+          <points y="30"/>
+          <points x="15" y="30"/>
+        </graphicsAlgorithm>
+      </children>
+    </children>
+    <children visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="2" filled="true" transparency="0.0" width="5" height="30" x="48" y="25"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.2"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.13 //@connections.14" incomingConnections="//@connections.12"/>
+    </children>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="15" height="15" x="150" y="60"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/input1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.15" incomingConnections="//@connections.14"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="97" height="30" x="37" y="20">
+      <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="82" height="15" x="-30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" value="activations"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/activations.1"/>
+    </link>
+    <children visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="30" height="15" x="52" y="15"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/activations.1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.12"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="122" height="30" x="1584" y="20">
+      <graphicsAlgorithmChildren xsi:type="al:Text" foreground="//@colors.4" lineWidth="1" filled="false" transparency="0.0" width="122" height="15" x="30" font="//@fonts.0" value="enabledActivations"/>
+    </graphicsAlgorithm>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/enabledActivations.1"/>
+    </link>
+    <children visible="true" active="true">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="30" height="15" y="15"/>
+      <link>
+        <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/enabledActivations.1"/>
+      </link>
+      <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.23"/>
+    </children>
+  </children>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@anchors.0" end="//@children.0/@children.1/@children.9/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.6"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.9/@anchors.0" end="//@children.0/@children.1/@children.2/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.7"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.9/@anchors.0" end="//@children.0/@children.1/@children.5/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.8"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.9/@anchors.0" end="//@children.0/@children.1/@children.8/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.9"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.1/@children.0/@anchors.0" end="//@children.0/@children.1/@children.10/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.10"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.4/@children.0/@anchors.0" end="//@children.0/@children.1/@children.11/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.11"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.7/@children.0/@anchors.0" end="//@children.0/@children.1/@children.12/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.12"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.10/@anchors.0" end="//@children.0/@children.1/@children.3/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofActionActivation"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.11/@anchors.0" end="//@children.0/@children.1/@children.6/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofControlNodeActivation"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.10/@anchors.0" end="//@children.0/@children.1/@children.13/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActionActivation"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.11/@anchors.0" end="//@children.0/@children.1/@children.13/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofControlNodeActivation"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.12/@anchors.0" end="//@children.0/@children.1/@children.13/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActivityParameterNodeActivation"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@children.0/@anchors.0" end="//@children.0/@children.4/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.3"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.4/@anchors.0" end="//@children.0/@children.2/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.4"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.4/@anchors.0" end="//@children.0/@children.5/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.5"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="260" y="44"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.5/@anchors.0" end="//@children.0/@children.1/@children.19/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.13"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="260" y="99"/>
+    <bendpoints x="1142" y="99"/>
+    <bendpoints x="1142" y="147"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.9/@anchors.0" end="//@children.0/@children.1/@children.23/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.14"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="880" y="124"/>
+    <bendpoints x="880" y="147"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.22/@children.0/@anchors.0" end="//@children.0/@children.1/@children.18/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.15"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.15/@children.0/@anchors.0" end="//@children.0/@children.1/@children.20/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.16"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.13/@anchors.0" end="//@children.0/@children.1/@children.21/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.17"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.24/@anchors.0" end="//@children.0/@children.3/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/nodeActivationEnabled"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.17/@children.0/@anchors.0" end="//@children.0/@children.1/@children.24/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/activationIsEnabled"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.9/@anchors.0" end="//@children.0/@children.1/@children.24/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.18"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+    <bendpoints x="314" y="107"/>
+    <bendpoints x="1369" y="107"/>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.2/@children.0/@anchors.0">
+    <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0"/>
+    <link>
+      <businessObjects href="fUML.xmof#//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.6"/>
+    </link>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="2" filled="false" transparency="0.0">
+        <points x="-10" y="5"/>
+        <points/>
+        <points x="-10" y="-5"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors red="98" green="131" blue="167"/>
+  <colors red="187" green="218" blue="247"/>
+  <colors/>
+  <fonts name="Arial" size="8"/>
+  <fonts name="Arial" size="8" bold="true"/>
+</pi:Diagram>

@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:fUML.Syntax.Actions.BasicActions="http://www.modelexecution.org/xmof/syntax/actions/basicactions" xmlns:fUML.Syntax.Actions.CompleteActions="http://www.modelexecution.org/xmof/syntax/actions/completeactions" xmlns:fUML.Syntax.Actions.IntermediateActions="http://www.modelexecution.org/xmof/syntax/actions/intermediateactions" xmlns:fUML.Syntax.Activities.ExtraStructuredActivities="http://www.modelexecution.org/xmof/syntax/activities/extrastructuredactivities" xmlns:fUML.Syntax.Activities.IntermediateActivities="http://www.modelexecution.org/xmof/syntax/activities/intermediateactivities" xmlns:fUML.Syntax.CommonBehaviors.BasicBehaviors="http://www.modelexecution.org/xmof/syntax/commonbehaviors/basicbehaviors" xmlns:kernel="http://www.modelexecution.org/xmof/syntax/classes/mykernel" name="fumlConfiguration" nsURI="http://www.modelexecution.org/fuml/configuration" nsPrefix="fumlConf">
+  <eSubpackages name="SyntaxConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/configuration" nsPrefix="fUML.SyntaxConf">
+    <eSubpackages name="CommonBehaviorsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/commonbehaviors/configuration" nsPrefix="fUML.Syntax.CommonBehaviorsConf">
+      <eSubpackages name="BasicBehaviorsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/commonbehaviors/basicbehaviors/configuration" nsPrefix="fUML.Syntax.CommonBehaviors.BasicBehaviorsConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="OpaqueBehaviorConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/BasicBehaviors/OpaqueBehavior"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="BehaviorConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/BasicBehaviors/Behavior"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="BehavioredClassifierConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/BasicBehaviors/BehavioredClassifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="FunctionBehaviorConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/BasicBehaviors/FunctionBehavior"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="CommunicationsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/commonbehaviors/communications/configuration" nsPrefix="fUML.Syntax.CommonBehaviors.CommunicationsConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="TriggerConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/Trigger"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="EventConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/Event"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="SignalConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/Signal"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="SignalEventConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/SignalEvent"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="MessageEventConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/MessageEvent"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReceptionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/CommonBehaviors/Communications/Reception"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="ClassesConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/classes/configuration" nsPrefix="fUML.Syntax.ClassesConf">
+      <eSubpackages name="KernelConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/classes/kernel/configuration" nsPrefix="fUML.Syntax.Classes.KernelConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ValueSpecificationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/ValueSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="TypedElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/TypedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="NamedElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/NamedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Element"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CommentConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Comment"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="NamespaceConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Namespace"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ElementImportConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/ElementImport"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PackageableElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/PackageableElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PackageImportConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/PackageImport"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PackageConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Package"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="TypeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Type"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StructuralFeatureConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/StructuralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="FeatureConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Feature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="RedefinableElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/RedefinableElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ClassifierConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="GeneralizationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Generalization"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PropertyConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="AssociationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Association"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="DataTypeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/DataType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="MultiplicityElementConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/MultiplicityElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="BehavioralFeatureConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ParameterConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Parameter"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="OperationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Operation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="InstanceSpecificationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/InstanceSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="SlotConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Slot"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="InstanceValueConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/InstanceValue"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralBooleanConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralBoolean"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralSpecificationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralSpecification"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralIntegerConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralInteger"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralNullConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralNull"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralStringConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LiteralUnlimitedNaturalConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/LiteralUnlimitedNatural"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PrimitiveTypeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/PrimitiveType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="EnumerationConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Enumeration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="EnumerationLiteralConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/EnumerationLiteral"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ClassConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Classes/Kernel/Class"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="ActivitiesConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/activities/configuration" nsPrefix="fUML.Syntax.ActivitiesConf">
+      <eSubpackages name="IntermediateActivitiesConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/activities/intermediateactivities/configuration" nsPrefix="fUML.Syntax.Activities.IntermediateActivitiesConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ObjectFlowConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ObjectFlow"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityEdgeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityEdge"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/Activity"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ObjectNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ObjectNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="MergeNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/MergeNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ControlNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ControlNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="JoinNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/JoinNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="InitialNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/InitialNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="FinalNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/FinalNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ForkNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ForkNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ControlFlowConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ControlFlow"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="DecisionNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/DecisionNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityFinalNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityFinalNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityParameterNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityParameterNode"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="CompleteStructuredActivitiesConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/activities/completestructuredactivities/configuration" nsPrefix="fUML.Syntax.Activities.CompleteStructuredActivitiesConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LoopNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/CompleteStructuredActivities/LoopNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ExecutableNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/CompleteStructuredActivities/ExecutableNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ClauseConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/CompleteStructuredActivities/Clause"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ConditionalNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/CompleteStructuredActivities/ConditionalNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StructuredActivityNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/CompleteStructuredActivities/StructuredActivityNode"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="ExtraStructuredActivitiesConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/activities/extrastructuredactivities/configuration" nsPrefix="fUML.Syntax.Activities.ExtraStructuredActivitiesConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ExpansionNodeConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/ExtraStructuredActivities/ExpansionNode"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ExpansionRegionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Activities/ExtraStructuredActivities/ExpansionRegion"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="ActionsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/actions/configuration" nsPrefix="fUML.Syntax.ActionsConf">
+      <eSubpackages name="IntermediateActionsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/actions/intermediateactions/configuration" nsPrefix="fUML.Syntax.Actions.IntermediateActionsConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StructuralFeatureActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/StructuralFeatureAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="TestIdentityActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/TestIdentityAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ValueSpecificationActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ValueSpecificationAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="WriteLinkActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/WriteLinkAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LinkActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/LinkAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LinkEndDataConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/LinkEndData"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="WriteStructuralFeatureActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/WriteStructuralFeatureAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="RemoveStructuralFeatureValueActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/RemoveStructuralFeatureValueAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReadLinkActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ReadLinkAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReadSelfActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ReadSelfAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReadStructuralFeatureActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ReadStructuralFeatureAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LinkEndCreationDataConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/LinkEndCreationData"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="LinkEndDestructionDataConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/LinkEndDestructionData"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ClearAssociationActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ClearAssociationAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ClearStructuralFeatureActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/ClearStructuralFeatureAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CreateLinkActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/CreateLinkAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CreateObjectActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/CreateObjectAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="DestroyLinkActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/DestroyLinkAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="DestroyObjectActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/DestroyObjectAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="AddStructuralFeatureValueActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/IntermediateActions/AddStructuralFeatureValueAction"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="CompleteActionsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/actions/completeactions/configuration" nsPrefix="fUML.Syntax.Actions.CompleteActionsConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StartClassifierBehaviorActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/StartClassifierBehaviorAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StartObjectBehaviorActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/StartObjectBehaviorAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReduceActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/ReduceAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReadExtentActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/ReadExtentAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReadIsClassifiedObjectActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/ReadIsClassifiedObjectAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ReclassifyObjectActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/ReclassifyObjectAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="AcceptEventActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/CompleteActions/AcceptEventAction"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="BasicActionsConfiguration" nsURI="http://www.modelexecution.org/fuml/syntax/actions/basicactions/configuration" nsPrefix="fUML.Syntax.Actions.BasicActionsConf">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/Action"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="InputPinConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/InputPin"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="PinConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/Pin"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CallActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/CallAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="InvocationActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/InvocationAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="SendSignalActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/SendSignalAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CallBehaviorActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/CallBehaviorAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CallOperationActionConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/CallOperationAction"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="OutputPinConfiguration">
+          <eSuperTypes href="fUML.ecore#//Syntax/Actions/BasicActions/OutputPin"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="Semantics" nsURI="http://www.modelexecution.org/fuml/semantics" nsPrefix="fUML.Semantics">
+    <eSubpackages name="Classes" nsURI="http://www.modelexecution.org/fuml/semantics/classes" nsPrefix="fUML.Semantics.Classes">
+      <eSubpackages name="Kernel" nsURI="http://www.modelexecution.org/fuml/semantics/classes/kernel" nsPrefix="fUML.Semantics.Classes.Kernel">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="Object" eSuperTypes="//Semantics/Classes/Kernel/ExtensionalValue">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="addType" method="//Semantics/Classes/Kernel/Object/addType.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="type"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="types" ordered="false" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/Classes/Kernel/Class"/>
+          </eStructuralFeatures>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="addType" specification="//Semantics/Classes/Kernel/Object/addType">
+            <ownedParameter name="type"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="type" outgoing="//Semantics/Classes/Kernel/Object/addType.1/%.1" parameter="//Semantics/Classes/Kernel/Object/addType.1/type"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Classes/Kernel/Object/addType.1/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add type" structuralFeature="//Semantics/Classes/Kernel/Object/types">
+              <object name="object" incoming="//Semantics/Classes/Kernel/Object/addType.1/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Classes/Kernel/Object/addType.1/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Classes/Kernel/Object/addType.1/this/result" target="//Semantics/Classes/Kernel/Object/addType.1/add%20type/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Classes/Kernel/Object/addType.1/type.1" target="//Semantics/Classes/Kernel/Object/addType.1/add%20type/value"/>
+          </ownedBehavior>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="Value" abstract="true" eSuperTypes="//Semantics/Loci/SemanticVisitor"/>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="StructuredValue" abstract="true" eSuperTypes="//Semantics/Classes/Kernel/Value">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createFeatureValues" lowerBound="1"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="CompoundValue" abstract="true" eSuperTypes="//Semantics/Classes/Kernel/StructuredValue">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="featureValues" ordered="false" upperBound="-1" eType="//Semantics/Classes/Kernel/FeatureValue" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ExtensionalValue" abstract="true" eSuperTypes="//Semantics/Classes/Kernel/CompoundValue">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="destroy" ordered="false" lowerBound="1"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="locus_extensionalValue" ordered="false" eType="//Semantics/Loci/Locus" eOpposite="//Semantics/Loci/Locus/extensionalValues"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="FeatureValue">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="feature" ordered="false" lowerBound="1">
+            <eType xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/Classes/Kernel/StructuralFeature"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Semantics/Classes/Kernel/Value" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" ordered="false">
+            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="CommonBehaviors" nsURI="http://www.modelexecution.org/fuml/semantics/commonbehaviors" nsPrefix="fUML.Semantics.CommonBehaviors">
+      <eSubpackages name="BasicBehaviors" nsURI="http://www.modelexecution.org/fuml/semantics/commonbehaviors/basicbehaviors" nsPrefix="fUML.Semantics.CommonBehaviors.BasicBehaviors">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ParameterValue"/>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="Execution" abstract="true" eSuperTypes="//Semantics/Classes/Kernel/Object">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="execute" method="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution"/>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="setParameterValue" ordered="false">
+            <eParameters xsi:type="kernel:DirectedParameter" name="parameterValue" ordered="false" lowerBound="1" eType="//Semantics/CommonBehaviors/BasicBehaviors/ParameterValue"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="getOutputParameterValues">
+            <eParameters xsi:type="kernel:DirectedParameter" name="outputParameterValues" ordered="false" upperBound="-1" eType="//Semantics/CommonBehaviors/BasicBehaviors/ParameterValue" direction="OUT"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false" lowerBound="1" eType="//Semantics/Classes/Kernel/Object"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="Communications" nsURI="http://www.modelexecution.org/fuml/semantics/commonbehaviors/communications" nsPrefix="fUML.Semantics.CommonBehaviors.Communications"/>
+    </eSubpackages>
+    <eSubpackages name="Loci" nsURI="http://www.modelexecution.org/fuml/semantics/loci" nsPrefix="fUML.Semantics.Loci">
+      <eClassifiers xsi:type="kernel:BehavioredEClass" name="Executor">
+        <eOperations xsi:type="kernel:BehavioredEOperation" name="execute" method="//Semantics/Loci/Executor/execute.1">
+          <eParameters xsi:type="kernel:DirectedParameter" name="behavior" ordered="false" lowerBound="1"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="context" ordered="false"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="inputs" upperBound="-1"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="output" upperBound="-1" direction="OUT"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="locus_executor" ordered="false" eType="//Semantics/Loci/Locus" eOpposite="//Semantics/Loci/Locus/executor"/>
+        <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="execute" specification="//Semantics/Loci/Executor/execute">
+          <ownedParameter name="behavior" ordered="false" lowerBound="1"/>
+          <ownedParameter name="context" ordered="false"/>
+          <ownedParameter name="inputs" upperBound="-1"/>
+          <ownedParameter name="output" upperBound="-1" direction="OUT"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="behavior" outgoing="//Semantics/Loci/Executor/execute.1/%.5" ordered="false" lowerBound="1" parameter="//Semantics/Loci/Executor/execute.1/behavior"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="context" outgoing="//Semantics/Loci/Executor/execute.1/%.6" ordered="false" parameter="//Semantics/Loci/Executor/execute.1/context"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="inputs" outgoing="//Semantics/Loci/Executor/execute.1/%.8" upperBound="-1" parameter="//Semantics/Loci/Executor/execute.1/inputs"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="output" incoming="//Semantics/Loci/Executor/execute.1/%.12" upperBound="-1" parameter="//Semantics/Loci/Executor/execute.1/output"/>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+            <result name="result" outgoing="//Semantics/Loci/Executor/execute.1/%" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="locus" structuralFeature="//Semantics/Loci/Executor/locus_executor">
+            <object name="object" incoming="//Semantics/Loci/Executor/execute.1/%" lowerBound="1"/>
+            <result name="result" outgoing="//Semantics/Loci/Executor/execute.1/%.1" upperBound="0"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="factory" structuralFeature="//Semantics/Loci/Locus/factory">
+            <object name="object" incoming="//Semantics/Loci/Executor/execute.1/%.1" lowerBound="1"/>
+            <result name="result" outgoing="//Semantics/Loci/Executor/execute.1/%.2" upperBound="0"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createExecution" operation="//Semantics/Loci/ExecutionFactory/createExecution">
+            <argument name="behavior" incoming="//Semantics/Loci/Executor/execute.1/%.5" lowerBound="1"/>
+            <argument name="context" incoming="//Semantics/Loci/Executor/execute.1/%.6"/>
+            <result name="execution" outgoing="//Semantics/Loci/Executor/execute.1/%.3"/>
+            <target name="target" incoming="//Semantics/Loci/Executor/execute.1/%.2" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="execute" outgoing="//Semantics/Loci/Executor/execute.1/%.10" incoming="//Semantics/Loci/Executor/execute.1/%.9" operation="//Semantics/CommonBehaviors/BasicBehaviors/Execution/execute">
+            <target name="target" incoming="//Semantics/Loci/Executor/execute.1/%.4" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" name="fork_execution" outgoing="//Semantics/Loci/Executor/execute.1/%.4 //Semantics/Loci/Executor/execute.1/%.7 //Semantics/Loci/Executor/execute.1/%.11 //Semantics/Loci/Executor/execute.1/%.13" incoming="//Semantics/Loci/Executor/execute.1/%.3"/>
+          <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="set parameter values" outgoing="//Semantics/Loci/Executor/execute.1/%.9" inputElement="//Semantics/Loci/Executor/execute.1/inputs.2">
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="setParameterValue" operation="//Semantics/CommonBehaviors/BasicBehaviors/Execution/setParameterValue">
+              <argument name="parameterValue" incoming="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/%.1" lowerBound="1"/>
+              <target name="target" incoming="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/%" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/execution" target="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/setParameterValue/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/inputs.2" target="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/setParameterValue/parameterValue"/>
+            <structuredNodeInput name="execution" outgoing="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/%" incoming="//Semantics/Loci/Executor/execute.1/%.7"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" name="inputs" outgoing="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/%.1" incoming="//Semantics/Loci/Executor/execute.1/%.8" regionAsInput="//Semantics/Loci/Executor/execute.1/set%20parameter%20values"/>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="getOutputParameterValues" outgoing="//Semantics/Loci/Executor/execute.1/%.14" incoming="//Semantics/Loci/Executor/execute.1/%.10" operation="//Semantics/CommonBehaviors/BasicBehaviors/Execution/getOutputParameterValues">
+            <result name="outputParameterValues" outgoing="//Semantics/Loci/Executor/execute.1/%.12"/>
+            <target name="target" incoming="//Semantics/Loci/Executor/execute.1/%.11" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="destroy" incoming="//Semantics/Loci/Executor/execute.1/%.14" operation="//Semantics/Classes/Kernel/ExtensionalValue/destroy">
+            <target name="target" incoming="//Semantics/Loci/Executor/execute.1/%.13" lowerBound="1"/>
+          </node>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/this/result" target="//Semantics/Loci/Executor/execute.1/locus/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/locus/result" target="//Semantics/Loci/Executor/execute.1/factory/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/factory/result" target="//Semantics/Loci/Executor/execute.1/createExecution/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/createExecution/execution" target="//Semantics/Loci/Executor/execute.1/fork_execution"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/fork_execution" target="//Semantics/Loci/Executor/execute.1/execute/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/behavior.1" target="//Semantics/Loci/Executor/execute.1/createExecution/behavior"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/context.1" target="//Semantics/Loci/Executor/execute.1/createExecution/context"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/fork_execution" target="//Semantics/Loci/Executor/execute.1/set%20parameter%20values/execution"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/inputs.1" target="//Semantics/Loci/Executor/execute.1/inputs.2"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/Executor/execute.1/set%20parameter%20values" target="//Semantics/Loci/Executor/execute.1/execute"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/Executor/execute.1/execute" target="//Semantics/Loci/Executor/execute.1/getOutputParameterValues"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/fork_execution" target="//Semantics/Loci/Executor/execute.1/getOutputParameterValues/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/getOutputParameterValues/outputParameterValues" target="//Semantics/Loci/Executor/execute.1/output.1"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Executor/execute.1/fork_execution" target="//Semantics/Loci/Executor/execute.1/destroy/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/Executor/execute.1/getOutputParameterValues" target="//Semantics/Loci/Executor/execute.1/destroy"/>
+        </ownedBehavior>
+      </eClassifiers>
+      <eClassifiers xsi:type="kernel:BehavioredEClass" name="ExecutionFactory">
+        <eOperations xsi:type="kernel:BehavioredEOperation" name="createExecution" method="//Semantics/Loci/ExecutionFactory/createExecution.1">
+          <eParameters xsi:type="kernel:DirectedParameter" name="behavior" ordered="false" lowerBound="1"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="context" ordered="false"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="execution" ordered="false" lowerBound="1" direction="OUT"/>
+        </eOperations>
+        <eOperations xsi:type="kernel:BehavioredEOperation" name="instantiateVisitor" method="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1">
+          <eParameters xsi:type="kernel:DirectedParameter" name="element" lowerBound="1"/>
+          <eParameters xsi:type="kernel:DirectedParameter" name="semanticVisitor" lowerBound="1" direction="OUT"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="locus_executionFactory" ordered="false" eType="//Semantics/Loci/Locus" eOpposite="//Semantics/Loci/Locus/factory"/>
+        <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="createExecution" specification="//Semantics/Loci/ExecutionFactory/createExecution">
+          <ownedParameter name="behavior" ordered="false" lowerBound="1"/>
+          <ownedParameter name="context" ordered="false"/>
+          <ownedParameter name="execution" ordered="false" lowerBound="1" direction="OUT"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="behavior" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.6" ordered="false" lowerBound="1" parameter="//Semantics/Loci/ExecutionFactory/createExecution.1/behavior"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="context" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.19" ordered="false" parameter="//Semantics/Loci/ExecutionFactory/createExecution.1/context"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="execution" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.25" ordered="false" lowerBound="1" parameter="//Semantics/Loci/ExecutionFactory/createExecution.1/execution"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.7 //Semantics/Loci/ExecutionFactory/createExecution.1/%.10 //Semantics/Loci/ExecutionFactory/createExecution.1/%.13" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.6"/>
+          <node xsi:type="fUML.Syntax.Actions.CompleteActions:ReadIsClassifiedObjectAction" name="instanceof OpaqueBehavior">
+            <classifier xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/CommonBehaviors/BasicBehaviors/OpaqueBehavior"/>
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.8" lowerBound="1"/>
+            <object name="object" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.7" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/notOpaqueBehavior" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.8"/>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="instantiateVisitor" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/notOpaqueBehavior" operation="//Semantics/Loci/ExecutionFactory/instantiateVisitor">
+            <argument name="element" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.10" lowerBound="1"/>
+            <result name="semanticVisitor" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.11"/>
+            <target name="target" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.9" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.9" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="addType" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.15" operation="//Semantics/Classes/Kernel/Object/addType">
+            <argument name="type" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.13"/>
+            <target name="target" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.12" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.12 //Semantics/Loci/ExecutionFactory/createExecution.1/%.14 //Semantics/Loci/ExecutionFactory/createExecution.1/%.22 //Semantics/Loci/ExecutionFactory/createExecution.1/%.25 //Semantics/Loci/ExecutionFactory/createExecution.1/%.26 //Semantics/Loci/ExecutionFactory/createExecution.1/%.27 //Semantics/Loci/ExecutionFactory/createExecution.1/%.30" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.11"/>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createFeatureValues" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.17" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.15" operation="//Semantics/Classes/Kernel/StructuredValue/createFeatureValues">
+            <target name="target" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.14" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="locus" structuralFeature="//Semantics/Loci/ExecutionFactory/locus_executionFactory">
+            <object name="object" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.16" lowerBound="1"/>
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.28" upperBound="0"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.18">
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.16" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:MergeNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.18" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.17"/>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:TestIdentityAction" name="equals" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.29">
+            <second name="second" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.20" lowerBound="1"/>
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.23" lowerBound="1"/>
+            <first name="first" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.21" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="null">
+            <value xsi:type="kernel:LiteralNull"/>
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.21" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.20 //Semantics/Loci/ExecutionFactory/createExecution.1/%.24" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.19"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/context%20not%20null //Semantics/Loci/ExecutionFactory/createExecution.1/context%20null" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.23"/>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set context to context" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/context%20not%20null" structuralFeature="//Semantics/CommonBehaviors/BasicBehaviors/Execution/context">
+            <object name="object" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.22" lowerBound="1"/>
+            <value name="value" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.24" lowerBound="1"/>
+            <result name="result" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set context to execution" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/context%20null" structuralFeature="//Semantics/CommonBehaviors/BasicBehaviors/Execution/context">
+            <object name="object" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.26" lowerBound="1"/>
+            <value name="value" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.27" lowerBound="1"/>
+            <result name="result" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="add" outgoing="//Semantics/Loci/ExecutionFactory/createExecution.1/%.29" operation="//Semantics/Loci/Locus/add">
+            <argument name="extensionalValue" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.30" lowerBound="1"/>
+            <target name="target" incoming="//Semantics/Loci/ExecutionFactory/createExecution.1/%.28" lowerBound="1"/>
+          </node>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/behavior.1" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%" target="//Semantics/Loci/ExecutionFactory/createExecution.1/instanceof%20OpaqueBehavior/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/instanceof%20OpaqueBehavior/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%.1"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/this/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/instantiateVisitor/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%" target="//Semantics/Loci/ExecutionFactory/createExecution.1/instantiateVisitor/element"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="notOpaqueBehavior" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.1" target="//Semantics/Loci/ExecutionFactory/createExecution.1/instantiateVisitor">
+            <guard xsi:type="kernel:LiteralBoolean"/>
+          </edge>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/instantiateVisitor/semanticVisitor" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/addType/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%" target="//Semantics/Loci/ExecutionFactory/createExecution.1/addType/type"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/createFeatureValues/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/addType" target="//Semantics/Loci/ExecutionFactory/createExecution.1/createFeatureValues"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/this.1/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/locus/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/createFeatureValues" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%.3"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.3" target="//Semantics/Loci/ExecutionFactory/createExecution.1/this.1"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/context.1" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%.4"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.4" target="//Semantics/Loci/ExecutionFactory/createExecution.1/equals/second"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/null/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/equals/first"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20context/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/equals/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/%.5"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.4" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20context/value"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/execution.1"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20execution/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20execution/value"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="context not null" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.5" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20context">
+            <guard xsi:type="kernel:LiteralBoolean"/>
+          </edge>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="context null" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.5" target="//Semantics/Loci/ExecutionFactory/createExecution.1/set%20context%20to%20execution">
+            <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+          </edge>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/locus/result" target="//Semantics/Loci/ExecutionFactory/createExecution.1/add/target"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/add" target="//Semantics/Loci/ExecutionFactory/createExecution.1/equals"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/createExecution.1/%.2" target="//Semantics/Loci/ExecutionFactory/createExecution.1/add/extensionalValue"/>
+        </ownedBehavior>
+        <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="instantiateVisitor" specification="//Semantics/Loci/ExecutionFactory/instantiateVisitor">
+          <ownedParameter name="element" lowerBound="1"/>
+          <ownedParameter name="semanticVisitor" lowerBound="1" direction="OUT"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="element" outgoing="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.2" lowerBound="1" parameter="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/element"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="semanticVisitor" incoming="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.5" lowerBound="1" parameter="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/semanticVisitor"/>
+          <node xsi:type="fUML.Syntax.Actions.CompleteActions:ReadIsClassifiedObjectAction" name="instanceof Activity">
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.4" lowerBound="1"/>
+            <object name="object" incoming="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.3" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.3" incoming="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.2"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/activityExecution" incoming="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.4"/>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:CreateObjectAction" name="new ActivityExecution" incoming="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/activityExecution" classifier="//Semantics/Activities/IntermediateActivities/ActivityExecution">
+            <result name="result" outgoing="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.5" lowerBound="1"/>
+          </node>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/element.1" target="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%" target="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/instanceof%20Activity/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/instanceof%20Activity/result" target="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.1"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="activityExecution" source="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/%.1" target="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/new%20ActivityExecution">
+            <guard xsi:type="kernel:LiteralBoolean" name="" value="true"/>
+          </edge>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/new%20ActivityExecution/result" target="//Semantics/Loci/ExecutionFactory/instantiateVisitor.1/semanticVisitor.1"/>
+        </ownedBehavior>
+      </eClassifiers>
+      <eClassifiers xsi:type="kernel:BehavioredEClass" name="Locus">
+        <eOperations xsi:type="kernel:BehavioredEOperation" name="add" lowerBound="1" method="//Semantics/Loci/Locus/add.1">
+          <eParameters xsi:type="kernel:DirectedParameter" name="extensionalValue" lowerBound="1"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="executor" ordered="false" eType="//Semantics/Loci/Executor" containment="true" eOpposite="//Semantics/Loci/Executor/locus_executor"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="factory" ordered="false" eType="//Semantics/Loci/ExecutionFactory" containment="true" eOpposite="//Semantics/Loci/ExecutionFactory/locus_executionFactory"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="extensionalValues" ordered="false" upperBound="-1" eType="//Semantics/Classes/Kernel/ExtensionalValue" containment="true" eOpposite="//Semantics/Classes/Kernel/ExtensionalValue/locus_extensionalValue"/>
+        <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="add" specification="//Semantics/Loci/Locus/add">
+          <ownedParameter name="extensionalValue" lowerBound="1"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="extensionalValue" outgoing="//Semantics/Loci/Locus/add.1/%.3" lowerBound="1" parameter="//Semantics/Loci/Locus/add.1/extensionalValue"/>
+          <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Loci/Locus/add.1/%.2" incoming="//Semantics/Loci/Locus/add.1/%.3"/>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add extensionalValue" structuralFeature="//Semantics/Loci/Locus/extensionalValues">
+            <object name="object" incoming="//Semantics/Loci/Locus/add.1/%.1" lowerBound="1"/>
+            <value name="value" incoming="//Semantics/Loci/Locus/add.1/%.2" lowerBound="1"/>
+            <result name="result" lowerBound="1"/>
+          </node>
+          <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+            <result name="result" outgoing="//Semantics/Loci/Locus/add.1/%.1" lowerBound="1"/>
+          </node>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Locus/add.1/this/result" target="//Semantics/Loci/Locus/add.1/add%20extensionalValue/object"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Locus/add.1/%" target="//Semantics/Loci/Locus/add.1/add%20extensionalValue/value"/>
+          <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Loci/Locus/add.1/extensionalValue.1" target="//Semantics/Loci/Locus/add.1/%"/>
+        </ownedBehavior>
+      </eClassifiers>
+      <eClassifiers xsi:type="kernel:BehavioredEClass" name="SemanticVisitor" abstract="true"/>
+    </eSubpackages>
+    <eSubpackages name="Activities" nsURI="http://www.modelexecution.org/fuml/semantics/activities" nsPrefix="fUML.Semantics.Activities">
+      <eSubpackages name="IntermediateActivities" nsURI="http://www.modelexecution.org/fuml/semantics/activities/intermediateactivities" nsPrefix="fUML.Semantics.Activities.IntermediateActivities">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityExecution" eSuperTypes="//Semantics/CommonBehaviors/BasicBehaviors/Execution">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="activationGroup" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup" containment="true" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activityExecution"/>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="execute_activityExecution" specification="//Semantics/CommonBehaviors/BasicBehaviors/Execution/execute">
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:CreateObjectAction" name="new ActivityNodeActivationGroup" classifier="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.2" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set activityExecution" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activityExecution">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.2" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.3" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.4" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.3" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.5" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.4"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="activate" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate">
+              <argument name="nodes" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.12" upperBound="-1"/>
+              <argument name="edges" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.13"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.5" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.6" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="types" structuralFeature="//Semantics/Classes/Kernel/Object/types">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.6" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.7" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallBehaviorAction" name="get">
+              <argument name="list" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.7" lowerBound="1" upperBound="-1"/>
+              <argument name="index" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.8" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.9"/>
+              <behavior xsi:type="fUML.Syntax.CommonBehaviors.BasicBehaviors:FunctionBehavior" href="pathmap://XMOF_LIBRARY/xmof_library.xmof#//PrimitiveBehaviors/ListFunctions/ListGet"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="1">
+              <value xsi:type="kernel:LiteralInteger" value="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.8" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.10 //Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.11" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.9"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="node">
+              <structuralFeature xsi:type="ecore:EReference" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/Activity/node"/>
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.10" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.12" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="edge">
+              <structuralFeature xsi:type="ecore:EReference" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/Activity/edge"/>
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.11" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.13" upperBound="0"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/new%20ActivityNodeActivationGroup/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/set%20activityExecution/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/set%20activityExecution/value"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/set%20activityExecution/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/activate/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/this.1/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/types/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/types/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/get/list"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/1/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/get/index"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/get/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/node/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/edge/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/node/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/activate/nodes"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/edge/result" target="//Semantics/Activities/IntermediateActivities/ActivityExecution/execute_activityExecution/activate/edges"/>
+          </ownedBehavior>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityNodeActivationGroup">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="run" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="activations" ordered="false" upperBound="-1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="activate" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="nodes" ordered="false" upperBound="-1"/>
+            <eParameters xsi:type="kernel:DirectedParameter" name="edges" ordered="false"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createNodeActivations" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="nodes" ordered="false" upperBound="-1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createEdgeInstances" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="edges" ordered="false" upperBound="-1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createNodeActivation" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="node" lowerBound="1"/>
+            <eParameters xsi:type="kernel:DirectedParameter" name="activation" lowerBound="1" direction="OUT"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="getActivityExecution" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="activityExecution" lowerBound="1" direction="OUT"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="addNodeActivation" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="activation" ordered="false" lowerBound="1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="addEdgeInstance" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="instance" ordered="false" lowerBound="1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="getNodeActivation" lowerBound="1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="node" ordered="false" lowerBound="1">
+              <eType xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityNode"/>
+            </eParameters>
+            <eParameters xsi:type="kernel:DirectedParameter" name="activation" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation" direction="OUT"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="getInitialEnabledActivations" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="activations" ordered="false" upperBound="-1"/>
+            <eParameters xsi:type="kernel:DirectedParameter" name="enabledActivations" ordered="false" upperBound="-1" direction="OUT"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="checkIncomingEdges">
+            <eParameters xsi:type="kernel:DirectedParameter" name="incomingEdges" ordered="false" upperBound="-1" eType="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance"/>
+            <eParameters xsi:type="kernel:DirectedParameter" name="activations" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation"/>
+            <eParameters xsi:type="kernel:DirectedParameter" name="notfound" lowerBound="1" direction="OUT">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="activityExecution" ordered="false" eType="//Semantics/Activities/IntermediateActivities/ActivityExecution" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityExecution/activationGroup"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="edgeInstances" ordered="false" upperBound="-1" eType="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance" containment="true" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance/group"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="nodeActivations" ordered="false" upperBound="-1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation" containment="true" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/group"/>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="activate" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate">
+            <ownedParameter name="nodes" ordered="false" upperBound="-1"/>
+            <ownedParameter name="edges" ordered="false"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="nodes" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.6" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/nodes"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="edges" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.7" ordered="false" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/edges"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createNodeActivations" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations">
+              <argument name="nodes" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.6" upperBound="-1"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.2" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createEdgeInstances" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances">
+              <argument name="edges" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.7" upperBound="-1"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.3" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="run" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run">
+              <argument name="activations" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.8" upperBound="-1"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.5" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.1" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.2 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.3 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.4 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.5" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.1"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="nodeActivations" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/nodeActivations">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.4" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%.8" upperBound="0"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/createNodeActivations/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/createEdgeInstances/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/nodeActivations/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/run/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/nodes.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/createNodeActivations/nodes"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/edges.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/createEdgeInstances/edges"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/nodeActivations/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activate.1/run/activations"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="createNodeActivations" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations">
+            <ownedParameter name="nodes" ordered="false" upperBound="-1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="nodes" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%.2" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/nodes"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="create node activations" inputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%">
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createNodeActivation" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation">
+                <argument name="node" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/%" lowerBound="1"/>
+                <result name="activation"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/%.1" lowerBound="1"/>
+              </node>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/createNodeActivation/node"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/input1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/createNodeActivation/target"/>
+              <structuredNodeInput name="input1" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/%.1" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%.1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/%" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%.2" regionAsInput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%.1" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/create%20node%20activations/input1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/nodes.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivations.1/%"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="createNodeActivation" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation">
+            <ownedParameter name="node" lowerBound="1"/>
+            <ownedParameter name="activation" lowerBound="1" direction="OUT"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="node" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.9" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/node"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="activation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.18" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/activation"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.3" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="getActivityExecution" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution">
+              <result name="activityExecution" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.4"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.3" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="locus" structuralFeature="//Semantics/Classes/Kernel/ExtensionalValue/locus_extensionalValue">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.4" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.5" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="factory" structuralFeature="//Semantics/Loci/Locus/factory">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.5" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.6" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="instantiateVisitor" operation="//Semantics/Loci/ExecutionFactory/instantiateVisitor">
+              <argument name="element" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.10" lowerBound="1"/>
+              <result name="semanticVisitor" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.17"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.6" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set node" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/node">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.19" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.11" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.7" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set running" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/running">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.7" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.8" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.13" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="false">
+              <value xsi:type="kernel:LiteralBoolean"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.8" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.10 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.11" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.9"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="addNodeActivation" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.16" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation">
+              <argument name="activation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.14" lowerBound="1"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.12" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.12" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.14 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.15" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.13"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createNodeActivations" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.16" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/createNodeActivations">
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.15" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.18 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.19" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.17"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/getActivityExecution/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/getActivityExecution/activityExecution" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/locus/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/locus/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/factory/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/factory/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/instantiateVisitor/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20node/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20running/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/false/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20running/value"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/node.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/instantiateVisitor/element"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20node/value"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/this.1/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/addNodeActivation/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20running/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/addNodeActivation/activation"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/createNodeActivations/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/addNodeActivation" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/createNodeActivations"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/instantiateVisitor/semanticVisitor" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.2"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/activation.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createNodeActivation.1/set%20node/object"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="getActivityExecution" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution">
+            <ownedParameter name="activityExecution" lowerBound="1" direction="OUT"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="activityExecution" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/%.1" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/activityExecution"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="activityExecution" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/activityExecution">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/%" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/%.1" upperBound="0"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/activityExecution.2/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/activityExecution.2/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getActivityExecution.1/activityExecution.1"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="addNodeActivation" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation">
+            <ownedParameter name="activation" ordered="false" lowerBound="1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="activation" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/%.1" ordered="false" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/activation"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add nodeActivation" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/nodeActivations">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/add%20nodeActivation/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/activation.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addNodeActivation.1/add%20nodeActivation/value"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="createEdgeInstances" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances">
+            <ownedParameter name="edges" ordered="false" upperBound="-1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="edges" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.2" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/edges"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="create edgeInstances" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.5" inputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%">
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:CreateObjectAction" name="new ActivityEdgeInstance" classifier="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/% //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.3" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" name="fork edge instance" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.4 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.7 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.12 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.13" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/% //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.3"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" name="fork edge" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.5 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.14 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.15" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.1"/>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.2" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" name="fork this" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.6 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.8 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.9" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.2"/>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="addEdgeInstance" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance">
+                <argument name="instance" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.7" lowerBound="1"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.6" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="getNodeActivation source" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getNodeActivation">
+                <argument name="node" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.16" lowerBound="1"/>
+                <result name="activation" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.10"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.8" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="getNodeActivation target" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getNodeActivation">
+                <argument name="node" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.17" lowerBound="1"/>
+                <result name="activation" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.11"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.9" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="addOutgoingEdge" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge">
+                <argument name="edge" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.12" lowerBound="1"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.10" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="addIncomingEdge" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge">
+                <argument name="edge" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.13" lowerBound="1"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.11" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set edge">
+                <structuralFeature xsi:type="ecore:EReference" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/Activity/edge"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.4" lowerBound="1"/>
+                <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.5" lowerBound="1"/>
+                <result name="result" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="source">
+                <structuralFeature xsi:type="ecore:EReference" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityEdge/source"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.14" lowerBound="1"/>
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.16" upperBound="0"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="target">
+                <structuralFeature xsi:type="ecore:EReference" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityEdge/target"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.15" lowerBound="1"/>
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.17" upperBound="0"/>
+              </node>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/new%20ActivityEdgeInstance/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20this"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/new%20ActivityEdgeInstance/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/set%20edge/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/set%20edge/value"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20this" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addEdgeInstance/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addEdgeInstance/instance"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20this" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20source/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20this" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20target/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20source/activation" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addOutgoingEdge/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20target/activation" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addIncomingEdge/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addOutgoingEdge/edge"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge%20instance" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/addIncomingEdge/edge"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/source/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/fork%20edge" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/target/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/source/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20source/node"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/target/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/getNodeActivation%20target/node"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances/%.1" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.2" regionAsInput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.5">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.4" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="nodeActivations" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/nodeActivations">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.4" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.3" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="create edge instances of structured nodes" inputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.1">
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="createEdgeInstances" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/createEdgeInstances">
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edge%20instances%20of%20structured%20nodes/%" lowerBound="1"/>
+              </node>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edge%20instances%20of%20structured%20nodes/createEdgeInstances/target"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edge%20instances%20of%20structured%20nodes/%" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.3" regionAsInput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edge%20instances%20of%20structured%20nodes"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/edges.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/nodeActivations/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/%.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/nodeActivations/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/create%20edgeInstances" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/createEdgeInstances.1/this"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="addEdgeInstance" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance">
+            <ownedParameter name="instance" ordered="false" lowerBound="1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="instance" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/%" ordered="false" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/instance"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/%.1" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add edgeInstance" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/edgeInstances">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/%.1" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/%" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/instance.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/add%20edgeInstance/value"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/addEdgeInstance.1/add%20edgeInstance/object"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="run" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run">
+            <ownedParameter name="activations" ordered="false" upperBound="-1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="activations" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.2" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/activations"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.3 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.5" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.2"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="run node activations" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.6" inputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.1">
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="run" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run">
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/run%20node%20activations/%" lowerBound="1"/>
+              </node>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/run%20node%20activations/run/target"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/run%20node%20activations/%" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.3" regionAsInput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/run%20node%20activations"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="getInitialEnabledActivations" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations">
+              <argument name="activations" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.5" upperBound="-1"/>
+              <result name="enabledActivations"/>
+              <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.4" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.6">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.4" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/activations.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/getInitialEnabledActivations/target"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/getInitialEnabledActivations/activations"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/run%20node%20activations" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/run.1/this"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="getInitialEnabledActivations" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations">
+            <ownedParameter name="activations" ordered="false" upperBound="-1"/>
+            <ownedParameter name="enabledActivations" ordered="false" upperBound="-1" direction="OUT"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="activations" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.3" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/activations"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="enabledActivations" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.6" ordered="false" upperBound="-1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/enabledActivations"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="determine initial enabled node activations" inputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%" outputElement="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.1">
+              <node xsi:type="fUML.Syntax.Actions.CompleteActions:ReadIsClassifiedObjectAction" name="instanceof ActionActivation" classifier="//Semantics/Actions/BasicActions/ActionActivation">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.10" lowerBound="1"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.7" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.CompleteActions:ReadIsClassifiedObjectAction" name="instanceof ControlNodeActivation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofActionActivation" classifier="//Semantics/Activities/IntermediateActivities/ControlNodeActivation">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.11" lowerBound="1"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.8" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.CompleteActions:ReadIsClassifiedObjectAction" name="instanceof ActivityParameterNodeActivation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofControlNodeActivation" classifier="//Semantics/Activities/IntermediateActivities/ActivityParameterNodeActivation">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.12" lowerBound="1"/>
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.9" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.7 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.8 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.9 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.14 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.18" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.6"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofActionActivation //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActionActivation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.10"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/notInstanceofControlNodeActivation //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofControlNodeActivation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.11"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActivityParameterNodeActivation" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.12"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:MergeNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.17" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActionActivation //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofControlNodeActivation //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceofActivityParameterNodeActivation"/>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.16" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="checkIncomingEdges" operation="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/checkIncomingEdges">
+                <argument name="incomingEdges" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.15" upperBound="-1"/>
+                <argument name="activations" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.13"/>
+                <result name="notfound" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/activationIsEnabled"/>
+                <target name="target" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.16" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="incomingEdges" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.17">
+                <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.14" lowerBound="1"/>
+                <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.15" upperBound="0"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/nodeActivationEnabled" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/activationIsEnabled //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.18" decisionInputFlow="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/activationIsEnabled"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActionActivation/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.1"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.2"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.3"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="notInstanceofActionActivation" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ControlNodeActivation">
+                <guard xsi:type="kernel:LiteralBoolean"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="notInstanceofControlNodeActivation" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/instanceof%20ActivityParameterNodeActivation">
+                <guard xsi:type="kernel:LiteralBoolean"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="instanceofActionActivation" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.4">
+                <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="instanceofControlNodeActivation" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.4">
+                <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="instanceofActivityParameterNodeActivation" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.3" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.4">
+                <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/input1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/activations"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/object"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/incomingEdges"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.4" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/incomingEdges"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="nodeActivationEnabled" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.5" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.1">
+                <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+              </edge>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="activationIsEnabled" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/checkIncomingEdges/notfound" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.5"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.5"/>
+              <structuredNodeInput name="input1" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.13" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.5" upperBound="-1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/%.6" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.4" regionAsInput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.6" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/nodeActivationEnabled" regionAsOutput="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.4 //Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.5" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.3"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/activations.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.2"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.2" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/determine%20initial%20enabled%20node%20activations/input1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/%.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/getInitialEnabledActivations.1/enabledActivations.1"/>
+          </ownedBehavior>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityNodeActivation" abstract="true">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createNodeActivations" lowerBound="1"/>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="addOutgoingEdge" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="edge" ordered="false" lowerBound="1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="addIncomingEdge" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="edge" ordered="false" lowerBound="1"/>
+          </eOperations>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="createEdgeInstances" lowerBound="1"/>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="run" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation //Semantics/Actions/BasicActions/ActionActivation/run_actionActivation"/>
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="isReady" lowerBound="1" method="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation //Semantics/Actions/BasicActions/ActionActivation/isReady_action">
+            <eParameters xsi:type="kernel:DirectedParameter" name="ready" ordered="false" lowerBound="1" direction="OUT"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="node" ordered="false">
+            <eType xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityNode"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="group" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/nodeActivations"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="running" ordered="false" lowerBound="1">
+            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" ordered="false" upperBound="-1" eType="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance/source"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" ordered="false" upperBound="-1" eType="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance/target"/>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="addOutgoingEdge" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge">
+            <ownedParameter name="edge" ordered="false" lowerBound="1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="edge" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/%.1" ordered="false" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/edge"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add outgoingEdge" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/outgoingEdges">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/add%20outgoingEdge/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/edge.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addOutgoingEdge.1/add%20outgoingEdge/value"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="addIncomingEdge" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge">
+            <ownedParameter name="edge" ordered="false" lowerBound="1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="edge" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/%.1" ordered="false" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/edge"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="add incomingEdge" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/incomingEdges">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/add%20incomingEdge/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/edge.1" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/addIncomingEdge.1/add%20incomingEdge/value"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="run_activityNodeActivation" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run">
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set running" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/running" replaceAll="true">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="true">
+              <value xsi:type="kernel:LiteralBoolean" value="true"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/%.1" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/set%20running/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/true/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation/set%20running/value"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="isReady_activityNodeActivation" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady">
+            <ownedParameter name="ready" ordered="false" lowerBound="1" direction="OUT">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </ownedParameter>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="ready" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/%.1" ordered="false" lowerBound="1" parameter="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/ready"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="running" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/running">
+              <object name="object" incoming="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/%" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/%.1" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/%" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/this/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/running/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/running/result" target="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation/ready.1"/>
+          </ownedBehavior>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityEdgeInstance">
+          <eOperations xsi:type="kernel:BehavioredEOperation" name="hasOffer" lowerBound="1">
+            <eParameters xsi:type="kernel:DirectedParameter" name="hasOffer" lowerBound="1" direction="OUT">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="edge" ordered="false">
+            <eType xsi:type="ecore:EClass" href="fUML.ecore#//Syntax/Activities/IntermediateActivities/ActivityEdge"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/outgoingEdges"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/incomingEdges"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="group" ordered="false" lowerBound="1" eType="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup" eOpposite="//Semantics/Activities/IntermediateActivities/ActivityNodeActivationGroup/edgeInstances"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ControlNodeActivation" abstract="true" eSuperTypes="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation"/>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ObjectNodeActivation" abstract="true" eSuperTypes="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation"/>
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActivityParameterNodeActivation" eSuperTypes="//Semantics/Activities/IntermediateActivities/ObjectNodeActivation"/>
+      </eSubpackages>
+      <eSubpackages name="CompleteStructuredActivities" nsURI="http://www.modelexecution.org/fuml/semantics/activities/completestructuredactivities" nsPrefix="fUML.Semantics.Activities.CompleteStructuredActivities"/>
+      <eSubpackages name="ExtraStructuredActivities" nsURI="http://www.modelexecution.org/fuml/semantics/activities/extrastructuredactivities" nsPrefix="fUML.Semantics.Activities.ExtraStructuredActivities"/>
+    </eSubpackages>
+    <eSubpackages name="Actions" nsURI="http://www.modelexecution.org/fuml/semantics/actions" nsPrefix="fUML.Semantics.Actions">
+      <eSubpackages name="BasicActions" nsURI="http://www.modelexecution.org/fuml/semantics/actions/basicactions" nsPrefix="fUML.Semantics.Actions.BasicActions">
+        <eClassifiers xsi:type="kernel:BehavioredEClass" name="ActionActivation">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="firing" lowerBound="1">
+            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          </eStructuralFeatures>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="run_actionActivation" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run">
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallBehaviorAction" name="super.run" behavior="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/run_activityNodeActivation"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this">
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/%" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:AddStructuralFeatureValueAction" name="set firing">
+              <object name="object" incoming="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/%" lowerBound="1"/>
+              <value name="value" incoming="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/%.1" lowerBound="1"/>
+              <result name="result" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="false">
+              <value xsi:type="kernel:LiteralBoolean"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/%.1" lowerBound="1"/>
+            </node>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/this/result" target="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/set%20firing/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/false/result" target="//Semantics/Actions/BasicActions/ActionActivation/run_actionActivation/set%20firing/value"/>
+          </ownedBehavior>
+          <ownedBehavior xsi:type="fUML.Syntax.Activities.IntermediateActivities:Activity" name="isReady_action" specification="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady">
+            <ownedParameter name="ready" lowerBound="1" direction="OUT">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </ownedParameter>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ActivityParameterNode" name="ready" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.7 //Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.8" parameter="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/ready">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="false" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.10">
+              <value xsi:type="kernel:LiteralBoolean"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.8" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="true" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.9">
+              <value xsi:type="kernel:LiteralBoolean" value="true"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.7" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:MergeNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.10" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/notAllEdgesHaveOffer //Semantics/Actions/BasicActions/ActionActivation/isReady_action/notSuperReady //Semantics/Actions/BasicActions/ActionActivation/isReady_action/firing.1"/>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:MergeNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.9" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/allEdgesHaveOffer"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallBehaviorAction" name="super.isReady" behavior="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/isReady_activityNodeActivation">
+              <result name="ready" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.11"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/notSuperReady //Semantics/Actions/BasicActions/ActionActivation/isReady_action/superReady" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.11"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/superReady">
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.12" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="firing" structuralFeature="//Semantics/Actions/BasicActions/ActionActivation/firing">
+              <object name="object" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.12" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.13" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/firing.1 //Semantics/Actions/BasicActions/ActionActivation/isReady_action/notFiring" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.13"/>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionRegion" name="check incoming edges" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.20" inputElement="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.4" outputElement="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.5">
+              <node xsi:type="fUML.Syntax.Actions.BasicActions:CallOperationAction" name="hasOffer" operation="//Semantics/Activities/IntermediateActivities/ActivityEdgeInstance/hasOffer">
+                <result name="hasOffer" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/hasOffer.1"/>
+                <target name="target" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.3" lowerBound="1"/>
+              </node>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/noOffer" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/hasOffer.1 //Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.4" decisionInputFlow="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/hasOffer.1"/>
+              <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:ForkNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.3 //Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.4" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.2"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.4" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.1"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.1" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/hasOffer/target"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="hasOffer" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/hasOffer/hasOffer" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.1" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%"/>
+              <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="noOffer" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.5">
+                <guard xsi:type="kernel:LiteralBoolean"/>
+              </edge>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/%.2" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.15" regionAsInput="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges"/>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadSelfAction" name="this" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/notFiring">
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.14" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ReadStructuralFeatureAction" name="incomingEdges" structuralFeature="//Semantics/Activities/IntermediateActivities/ActivityNodeActivation/incomingEdges">
+              <object name="object" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.14" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.15" upperBound="0"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.ExtraStructuredActivities:ExpansionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.16" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges/noOffer" regionAsOutput="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges"/>
+            <node xsi:type="fUML.Syntax.Actions.BasicActions:CallBehaviorAction" name="size" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.20">
+              <argument name="list" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.16" upperBound="-1"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.17"/>
+              <behavior xsi:type="fUML.Syntax.CommonBehaviors.BasicBehaviors:FunctionBehavior" href="pathmap://XMOF_LIBRARY/xmof_library.xmof#//PrimitiveBehaviors/ListFunctions/ListSize"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:TestIdentityAction" name="equals">
+              <second name="second" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.17" lowerBound="1"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.19" lowerBound="1"/>
+              <first name="first" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.18" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Actions.IntermediateActions:ValueSpecificationAction" name="0">
+              <value xsi:type="kernel:LiteralInteger"/>
+              <result name="result" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.18" lowerBound="1"/>
+            </node>
+            <node xsi:type="fUML.Syntax.Activities.IntermediateActivities:DecisionNode" outgoing="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/allEdgesHaveOffer //Semantics/Actions/BasicActions/ActionActivation/isReady_action/notAllEdgesHaveOffer" incoming="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.19"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/true/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/ready.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/false/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/ready.1"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.1" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/true"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/false"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/super.isReady/ready" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.2"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/this/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/firing/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/firing/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.3"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/this.1/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/incomingEdges/object"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/incomingEdges/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.4"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.5" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/size/list"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/size/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/equals/second"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/0/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/equals/first"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/equals/result" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.6"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="allEdgesHaveOffer" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.6" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.1">
+              <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+            </edge>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ObjectFlow" name="notAllEdgesHaveOffer" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.6" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%">
+              <guard xsi:type="kernel:LiteralBoolean"/>
+            </edge>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/check%20incoming%20edges" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/size"/>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="notSuperReady" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.2" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%">
+              <guard xsi:type="kernel:LiteralBoolean"/>
+            </edge>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="superReady" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.2" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/this">
+              <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+            </edge>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="firing" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.3" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%">
+              <guard xsi:type="kernel:LiteralBoolean" value="true"/>
+            </edge>
+            <edge xsi:type="fUML.Syntax.Activities.IntermediateActivities:ControlFlow" name="notFiring" source="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/%.3" target="//Semantics/Actions/BasicActions/ActionActivation/isReady_action/this.1">
+              <guard xsi:type="kernel:LiteralBoolean"/>
+            </edge>
+          </ownedBehavior>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="IntermediateActions" nsURI="http://www.modelexecution.org/fuml/semantics/actions/intermediateactions" nsPrefix="fUML.Semantics.Actions.IntermediateActions"/>
+      <eSubpackages name="CompleteActions" nsURI="http://www.modelexecution.org/fuml/semantics/actions/completeactions" nsPrefix="fUML.Semantics.Actions.CompleteActions"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
