@@ -12,8 +12,11 @@ package org.modelexecution.xmof.configuration.profile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -28,8 +31,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.modelexecution.xmof.configuration.ConfigurationObjectMap;
 import org.modelexecution.xmof.vm.IXMOFVirtualMachineListener;
 import org.modelexecution.xmof.vm.XMOFBasedModel;
@@ -65,7 +74,8 @@ import fUML.Syntax.Classes.Kernel.NamedElement;
 import fUML.Syntax.Classes.Kernel.Property;
 import fUML.Syntax.Classes.Kernel.StructuralFeature;
 
-public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener {
+public class ProfileApplicationGenerator extends EContentAdapter implements
+		IXMOFVirtualMachineListener {
 
 	private XMOFBasedModel model;
 	private Collection<Profile> configurationProfiles;
@@ -76,6 +86,9 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 	private IProfileFacade facade;
 	private XMOFInstanceMap instanceMap;
 	private Copier copier = new Copier();
+
+	private HashMap<EObject, StereotypeApplication> configurationStereotypeApplicationMap = new HashMap<EObject, StereotypeApplication>();
+	private EditingDomain editingDomain;
 
 	public ProfileApplicationGenerator(XMOFBasedModel model,
 			Collection<Profile> configurationProfiles,
@@ -88,12 +101,22 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 
 	@Override
 	public void notify(XMOFVirtualMachineEvent event) {
-		if (Type.STOP.equals(event.getType())) {
-			try {
-				generateProfileApplication(event.getVirtualMachine());
-			} catch (IOException e) {
-				XMOFConfigurationProfilePlugin.log(e);
+		if (Type.START.equals(event.getType())) {
+			if (event.getVirtualMachine().isSynchronizeModel()) {
+				generateProfileApplicationSafely(event);
 			}
+		} else if (Type.STOP.equals(event.getType())) {
+			if (!event.getVirtualMachine().isSynchronizeModel()) {
+				generateProfileApplicationSafely(event);
+			}
+		}
+	}
+
+	private void generateProfileApplicationSafely(XMOFVirtualMachineEvent event) {
+		try {
+			generateProfileApplication(event.getVirtualMachine());
+		} catch (IOException e) {
+			XMOFConfigurationProfilePlugin.log(e);
 		}
 	}
 
@@ -138,6 +161,8 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 				&& facade.isApplicable(confStereotype, eObject)) {
 			StereotypeApplication application = facade.apply(confStereotype,
 					eObject);
+			configurationStereotypeApplicationMap.put(confObject, application);
+			registerContentAdapter(confObject);
 			for (EStructuralFeature feature : confStereotype
 					.getEStructuralFeatures()) {
 				Object value = getValue(object, feature);
@@ -155,8 +180,9 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 	private Stereotype getConfigurationStereotype(EObject eObject) {
 		EClass confClass = eObject.eClass();
 		EClass baseClass = getBaseClass(confClass);
-		for (Profile profile : configurationProfiles) {			
-			Stereotype runtimeStereotype = getRuntimeStereotype(profile, baseClass);
+		for (Profile profile : configurationProfiles) {
+			Stereotype runtimeStereotype = getRuntimeStereotype(profile,
+					baseClass);
 			if (runtimeStereotype != null)
 				return runtimeStereotype;
 		}
@@ -164,21 +190,24 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 	}
 
 	private EClass getBaseClass(EClass confClass) {
-		// the configuration class should only have the corresponding eClass of the Ecore-based metamodel as super type
-		if(confClass.getESuperTypes().size() > 0) {
+		// the configuration class should only have the corresponding eClass of
+		// the Ecore-based metamodel as super type
+		if (confClass.getESuperTypes().size() > 0) {
 			return confClass.getESuperTypes().get(0);
 		}
 		return null;
 	}
-	
+
 	private Stereotype getRuntimeStereotype(Profile profile, EClass baseClass) {
-		if(baseClass == null)
+		if (baseClass == null)
 			return null;
-		EList<Stereotype> applicableStereotypes = profile.getApplicableStereotypes(baseClass);		
-		for(Stereotype stereotype : applicableStereotypes) {
-			EList<Extension> applicableExtensions = stereotype.getApplicableExtensions(baseClass);
-			for(Extension extension : applicableExtensions) {
-				if(extension.getTarget().equals(baseClass))
+		EList<Stereotype> applicableStereotypes = profile
+				.getApplicableStereotypes(baseClass);
+		for (Stereotype stereotype : applicableStereotypes) {
+			EList<Extension> applicableExtensions = stereotype
+					.getApplicableExtensions(baseClass);
+			for (Extension extension : applicableExtensions) {
+				if (extension.getTarget().equals(baseClass))
 					return stereotype;
 			}
 		}
@@ -187,43 +216,48 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 
 	private Object getValue(Object_ object, EStructuralFeature feature) {
 		Collection<StructuralFeature> structuralFeatures = getStructuralFeatures(object);
-		for(StructuralFeature structuralFeature : structuralFeatures) {
+		for (StructuralFeature structuralFeature : structuralFeatures) {
 			if (structuralFeature.name.equals(feature.getName())) {
 				if (feature instanceof EAttribute) {
-					return getAttributeValue(object, structuralFeature, (EAttribute) feature);
+					return getAttributeValue(object, structuralFeature,
+							(EAttribute) feature);
 				} else if (feature instanceof EReference) {
-					return getReferenceValue(object, structuralFeature, (EReference) feature);
+					return getReferenceValue(object, structuralFeature,
+							(EReference) feature);
 				}
 			}
 		}
 		return null;
 	}
-	
+
 	private Collection<StructuralFeature> getStructuralFeatures(Object_ object) {
 		Collection<StructuralFeature> structuralFeatures = new HashSet<StructuralFeature>();
-		for(Class_ class_ : object.types) {
+		for (Class_ class_ : object.types) {
 			structuralFeatures.addAll(getStructuralFeatures(class_));
 		}
 		return structuralFeatures;
 	}
-	
-	private Collection<StructuralFeature> getStructuralFeatures(Classifier classifier) {
+
+	private Collection<StructuralFeature> getStructuralFeatures(
+			Classifier classifier) {
 		Collection<StructuralFeature> structuralFeatures = new HashSet<StructuralFeature>();
-		for(NamedElement member : classifier.member) {
-			if(member instanceof StructuralFeature) {
-				structuralFeatures.add((StructuralFeature)member);
+		for (NamedElement member : classifier.member) {
+			if (member instanceof StructuralFeature) {
+				structuralFeatures.add((StructuralFeature) member);
 			}
 		}
-		for(Classifier general : classifier.general) {
+		for (Classifier general : classifier.general) {
 			structuralFeatures.addAll(getStructuralFeatures(general));
 		}
 		return structuralFeatures;
 	}
 
-	private Object getReferenceValue(Object_ object, StructuralFeature structuralFeature, EReference reference) {
+	private Object getReferenceValue(Object_ object,
+			StructuralFeature structuralFeature, EReference reference) {
 		Association association = getAssociation(structuralFeature);
-		Collection<Object_> linkedObjects = getLinkedObjects(association, structuralFeature, object);
-		EList<Object> linkedObjectsOriginal = new BasicEList<Object>();
+		Collection<Object_> linkedObjects = getLinkedObjects(association,
+				structuralFeature, object);
+		EList<EObject> linkedObjectsOriginal = new BasicEList<EObject>();
 		for (Object_ o : linkedObjects) {
 			EObject confobject = instanceMap.getEObject(o);
 			if (confobject != null) {
@@ -232,7 +266,8 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 				if (originalobject != null) {
 					linkedObjectsOriginal.add(originalobject);
 				} else if (reference.isContainment()) {
-					EObject confobjectcopy = copier.copy(confobject);
+					EObject confobjectcopy = copier.copy(confobject); 
+					//TODO because of this copying the contained copies have to be updated as well
 					linkedObjectsOriginal.add(confobjectcopy);
 					createReferencesForCopiedEObject(confobject, confobjectcopy);
 				}
@@ -404,11 +439,13 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 		return linkedObjects;
 	} // getMatchingLinks
 
-	private Object getAttributeValue(Object_ object, StructuralFeature structuralFeature, EAttribute eAttribute) {
+	private Object getAttributeValue(Object_ object,
+			StructuralFeature structuralFeature, EAttribute eAttribute) {
 		if (!eAttribute.isMany()) {
 			EDataType attType = eAttribute.getEAttributeType();
-			FeatureValue featureValue = object.getFeatureValue(structuralFeature);
-			if(featureValue == null) {
+			FeatureValue featureValue = object
+					.getFeatureValue(structuralFeature);
+			if (featureValue == null) {
 				return null;
 			}
 			if (featureValue.values.isEmpty()) {
@@ -473,4 +510,170 @@ public class ProfileApplicationGenerator implements IXMOFVirtualMachineListener 
 		return configurationProfiles;
 	}
 
+	@Override
+	public void notifyChanged(Notification notification) {
+		super.notifyChanged(notification);
+
+		EObject objectToUpdate = null;
+		EStructuralFeature featureToUpdate = null;
+		
+		if(hasStereotypeApplication(notification.getNotifier())) {
+			objectToUpdate = getStereotypeApplicationToBeUpdated(notification
+					.getNotifier());
+			featureToUpdate = getStereotypeApplicationFeatureToBeUpdated(
+					(StereotypeApplication)objectToUpdate, notification.getFeature());
+		}
+
+		if (!(objectToUpdate != null && featureToUpdate != null))
+			return;
+
+		switch (notification.getEventType()) {
+		case Notification.ADD:
+		case Notification.ADD_MANY:
+			addFeatureValue(objectToUpdate, featureToUpdate,
+					getValueToUpdate(notification.getNewValue(), featureToUpdate), notification.getPosition());
+			break;
+		case Notification.REMOVE:
+		case Notification.REMOVE_MANY:
+			removeFeatureValue(objectToUpdate, featureToUpdate,
+					getValueToUpdate(notification.getOldValue(), featureToUpdate));
+			break;
+		case Notification.SET:
+			setFeatureValue(objectToUpdate, featureToUpdate,
+					getValueToUpdate(notification.getNewValue(), featureToUpdate), notification.getPosition());
+			break;
+		case Notification.UNSET: //TODO test
+			unsetFeatureValue(objectToUpdate, featureToUpdate,
+					notification.getPosition());
+			break;
+		default:
+			break;
+		}
+		// TODO in case conf objects are referenced, the reference should point to model element instead
+		// this must also be considered in removal, setting, unsetting
+	}
+
+	private void addFeatureValue(EObject eObject,
+			EStructuralFeature feature, Object newValue, int position) {
+		Command cmd;
+		if (feature.isMany()) {
+			cmd = new AddCommand(getEditingDomain(), eObject,
+					feature, newValue, position);
+		} else {
+			cmd = new AddCommand(getEditingDomain(), eObject,
+					feature, newValue);
+		}
+		execute(cmd);
+	}
+
+	private void removeFeatureValue(
+			EObject eObject,
+			EStructuralFeature feature, Object oldValue) {
+		Command cmd = new RemoveCommand(getEditingDomain(),
+				eObject, feature, oldValue);
+		execute(cmd);
+	}
+
+	private void setFeatureValue(EObject eObject,
+			EStructuralFeature feature, Object newValue, int position) {
+		Command cmd;
+		if (feature.isMany()) {
+			cmd = new SetCommand(getEditingDomain(), eObject,
+					feature, newValue, position);
+		} else {
+			cmd = new SetCommand(getEditingDomain(), eObject,
+					feature, newValue);
+		}
+		execute(cmd);
+	}
+
+	private void unsetFeatureValue(EObject eObject,
+			EStructuralFeature feature, int position) {
+		Command cmd;
+		if (feature.isMany()) {
+			cmd = new SetCommand(getEditingDomain(), eObject,
+					feature, SetCommand.UNSET_VALUE, position);
+		} else {
+			cmd = new SetCommand(getEditingDomain(), eObject,
+					feature, SetCommand.UNSET_VALUE);
+		}
+		execute(cmd);
+	}
+	
+	private Object getValueToUpdate(Object value, EStructuralFeature feature) {
+		if(value instanceof EObject) {
+			EObject confObject = (EObject) value;
+			EObject originalObject = configurationMap.getOriginalObject(confObject);
+			if(originalObject != null) {
+				return originalObject;
+			} else if(feature instanceof EReference) {
+				EReference eReference = (EReference) feature;
+				if(eReference.isContainment()) {
+					registerContentAdapter(confObject);
+					confObject.eAdapters().add(this);
+					return copier.copy(confObject);
+				} else {
+					return confObject;
+				}
+			}
+		}
+		return value;
+	}
+
+	private boolean hasStereotypeApplication(Object changedObject) {
+		if(changedObject instanceof EObject) {
+			EObject confObject = (EObject) changedObject;
+			return configurationStereotypeApplicationMap.containsKey(confObject);
+		}
+		return false;
+	}
+
+	private StereotypeApplication getStereotypeApplicationToBeUpdated(
+			Object changedObject) {
+		try {
+			EObject confObject = (EObject) changedObject;
+			StereotypeApplication stereotypeApplication = configurationStereotypeApplicationMap
+					.get(confObject);
+			return stereotypeApplication;
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+	private EStructuralFeature getStereotypeApplicationFeatureToBeUpdated(
+			StereotypeApplication stereotypeApplication, Object changedFeature) {
+		try {
+			return stereotypeApplication.getStereotype().getEStructuralFeature(
+					((EStructuralFeature) changedFeature).getName());
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+	public void setEditingDomain(EditingDomain editingDomain) {
+		this.editingDomain = editingDomain;
+	}
+
+	public EditingDomain getEditingDomain() {
+		if (editingDomain == null) {
+			editingDomain = TransactionalEditingDomain.Factory.INSTANCE
+					.createEditingDomain(profileApplicationResource
+							.getResourceSet());
+		}
+		return editingDomain;
+	}
+
+	private void execute(Command cmd) {
+		if (getEditingDomain() != null) {
+			getEditingDomain().getCommandStack().execute(cmd);
+		} else {
+			cmd.execute();
+		}
+	}
+	
+	private void registerContentAdapter(EObject confObject) {
+		if(!confObject.eAdapters().contains(this)) {
+			confObject.eAdapters().add(this);
+		}		
+	}
 }
