@@ -274,8 +274,8 @@ public class ExecutionFactoryInitializer {
 	}
 
 	private void addBuiltInType(String primitiveType) {
-		PrimitiveType type = (PrimitiveType) Repository.INSTANCE
-				.getClassifierByName(primitiveType).getDelegate();
+		PrimitiveType type = (PrimitiveType) repository.getClassifierByName(
+				primitiveType).getDelegate();
 		executionFactory.addBuiltInType(type);
 	}
 
