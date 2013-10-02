@@ -252,7 +252,6 @@ public class ExecutionFactoryInitializer {
 		PRIMITIVE_BEHAVIOR_MAP
 				.put("FoundationalModelLibrary.PrimitiveBehaviors.ListFunctions.ListSize",
 						new ListSizeFunctionBehaviorExecution());
-		// TODO ListConcat will not be found in repository?
 		PRIMITIVE_BEHAVIOR_MAP
 				.put("FoundationalModelLibrary.PrimitiveBehaviors.ListFunctions.ListConcat",
 						new ListConcatFunctionBehaviorExecution());
