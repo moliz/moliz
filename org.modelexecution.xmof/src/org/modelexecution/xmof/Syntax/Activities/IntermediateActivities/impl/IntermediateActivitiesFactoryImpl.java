@@ -5,7 +5,6 @@ package org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.Activity;
@@ -20,11 +19,8 @@ import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.Intermed
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.JoinNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.MergeNode;
 import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ObjectFlow;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.DirectedParameter;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.KernelFactory;
-import org.modelexecution.xmof.Syntax.Classes.Kernel.ParameterDirectionKind;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsFactory;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
@@ -109,95 +105,9 @@ public class IntermediateActivitiesFactoryImpl extends EFactoryImpl implements
 	public Activity createActivity(BehavioredEOperation operation,
 			boolean addActivityToBehavioredClassifier) {
 		Activity activity = createActivity();
-		prepareActivityForOperation(activity,
+		BasicBehaviorsFactory.eINSTANCE.prepareBehaviorForOperation(activity,
 				operation, addActivityToBehavioredClassifier);
 		return activity;
-	}
-
-	public void prepareActivityForOperation(Activity activity,
-			BehavioredEOperation operation, boolean addActivityToBehavioredClassifier) {
-		activity.setName(operation.getName());
-		operation.getMethod().add(activity);
-		if (addActivityToBehavioredClassifier) {
-			addToOwnedBehavior(operation, activity);
-		}
-		addParameters(operation, activity);
-	}
-
-	private void addToOwnedBehavior(BehavioredEOperation operation,
-			Activity activity) {
-		if (operation.getEContainingClass() instanceof BehavioredEClass) {
-			BehavioredEClass behavioredEClass = (BehavioredEClass) operation
-					.getEContainingClass();
-			behavioredEClass.getOwnedBehavior().add(activity);
-		}
-	}
-
-	private void addParameters(BehavioredEOperation operation, Activity activity) {
-		if (operation.getEType() != null) {
-			DirectedParameter parameter = createDirectedParameter(operation);
-			addParameterNode(activity, parameter);
-		}
-
-		for (EParameter eParameter : operation.getEParameters()) {
-			DirectedParameter parameter = createDirectedParameter(eParameter);
-			addParameterNode(activity, parameter);
-		}
-	}
-
-	private DirectedParameter createDirectedParameter(
-			BehavioredEOperation operation) {
-		DirectedParameter parameter = KernelFactory.eINSTANCE
-				.createDirectedParameter();
-		parameter.setEType(operation.getEType());
-		parameter.setEGenericType(operation.getEGenericType());
-		parameter.setLowerBound(operation.getLowerBound());
-		parameter.setOrdered(operation.isOrdered());
-		parameter.setUnique(operation.isUnique());
-		parameter.setUpperBound(operation.getUpperBound());
-		parameter.setDirection(ParameterDirectionKind.RETURN);
-		parameter.setName("return");
-		return parameter;
-	}
-
-	private DirectedParameter createDirectedParameter(EParameter eParameter) {
-		DirectedParameter parameter = KernelFactory.eINSTANCE
-				.createDirectedParameter();
-		parameter.setName(eParameter.getName());
-		parameter.setEType(eParameter.getEType());
-		parameter.setEGenericType(eParameter.getEGenericType());
-		parameter.setLowerBound(eParameter.getLowerBound());
-		parameter.setOrdered(eParameter.isOrdered());
-		parameter.setUnique(eParameter.isUnique());
-		parameter.setUpperBound(eParameter.getUpperBound());
-		if(eParameter instanceof DirectedParameter) {
-			parameter.setDirection(((DirectedParameter)eParameter).getDirection());
-		} else {
-			parameter.setDirection(ParameterDirectionKind.IN);
-		}
-		return parameter;
-	}
-
-	private void addParameterNode(Activity activity, DirectedParameter parameter) {
-		ActivityParameterNode parameterNode = createParameterNode(parameter);
-		parameterNode.setActivity(activity);
-		activity.getNode().add(parameterNode);
-		activity.getOwnedParameter().add(parameter);
-	}
-
-	private ActivityParameterNode createParameterNode(
-			DirectedParameter parameter) {
-		ActivityParameterNode parameterNode = IntermediateActivitiesFactory.eINSTANCE
-				.createActivityParameterNode();
-		parameterNode.setEGenericType(parameter.getEGenericType());
-		parameterNode.setEType(parameter.getEType());
-		parameterNode.setLowerBound(parameter.getLowerBound());
-		parameterNode.setOrdered(parameter.isOrdered());
-		parameterNode.setUnique(parameter.isUnique());
-		parameterNode.setUpperBound(parameter.getUpperBound());
-		parameterNode.setParameter(parameter);
-		parameterNode.setName(parameter.getName());
-		return parameterNode;
 	}
 
 	/**

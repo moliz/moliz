@@ -3,6 +3,7 @@
 package org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,4 +49,21 @@ public interface BasicBehaviorsFactory extends EFactory {
 	 */
 	BasicBehaviorsPackage getBasicBehaviorsPackage();
 
+	/**
+	 * Prepares the specified {@link Behavior} so that it realizes the specified
+	 * {@code operation} in terms of its
+	 * {@link BehavioredEOperation#getMethod() method}. The created behavior is
+	 * added to the {@link BehavioredClassifier} containing the specified
+	 * {@code operation}.
+	 * 
+	 * @param operation
+	 *            to create an behavior for
+	 * @param addToBehavioredClassifier
+	 *            whether or not to add the created behavior to the
+	 *            {@link BehavioredClassifier} containing the specified
+	 *            {@code operation}.
+	 */
+	public void prepareBehaviorForOperation(Behavior behavior,
+			BehavioredEOperation operation,
+			boolean addToBehavioredClassifier);
 } //BasicBehaviorsFactory

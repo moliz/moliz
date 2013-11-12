@@ -6,10 +6,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.Activity;
+import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.ActivityParameterNode;
+import org.modelexecution.xmof.Syntax.Activities.IntermediateActivities.IntermediateActivitiesFactory;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.DirectedParameter;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.KernelFactory;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.ParameterDirectionKind;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsFactory;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsPackage;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.CallConcurrencyKind;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.FunctionBehavior;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
@@ -105,6 +115,94 @@ public class BasicBehaviorsFactoryImpl extends EFactoryImpl implements BasicBeha
 		return opaqueBehavior;
 	}
 
+	public void prepareBehaviorForOperation(Behavior behavior,
+			BehavioredEOperation operation, boolean addToBehavioredClassifier) {		
+		behavior.setName(operation.getName());
+		operation.getMethod().add(behavior);
+		if (addToBehavioredClassifier) {
+			addToOwnedBehavior(operation, behavior);
+		}
+		addParameters(operation, behavior);
+	}
+	
+	private void addToOwnedBehavior(BehavioredEOperation operation,
+			Behavior behavior) {
+		if (operation.getEContainingClass() instanceof BehavioredEClass) {
+			BehavioredEClass behavioredEClass = (BehavioredEClass) operation
+					.getEContainingClass();
+			behavioredEClass.getOwnedBehavior().add(behavior);
+		}
+	}
+
+	private void addParameters(BehavioredEOperation operation, Behavior behavior) {
+		if (operation.getEType() != null) {
+			DirectedParameter parameter = createDirectedParameter(operation);
+			behavior.getOwnedParameter().add(parameter);
+			if(behavior instanceof Activity)
+				addParameterNode((Activity)behavior, parameter);
+		}
+
+		for (EParameter eParameter : operation.getEParameters()) {
+			DirectedParameter parameter = createDirectedParameter(eParameter);
+			if(behavior instanceof Activity)
+				addParameterNode((Activity)behavior, parameter);
+		}
+	}
+	
+	private DirectedParameter createDirectedParameter(
+			BehavioredEOperation operation) {
+		DirectedParameter parameter = KernelFactory.eINSTANCE
+				.createDirectedParameter();
+		parameter.setEType(operation.getEType());
+		parameter.setEGenericType(operation.getEGenericType());
+		parameter.setLowerBound(operation.getLowerBound());
+		parameter.setOrdered(operation.isOrdered());
+		parameter.setUnique(operation.isUnique());
+		parameter.setUpperBound(operation.getUpperBound());
+		parameter.setDirection(ParameterDirectionKind.RETURN);
+		parameter.setName("return");
+		return parameter;
+	}
+
+	private DirectedParameter createDirectedParameter(EParameter eParameter) {
+		DirectedParameter parameter = KernelFactory.eINSTANCE
+				.createDirectedParameter();
+		parameter.setName(eParameter.getName());
+		parameter.setEType(eParameter.getEType());
+		parameter.setEGenericType(eParameter.getEGenericType());
+		parameter.setLowerBound(eParameter.getLowerBound());
+		parameter.setOrdered(eParameter.isOrdered());
+		parameter.setUnique(eParameter.isUnique());
+		parameter.setUpperBound(eParameter.getUpperBound());
+		if(eParameter instanceof DirectedParameter) {
+			parameter.setDirection(((DirectedParameter)eParameter).getDirection());
+		} else {
+			parameter.setDirection(ParameterDirectionKind.IN);
+		}
+		return parameter;
+	}
+
+	private void addParameterNode(Activity activity, DirectedParameter parameter) {
+		ActivityParameterNode parameterNode = createParameterNode(parameter);
+		parameterNode.setActivity(activity);
+		activity.getNode().add(parameterNode);		
+	}
+
+	private ActivityParameterNode createParameterNode(
+			DirectedParameter parameter) {
+		ActivityParameterNode parameterNode = IntermediateActivitiesFactory.eINSTANCE
+				.createActivityParameterNode();
+		parameterNode.setEGenericType(parameter.getEGenericType());
+		parameterNode.setEType(parameter.getEType());
+		parameterNode.setLowerBound(parameter.getLowerBound());
+		parameterNode.setOrdered(parameter.isOrdered());
+		parameterNode.setUnique(parameter.isUnique());
+		parameterNode.setUpperBound(parameter.getUpperBound());
+		parameterNode.setParameter(parameter);
+		parameterNode.setName(parameter.getName());
+		return parameterNode;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
