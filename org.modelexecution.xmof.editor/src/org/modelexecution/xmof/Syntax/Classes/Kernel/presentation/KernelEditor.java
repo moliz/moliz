@@ -146,7 +146,10 @@ import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEOperation;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.provider.ExtendedEcoreItemProviderAdapterFactory;
 import org.modelexecution.xmof.Syntax.Classes.Kernel.provider.KernelItemProviderAdapterFactory;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsFactory;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsPackage;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 import org.modelexecution.xmof.diagram.XMOFDiagramPlugin;
 import org.modelexecution.xmof.diagram.features.AddActivityFeature;
 
@@ -161,15 +164,18 @@ public class KernelEditor extends EcoreEditor implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
 		IViewerProvider, IGotoMarker {
 
+	public static final String ALF_LANGUAGE_NAME = "Alf";
+	
 	public static final String EDITING_DOMAIN_ID = "org.modelexecution.xmof.editor";
 
 	private static final String GRAPHITI_DIAGRAM_EXTENSION = "diagram";
 
 	private static final String DOT = ".";
 
-	private Map<Activity, Integer> activityDiagramPageMap = new HashMap<Activity, Integer>();
+	private Map<Behavior, Integer> behaviorPageMap = new HashMap<Behavior, Integer>();
 
 	private Map<Integer, DiagramEditorInternal> pageDiagramEditorMap = new HashMap<Integer, DiagramEditorInternal>();
+	private Map<Integer, AlfEditor> pageAlfEditorMap = new HashMap<Integer, AlfEditor>();
 
 	/**
 	 * This keeps track of the editing domain that is used to track all changes
@@ -990,26 +996,34 @@ public class KernelEditor extends EcoreEditor implements
 	}
 
 	private void showDiagram(Activity activity) {
-		int diagramPageIndex = getOrCreateDiagramPage(activity);
+		int diagramPageIndex = getOrCreateBehaviorPage(activity);
 		setActivePage(diagramPageIndex);
 	}
 
-	private int getOrCreateDiagramPage(Activity activity) {
-		if (haveDiagramPage(activity)) {
-			return getDiagramPageIndex(activity);
+	private int getOrCreateBehaviorPage(Behavior behavior) {
+		if (haveBehaviorPage(behavior)) {
+			return getBehaviorPageIndex(behavior);
 		} else {
-			return createDiagramPage(activity);
+			return createBehaviorPage(behavior);
 		}
 	}
 
-	private boolean haveDiagramPage(Activity activity) {
-		return activityDiagramPageMap.containsKey(activity);
+	private boolean haveBehaviorPage(Behavior behavior) {
+		return behaviorPageMap.containsKey(behavior);
 	}
 
-	private int getDiagramPageIndex(Activity activity) {
-		return activityDiagramPageMap.get(activity);
+	private int getBehaviorPageIndex(Behavior behavior) {
+		return behaviorPageMap.get(behavior);
 	}
 
+	private int createBehaviorPage(Behavior behavior) {
+		if (behavior instanceof Activity)
+			return createDiagramPage((Activity)behavior);
+		else if (behavior instanceof OpaqueBehavior)
+			return createAlfCodePage((OpaqueBehavior)behavior);
+		return 0;
+	}
+	
 	private int createDiagramPage(Activity activity) {
 		try {
 			DiagramEditorInternal editor = new DiagramEditorInternal(
@@ -1039,7 +1053,7 @@ public class KernelEditor extends EcoreEditor implements
 		IEditorInput editorInput = createDiagramEditorInput(activity);
 		int pageIndex = addPage(editor, editorInput);
 		setPageText(pageIndex, activity.getName());
-		activityDiagramPageMap.put(activity, pageIndex);
+		behaviorPageMap.put(activity, pageIndex);
 		pageDiagramEditorMap.put(pageIndex, editor);
 		return pageIndex;
 	}
@@ -1115,39 +1129,41 @@ public class KernelEditor extends EcoreEditor implements
 	private void showDiagram(final BehavioredEOperation operation) {
 		Activity activity = null;
 		if (operation.getMethod().isEmpty()) {
-			activity = createActivityWithoutAddingItToClassifier(operation);
+			activity = IntermediateActivitiesFactory.eINSTANCE
+					.createActivity();
+			prepareBehaviorForOperation(operation, activity);
 			addToOwnedBehaviorUsingCommand(operation, activity);
 			doSave(new NullProgressMonitor());
-		} else {
-			activity = (Activity) operation.getMethod().get(0);
+		} else {			
+			Behavior behavior = operation.getMethod().get(0);
+			if(behavior instanceof Activity)
+				activity = (Activity) behavior;
 		}
-		showDiagram(activity);
+		if(activity != null)
+			showDiagram(activity);
 	}
 
-	private Activity createActivityWithoutAddingItToClassifier(
-			final BehavioredEOperation operation) {
-		final Activity activity = IntermediateActivitiesFactory.eINSTANCE
-				.createActivity();
+	private void prepareBehaviorForOperation(
+			final BehavioredEOperation operation, final Behavior behavior) {
 		getTransactionalEditingDomain().getCommandStack().execute(
 				new RecordingCommand(getTransactionalEditingDomain()) {
 					@Override
 					protected void doExecute() {
-						IntermediateActivitiesFactory.eINSTANCE
-								.prepareActivityForOperation(activity,
+						BasicBehaviorsFactory.eINSTANCE
+								.prepareBehaviorForOperation(behavior,
 										operation, false);
 					}
 				});
-		return activity;
-	}
+	}	
 
 	private void addToOwnedBehaviorUsingCommand(BehavioredEOperation operation,
-			Activity activity) {
+			Behavior behavior) {
 		if (operation.getEContainingClass() instanceof BehavioredEClass) {
 			BehavioredEClass behavioredEClass = (BehavioredEClass) operation
 					.getEContainingClass();
 			Command command = AddCommand.create(getEditingDomain(),
 					behavioredEClass, BasicBehaviorsPackage.eINSTANCE
-							.getBehavioredClassifier_OwnedBehavior(), activity);
+							.getBehavioredClassifier_OwnedBehavior(), behavior);
 			getEditingDomain().getCommandStack().execute(command);
 		}
 	}
@@ -2183,9 +2199,73 @@ public class KernelEditor extends EcoreEditor implements
 		if (clickedElement instanceof Activity) {
 			Activity activity = (Activity) clickedElement;
 			showDiagram(activity);
+		} else if(clickedElement instanceof OpaqueBehavior) {
+			OpaqueBehavior opaqueBehavior = (OpaqueBehavior) clickedElement;
+			showAlfCode(opaqueBehavior);
 		} else if (clickedElement instanceof BehavioredEOperation) {
 			BehavioredEOperation operation = (BehavioredEOperation) clickedElement;
-			showDiagram(operation);
+			showOperationMethod(operation);			
 		}
 	}
+
+	private void showOperationMethod(BehavioredEOperation operation) {
+		if(hasOpaqueBehavior(operation))
+			showAlfCode(operation);
+		else 
+			showDiagram(operation);		
+	}
+	
+	private boolean hasOpaqueBehavior(BehavioredEOperation operation) {
+		if(operation.getMethod().size() > 0) {
+			Behavior behavior = operation.getMethod().get(0);
+			if(behavior instanceof OpaqueBehavior) {
+				return true;
+			}
+		} 
+		return false;
+	}
+	
+	public void showAlfCode(final BehavioredEOperation operation) {
+		OpaqueBehavior alfBehavior = null;
+		if (operation.getMethod().isEmpty()) {
+			alfBehavior = BasicBehaviorsFactory.eINSTANCE.createOpaqueBehavior();
+			alfBehavior.getLanguage().add(ALF_LANGUAGE_NAME);
+			alfBehavior.getBody().add("");
+			prepareBehaviorForOperation(operation, alfBehavior);
+			addToOwnedBehaviorUsingCommand(operation, alfBehavior);
+			doSave(new NullProgressMonitor());
+		} else {
+			Behavior behavior = operation.getMethod().get(0);
+			if(behavior instanceof OpaqueBehavior)
+				alfBehavior = (OpaqueBehavior) behavior;
+		}
+		if(alfBehavior != null)
+			showAlfCode(alfBehavior);
+	}
+	
+	private void showAlfCode(OpaqueBehavior alfBehavior) {
+		int diagramPageIndex = getOrCreateBehaviorPage(alfBehavior);
+		setActivePage(diagramPageIndex);
+	}
+	
+	private int createAlfCodePage(OpaqueBehavior alfBehavior) {
+		try {
+			AlfEditor alfEditor = new AlfEditor(getTransactionalEditingDomain(), alfBehavior);
+			int pageIndex = addEditorPage(alfBehavior, alfEditor);
+			return pageIndex;			
+		} catch (PartInitException exception) {
+			XMOFEditorPlugin.INSTANCE.log(exception);
+		}
+		return 0;
+	}
+
+	private int addEditorPage(OpaqueBehavior alfBehavior, AlfEditor editor)
+			throws PartInitException {
+		int pageIndex = addPage(editor, null);
+		setPageText(pageIndex, alfBehavior.getName());
+		behaviorPageMap.put(alfBehavior, pageIndex);
+		pageAlfEditorMap.put(pageIndex, editor);
+		return pageIndex;
+	}
+	
 }

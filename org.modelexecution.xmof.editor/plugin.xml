@@ -31,5 +31,31 @@
             contributorClass="org.modelexecution.xmof.Syntax.Classes.Kernel.presentation.KernelActionBarContributor">
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.modelexecution.xmof.Syntax.Classes.Kernel.presentation.KernelEditorID">
+         <command
+               commandId="org.modelexecution.xmof.editor.alfbehavior"
+               label="Define Alf Behavior"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.modelexecution.xmof.editor.alfbehavior"
+            name="alfbehavior">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.modelexecution.xmof.Syntax.Classes.Kernel.presentation.AlfHandler"
+            commandId="org.modelexecution.xmof.editor.alfbehavior">
+      </handler>
+   </extension>
 
 </plugin>
