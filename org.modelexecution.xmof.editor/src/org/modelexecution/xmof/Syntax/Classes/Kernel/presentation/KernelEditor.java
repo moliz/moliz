@@ -995,11 +995,6 @@ public class KernelEditor extends EcoreEditor implements
 		});
 	}
 
-	private void showDiagram(Activity activity) {
-		int diagramPageIndex = getOrCreateBehaviorPage(activity);
-		setActivePage(diagramPageIndex);
-	}
-
 	private int getOrCreateBehaviorPage(Behavior behavior) {
 		if (haveBehaviorPage(behavior)) {
 			return getBehaviorPageIndex(behavior);
@@ -1140,7 +1135,7 @@ public class KernelEditor extends EcoreEditor implements
 				activity = (Activity) behavior;
 		}
 		if(activity != null)
-			showDiagram(activity);
+			showBehavior(activity);
 	}
 
 	private void prepareBehaviorForOperation(
@@ -2196,12 +2191,9 @@ public class KernelEditor extends EcoreEditor implements
 	}
 
 	private void handleDoubleClick(Object clickedElement) {
-		if (clickedElement instanceof Activity) {
-			Activity activity = (Activity) clickedElement;
-			showDiagram(activity);
-		} else if(clickedElement instanceof OpaqueBehavior) {
-			OpaqueBehavior opaqueBehavior = (OpaqueBehavior) clickedElement;
-			showAlfCode(opaqueBehavior);
+		if (clickedElement instanceof Behavior) {
+			Behavior behavior = (Behavior) clickedElement;
+			showBehavior(behavior);
 		} else if (clickedElement instanceof BehavioredEOperation) {
 			BehavioredEOperation operation = (BehavioredEOperation) clickedElement;
 			showOperationMethod(operation);			
@@ -2213,6 +2205,11 @@ public class KernelEditor extends EcoreEditor implements
 			showAlfCode(operation);
 		else 
 			showDiagram(operation);		
+	}
+	
+	private void showBehavior(Behavior behavior) {
+		int diagramPageIndex = getOrCreateBehaviorPage(behavior);
+		setActivePage(diagramPageIndex);
 	}
 	
 	private boolean hasOpaqueBehavior(BehavioredEOperation operation) {
@@ -2240,13 +2237,8 @@ public class KernelEditor extends EcoreEditor implements
 				alfBehavior = (OpaqueBehavior) behavior;
 		}
 		if(alfBehavior != null)
-			showAlfCode(alfBehavior);
-	}
-	
-	private void showAlfCode(OpaqueBehavior alfBehavior) {
-		int diagramPageIndex = getOrCreateBehaviorPage(alfBehavior);
-		setActivePage(diagramPageIndex);
-	}
+			showBehavior(alfBehavior);
+	}	
 	
 	private int createAlfCodePage(OpaqueBehavior alfBehavior) {
 		try {
