@@ -43,7 +43,7 @@ public class ExecutionContext {
 	 * The language name to be used in opaque behaviors and expressions
 	 * containing ALF code
 	 */
-	public static final String ALF_LANGUAGE_NAME = "Alf";
+	public static final String ALF_LANGUAGE_NAME = AlfOpaqueBehaviorExecution.ALF_LANGUAGE_NAME;
 
 	protected static final String exception_illegalexecutionid = "Illegal execution id.";
 	protected static final String exception_noenablednodes = "No enabled nodes available.";
