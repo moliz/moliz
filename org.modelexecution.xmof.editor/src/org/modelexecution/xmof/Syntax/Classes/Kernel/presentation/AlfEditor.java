@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.modelexecution.ui.AlfResourceProvider;
-import org.modelexecution.ui.internal.AlfStubActivator;
+import org.modelexecution.ui.internal.AlfActivator;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.BasicBehaviorsPackage;
 import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
@@ -40,8 +40,8 @@ public class AlfEditor extends EditorPart {
 			OpaqueBehavior alfBehavior_) {
 		this.editingDomain = editingDomain;
 		this.alfBehavior = alfBehavior_;
-		alfEditorInjector = AlfStubActivator.getInstance().getInjector(
-				"org.modelexecution.AlfStub");
+		alfEditorInjector = AlfActivator.getInstance().getInjector(
+				"org.modelexecution.Alf");
 		alfBehavior.eAdapters().add(new AdapterImpl() {
 			@Override
 			public void notifyChanged(Notification notification) {

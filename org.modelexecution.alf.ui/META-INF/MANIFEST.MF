@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.modelexecution.alf.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.modelexecution.alf.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.modelexecution.alf;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare,
+ com.google.inject
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.modelexecution.ui,
+ org.modelexecution.ui.contentassist,
+ org.modelexecution.ui.contentassist.antlr,
+ org.modelexecution.ui.internal,
+ org.modelexecution.ui.quickfix
+Bundle-Activator: org.modelexecution.ui.internal.AlfActivator
