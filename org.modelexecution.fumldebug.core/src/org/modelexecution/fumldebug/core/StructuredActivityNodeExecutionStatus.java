@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
+import fUML.Semantics.Actions.BasicActions.CallBehaviorActionActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
+import fUML.Syntax.Actions.BasicActions.CallBehaviorAction;
 import fUML.Syntax.Activities.CompleteStructuredActivities.StructuredActivityNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
+import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
 public class StructuredActivityNodeExecutionStatus extends ActivityNodeExecutionStatus{
 
@@ -51,7 +54,7 @@ public class StructuredActivityNodeExecutionStatus extends ActivityNodeExecution
 	
 	private boolean hasStructuredActivityNodeEnabledCalledNodes() {
 		for(ActivityNodeActivation childnodeactivation : structuredActivityNodeActivation.activationGroup.nodeActivations) {
-			if(childnodeactivation instanceof CallActionActivation) {
+			if(childnodeactivation instanceof CallActionActivation && !(childnodeactivation instanceof CallBehaviorActionActivation && ((CallBehaviorAction)childnodeactivation.node).behavior instanceof OpaqueBehavior)) {
 				CallActionExecutionStatus callActionExecutionStatus = (CallActionExecutionStatus)activityExecutionStatus.getActivityNodeExecutionStatus(childnodeactivation.node);
 				ActivityExecutionStatus calledActivityExecutionStatus = callActionExecutionStatus.getCalledActivityExecutionStatus();
 				if(calledActivityExecutionStatus.hasEnabledNodesIncludingCallees()) {
