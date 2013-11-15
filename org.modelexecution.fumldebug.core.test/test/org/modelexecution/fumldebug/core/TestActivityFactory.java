@@ -188,7 +188,14 @@ public class TestActivityFactory {
 			obj3 = ActivityFactory.createObject(class_);
 			string1 = ActivityFactory.createStringValue("tanja");
 			
-			ParameterValue objectparametervalue = ActivityFactory.createParameterValue(objectparameter, obj1, obj2, obj3);
+			Reference r1 = new Reference();
+			r1.referent = obj1;
+			Reference r2 = new Reference();
+			r2.referent = obj2;
+			Reference r3 = new Reference();
+			r3.referent = obj3;
+			
+			ParameterValue objectparametervalue = ActivityFactory.createParameterValue(objectparameter, r1, r2, r3);
 			ParameterValue valueparametervalue = ActivityFactory.createParameterValue(valueparameter, string1);
 			parametervaluelist = ActivityFactory.createParameterValueList(objectparametervalue, valueparametervalue);
 		}
@@ -201,10 +208,10 @@ public class TestActivityFactory {
 				return false;
 			}			
 			for(Value value : outvalues.get(0).values) {
-				if(!(value instanceof Object_)) {
+				if(!(value instanceof Reference)) {
 					return false;
 				}
-				Object_ obj = (Object_)value;
+				Object_ obj = ((Reference)value).referent;
 				if( !( checkType(obj) && checkName(obj) ) ) {
 					return false;
 				}
@@ -284,7 +291,7 @@ public class TestActivityFactory {
 			guardliteral.value = true;
 			e2.guard = guardliteral;
 			
-			decision.decisionInput = ExecutionContext.getInstance().getOpaqueBehavior("less");
+			decision.decisionInput = ExecutionContext.getInstance().getOpaqueBehavior("FoundationalModelLibrary.PrimitiveBehaviors.IntegerFunctions.<");
 		}
 		
 	}
@@ -492,8 +499,12 @@ public class TestActivityFactory {
 			o2 = ActivityFactory.createObject(class_);
 			string1 = ActivityFactory.createStringValue("tanja");
 			string2 = ActivityFactory.createStringValue("philip");
+			Reference r1 = new Reference();
+			r1.referent = o1;
+			Reference r2 = new Reference();
+			r2.referent = o2;
 			
-			ParameterValue objectparametervalue = ActivityFactory.createParameterValue(objectparameter, o1, o2);
+			ParameterValue objectparametervalue = ActivityFactory.createParameterValue(objectparameter, r1, r2);
 			ParameterValue valueparametervalue = ActivityFactory.createParameterValue(valueparameter, string1, string2);
 			parametervaluelist = ActivityFactory.createParameterValueList(objectparametervalue, valueparametervalue);
 		}

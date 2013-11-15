@@ -11,7 +11,6 @@ package org.modelexecution.fumldebug.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
@@ -33,6 +32,7 @@ import fUML.Semantics.Loci.LociL1.FirstChoiceStrategy;
 import fUML.Semantics.Loci.LociL1.Locus;
 import fUML.Semantics.Loci.LociL3.ExecutionFactoryL3;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
+import fUML.Syntax.Classes.Kernel.Classifier;
 import fUML.Syntax.Classes.Kernel.PrimitiveType;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
@@ -52,8 +52,6 @@ public class ExecutionContext {
 	private static ExecutionContext instance;
 
 	private Locus locus = null;
-
-	private Hashtable<String, OpaqueBehavior> opaqueBehaviors = new Hashtable<String, OpaqueBehavior>();
 
 	private NodeSelectionStrategy nextNodeStrategy = new NodeSelectionStrategyImpl();
 
@@ -272,8 +270,12 @@ public class ExecutionContext {
 	 * @return provided opaque behavior, null if it is not provided
 	 */
 	public OpaqueBehavior getOpaqueBehavior(String name) {
-		if (opaqueBehaviors.containsKey(name)) {
-			return opaqueBehaviors.get(name);
+		for (OpaqueBehaviorExecution primitiveBehaviorPrototype : this.locus.factory.primitiveBehaviorPrototypes) {
+			Classifier primitiveBehavior = primitiveBehaviorPrototype
+					.getTypes().get(0);
+			if (primitiveBehavior.qualifiedName.equals(name)) {
+				return (OpaqueBehavior) primitiveBehavior;
+			}
 		}
 		return null;
 	}
@@ -467,9 +469,6 @@ public class ExecutionContext {
 	 */
 	public void addOpaqueBehavior(OpaqueBehaviorExecution behaviorexecution) {
 		locus.factory.addPrimitiveBehaviorPrototype(behaviorexecution);
-		OpaqueBehavior behavior = (OpaqueBehavior) behaviorexecution.types
-				.get(0);
-		this.opaqueBehaviors.put(behavior.name, behavior);
 	}
 
 	/**

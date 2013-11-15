@@ -4428,11 +4428,13 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 		ActivityParameterNode parameternodeout = ActivityFactory.createActivityParameterNode(activity, "activityparamout", parameterout);
 		ForkNode fork2 = ActivityFactory.createForkNode(activity, "fork2");
 		ExpansionRegion expansionregion = testdata.createExpansionRegion(activity);
-		
+		InitialNode init = ActivityFactory.createInitialNode(activity, "init");
+				
 		ActivityFactory.createObjectFlow(activity, parameternode, fork2);
 		ActivityFactory.createObjectFlow(activity, fork2, expansionregion.inputElement.get(0));
 		ActivityFactory.createObjectFlow(activity, fork2, parameternodeout);
-				
+		ActivityFactory.createControlFlow(activity, init, expansionregion);
+		
 		ParameterValueList input = testdata.createInputObjects(parameter);
 		
 		ExecutionContext.getInstance().execute(activity, null, input);
@@ -4468,11 +4470,16 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 		ForkNode fork2 = ActivityFactory.createForkNode(activity, "fork2");
 		ExpansionRegion expansionregion1 = testdata.createExpansionRegion(activity);
 		ExpansionRegion expansionregion2 = testdata.createExpansionRegion(activity);
+		InitialNode init = ActivityFactory.createInitialNode(activity, "init");
+		ForkNode fork3 = ActivityFactory.createForkNode(activity, "fork3");		
 		
 		ActivityFactory.createObjectFlow(activity, parameternode, fork2);
 		ActivityFactory.createObjectFlow(activity, fork2, expansionregion1.inputElement.get(0));
 		ActivityFactory.createObjectFlow(activity, fork2, expansionregion2.inputElement.get(0));
 		ActivityFactory.createObjectFlow(activity, fork2, parameternodeout);
+		ActivityFactory.createControlFlow(activity, init, fork3);
+		ActivityFactory.createControlFlow(activity, fork3, expansionregion1);
+		ActivityFactory.createControlFlow(activity, fork3, expansionregion2);
 				
 		ParameterValueList input = testdata.createInputObjects(parameter);
 		
@@ -4501,7 +4508,8 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 		Parameter paramobject = ActivityFactory.createParameter(activity, "object", ParameterDirectionKind.in);
 		ActivityParameterNode paramnodeobject = ActivityFactory.createActivityParameterNode(activity, "object", paramobject);
 		Parameter paramresult = ActivityFactory.createParameter(activity, "result", ParameterDirectionKind.out);
-		ActivityParameterNode paramnoderesult = ActivityFactory.createActivityParameterNode(activity, "result", paramresult);		
+		ActivityParameterNode paramnoderesult = ActivityFactory.createActivityParameterNode(activity, "result", paramresult);
+		
 		CallBehaviorAction call = ActivityFactory.createCallBehaviorAction(activity, "call indexof", ExecutionContext.getInstance().getOpaqueBehavior("listindexof"), 1, 2);
 		ActivityFactory.createObjectFlow(activity, paramnodelist, call.input.get(0));
 		ActivityFactory.createObjectFlow(activity, paramnodeobject, call.input.get(1));
@@ -4736,7 +4744,7 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 			ForkNode fork = ActivityFactory.createForkNode(activity2, "fork");
 			ValueSpecificationAction vspec = ActivityFactory.createValueSpecificationAction(activity2, "specify 1", 1);
 			ReadStructuralFeatureAction readprop = ActivityFactory.createReadStructuralFeatureAction(activity2, "read prop", prop);
-			CallBehaviorAction add = ActivityFactory.createCallBehaviorAction(activity2, "call add", ExecutionContext.getInstance().getOpaqueBehavior("add"), 1, 2);
+			CallBehaviorAction add = ActivityFactory.createCallBehaviorAction(activity2, "call add", ExecutionContext.getInstance().getOpaqueBehavior("FoundationalModelLibrary.PrimitiveBehaviors.IntegerFunctions.+"), 1, 2);
 			AddStructuralFeatureValueAction setprop = ActivityFactory.createAddStructuralFeatureValueAction(activity2, "set prop", prop, true);
 			ActivityFactory.createObjectFlow(activity2, readself.result, fork);
 			ActivityFactory.createObjectFlow(activity2, fork, setprop.object);
@@ -4891,6 +4899,7 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 			ActivityFactory.createControlFlow(activity, expansionregion, specify1);
 			ActivityFactory.createObjectFlow(activity, specify1.result, calllistget.argument.get(1));
 			ActivityFactory.createObjectFlow(activity, calllistget.result.get(0), activityparameternode);
+			ActivityFactory.createControlFlow(activity, readtransitions, expansionregion);
 		}
 
 		private void initializeExpansionRegion() {

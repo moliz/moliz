@@ -2179,7 +2179,9 @@ public class ExtensionalValueEventsTest extends MolizTest implements ExecutionEv
 		value_name.value = "tanja";
 		ValueList values = new ValueList();
 		values.add(value_name);		
-		obj_stud.setFeatureValue(property_name, values, 1);		
+		obj_stud.setFeatureValue(property_name, values, 1);	
+		Reference reference = new Reference();
+		reference.referent = obj_stud;
 		
 		Activity activity = ActivityFactory.createActivity("testAddStructuralFeatureValueActionForLinks");				
 		ClearStructuralFeatureAction action_clearstructfeature = ActivityFactory.createClearStructuralFeatureAction(activity, "ClearFeature name", property_name);
@@ -2192,7 +2194,7 @@ public class ExtensionalValueEventsTest extends MolizTest implements ExecutionEv
 		ParameterValue paramvalue_studobj = new ParameterValue();
 		paramvalue_studobj.parameter = param_studobj;
 		ValueList values_stud = new ValueList();
-		values_stud.add(obj_stud);
+		values_stud.add(reference);
 		paramvalue_studobj.values = values_stud;
 						
 		ParameterValueList inputs = new ParameterValueList();
@@ -2227,7 +2229,7 @@ public class ExtensionalValueEventsTest extends MolizTest implements ExecutionEv
 		assertEquals(ExtensionalValueEventType.VALUE_REMOVED, event.getType());
 		assertTrue(event.getExtensionalValue() instanceof Object_);
 		Object_ o = (Object_)event.getExtensionalValue();
-		assertEquals(obj_stud, o);		
+		assertEquals(obj_stud, o); 		
 		FeatureValue value = event.getFeatureValue();
 		assertEquals(property_name, value.feature);
 		assertEquals(0, value.values.size());
@@ -2377,6 +2379,8 @@ public class ExtensionalValueEventsTest extends MolizTest implements ExecutionEv
 		values.add(value_name1);
 		values.add(value_name2);		
 		obj_stud.setFeatureValue(property_name, values, 1);		
+		Reference reference = new Reference();
+		reference.referent = obj_stud;
 		
 		Activity activity = ActivityFactory.createActivity("testRemoveStructuralFeatureValueAction");				
 		RemoveStructuralFeatureValueAction action_removevalue = ActivityFactory.createRemoveStructuralFeatureValueAction(activity, "RemoveValue name", property_name, true);
@@ -2395,7 +2399,7 @@ public class ExtensionalValueEventsTest extends MolizTest implements ExecutionEv
 		ParameterValue paramvalue_studobj = new ParameterValue();
 		paramvalue_studobj.parameter = param_studobj;
 		ValueList values_stud = new ValueList();
-		values_stud.add(obj_stud);
+		values_stud.add(reference);
 		paramvalue_studobj.values = values_stud;
 		
 		ParameterValue paramvalue_string = new ParameterValue();

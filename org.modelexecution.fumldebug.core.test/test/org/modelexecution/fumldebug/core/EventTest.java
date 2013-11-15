@@ -9,6 +9,9 @@
  */
 package org.modelexecution.fumldebug.core;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +19,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-
-import org.modelexecution.fumldebug.core.ExecutionContext;
-import org.modelexecution.fumldebug.core.ExecutionEventListener;
 import org.modelexecution.fumldebug.core.event.ActivityEntryEvent;
 import org.modelexecution.fumldebug.core.event.ActivityExitEvent;
 import org.modelexecution.fumldebug.core.event.ActivityNodeEntryEvent;
@@ -602,7 +601,7 @@ public class EventTest implements ExecutionEventListener{
 		ValueSpecificationAction vsaction2 = ActivityFactory.createValueSpecificationAction(activity, "ValueSpecificationAction 2", 2);		
 
 		DecisionNode decisionnode = ActivityFactory.createDecisionNode(activity, "DecisionNode");
-		OpaqueBehavior decisionbehavior = ExecutionContext.getInstance().getOpaqueBehavior("greater");
+		OpaqueBehavior decisionbehavior = ExecutionContext.getInstance().getOpaqueBehavior("FoundationalModelLibrary.PrimitiveBehaviors.IntegerFunctions.>");
 		decisionnode.setDecisionInput(decisionbehavior);
 		//decision input value
 		ActivityFactory.createDecisionInputFlow(activity, vsaction2.result, decisionnode);
@@ -615,6 +614,7 @@ public class EventTest implements ExecutionEventListener{
 		ActivityFactory.createControlFlow(activity, decisionnode, mergenode2, false);
 		
 		ExecutionContext.getInstance().execute(activity, null, new ParameterValueList());
+		
 		
 		assertEquals(10, eventlist.size());
 		
@@ -647,7 +647,7 @@ public class EventTest implements ExecutionEventListener{
 		
 		assertTrue(eventlist.get(9) instanceof ActivityExitEvent);
 		assertEquals(activity, ((ActivityExitEvent)eventlist.get(9)).getActivity());		
-	}	
+	}		
 
 	/**
 	 * A Fork Node that has no incoming edges cannot produce a forked token that is sent to

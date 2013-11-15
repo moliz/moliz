@@ -53,7 +53,7 @@ public aspect ExecutionControlAspect {
 
 	private pointcut activityExecutionInStepwiseExecutionMode(ActivityExecution execution) :  activityExecution(execution) && inStepwiseExecutionMode();
 
-	private pointcut inExecutionMode() : cflow(execution(void ExecutionContext.execute(Behavior, Object_, ParameterValueList)));
+	private pointcut inExecutionMode() : cflow(execution(ParameterValueList ExecutionContext.execute(Behavior, Object_, ParameterValueList)));
 
 	private pointcut activityExecutionInExecutionMode(ActivityExecution execution) :  activityExecution(execution) && inExecutionMode();
 
@@ -189,8 +189,8 @@ public aspect ExecutionControlAspect {
 		}
 	}
 
-	private pointcut callActionSendsOffers(CallActionActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(void ActionActivation.fire(TokenList));
-
+	private pointcut callActionSendsOffers(CallActionActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(TokenList ActionActivation.completeAction());
+	
 	/**
 	 * Prevents the method CallBehaviorActionActivation.fire() from sending
 	 * offers (if an Activity was called). This is done when the execution of
@@ -209,8 +209,8 @@ public aspect ExecutionControlAspect {
 		}
 	}
 	
-	private pointcut callActionCallIsReady(CallActionActivation activation) : call (boolean ActionActivation.isReady()) && target(activation) && withincode(void ActionActivation.fire(TokenList));
-
+	private pointcut callActionCallIsReady(CallActionActivation activation) : call (boolean ActionActivation.isReady()) && target(activation) && withincode(TokenList ActionActivation.completeAction());
+	
 	/**
 	 * Ensures that the do-while loop in the Action.fire() method is not called
 	 * for a CallBehaviorActionActivation that calls an Activity by returning
@@ -586,7 +586,7 @@ public aspect ExecutionControlAspect {
 	 * 
 	 * @param activation
 	 */
-	private pointcut expansionRegionSendsOffers(ExpansionRegionActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(void ActionActivation.fire(TokenList));
+	private pointcut expansionRegionSendsOffers(ExpansionRegionActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(TokenList ActionActivation.completeAction());
 
 	/**
 	 * Prevents the method ExpansionRegionActivation.fire() from sending offers.
@@ -600,7 +600,7 @@ public aspect ExecutionControlAspect {
 	 * 
 	 * @param expansionActivationGroup
 	 */
-	private pointcut expansionActivationGroupRunGroup(ExpansionActivationGroup expansionActivationGroup) : call (void ExpansionRegionActivation.runGroup(ExpansionActivationGroup)) && args(expansionActivationGroup) && withincode(void ExpansionRegionActivation.doStructuredActivity());
+	private pointcut expansionActivationGroupRunGroup(ExpansionActivationGroup expansionActivationGroup) : call (void ExpansionRegionActivation.runGroup(ExpansionActivationGroup)) && args(expansionActivationGroup) && (withincode(void ExpansionRegionActivation.runIterative()) || withincode(void ExpansionRegionActivation.runParallel()));
 
 	/**
 	 * Ensures that ExpansionRegionActivation.runGroup(ExpansionActivationGroup)
@@ -625,8 +625,8 @@ public aspect ExecutionControlAspect {
 	 * ExpansionRegionActivation.runGroup(ExpansionActivationGroup).
 	 * 
 	 * @param activationGroup
-	 */
-	private pointcut debugActivityNodeActivationGroupTerminateAll(ActivityNodeActivationGroup activationGroup) : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void ExpansionRegionActivation.runGroup(ExpansionActivationGroup)) && target(activationGroup);
+	 */	
+	private pointcut debugActivityNodeActivationGroupTerminateAll(ActivityNodeActivationGroup activationGroup) : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void ExpansionRegionActivation.terminateGroup(ExpansionActivationGroup)) && target(activationGroup);
 
 	/**
 	 * Prevents the execution of the method
@@ -644,7 +644,7 @@ public aspect ExecutionControlAspect {
 	 * Structured activity nodes
 	 */
 	
-	private pointcut structuredActivityNodeSendsOffers(StructuredActivityNodeActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(void ActionActivation.fire(TokenList));
+	private pointcut structuredActivityNodeSendsOffers(StructuredActivityNodeActivation activation) : call (void ActionActivation.sendOffers()) && target(activation) && withincode(TokenList ActionActivation.completeAction());
 
 	/**
 	 * Prevents the method void ActionActivation.sendOffers() from sending offers for structured activity node
@@ -659,7 +659,7 @@ public aspect ExecutionControlAspect {
 	 * Conditional nodes
 	 */
 		
-	private pointcut conditionalNodeTerminatesAll() : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void ConditionalNodeActivation.doStructuredActivity());
+	private pointcut conditionalNodeTerminatesAll() : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void ConditionalNodeActivation.completeBody());
 	
 	/**
 	 * Prevents the method ConditionalNodeActivation.doStructuredActivity() from terminating all contained nodes.

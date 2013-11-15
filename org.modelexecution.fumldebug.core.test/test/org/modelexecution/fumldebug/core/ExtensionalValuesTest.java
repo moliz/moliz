@@ -93,7 +93,7 @@ public class ExtensionalValuesTest implements ExecutionEventListener {
 		Parameter outparam = ActivityFactory.createParameter(activity, "output", ParameterDirectionKind.out);
 		ActivityParameterNode inparamnode = ActivityFactory.createActivityParameterNode(activity, "input", inparam);
 		ActivityParameterNode outparamnode = ActivityFactory.createActivityParameterNode(activity, "output", outparam);
-		ReduceAction reduce = ActivityFactory.createReduceAction(activity, "add", ExecutionContext.getInstance().getOpaqueBehavior("add"));
+		ReduceAction reduce = ActivityFactory.createReduceAction(activity, "add", ExecutionContext.getInstance().getOpaqueBehavior("FoundationalModelLibrary.PrimitiveBehaviors.IntegerFunctions.+"));
 		
 		ActivityFactory.createObjectFlow(activity, inparamnode, reduce.collection);
 		ActivityFactory.createObjectFlow(activity, reduce.result, outparamnode);

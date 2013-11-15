@@ -94,7 +94,7 @@ public class DecisionNodeTests extends MolizTest implements ExecutionEventListen
 		ValueSpecificationAction specify1 = ActivityFactory.createValueSpecificationAction(activity, "specify 1", 1);
 		ValueSpecificationAction specify2 = ActivityFactory.createValueSpecificationAction(activity, "specify 2", 2);
 		DecisionNode decision = ActivityFactory.createDecisionNode(activity, "decision");
-		Behavior less = ExecutionContext.getInstance().getOpaqueBehavior("less");
+		Behavior less = ExecutionContext.getInstance().getOpaqueBehavior("FoundationalModelLibrary.PrimitiveBehaviors.IntegerFunctions.<");
 		decision.setDecisionInput(less);
 		Parameter outparam = ActivityFactory.createParameter(activity, "out", ParameterDirectionKind.out);
 		ActivityParameterNode outparamnode = ActivityFactory.createActivityParameterNode(activity, "out", outparam); 

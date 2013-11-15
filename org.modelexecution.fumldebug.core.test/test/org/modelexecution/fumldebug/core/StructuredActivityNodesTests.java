@@ -32,6 +32,7 @@ import org.modelexecution.fumldebug.core.event.ExtensionalValueEvent;
 import org.modelexecution.fumldebug.core.event.SuspendEvent;
 
 import fUML.Semantics.Classes.Kernel.Object_;
+import fUML.Semantics.Classes.Kernel.Reference;
 import fUML.Semantics.Classes.Kernel.StringValue;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValueList;
 import fUML.Syntax.Activities.IntermediateActivities.Activity;
@@ -1187,14 +1188,16 @@ public class StructuredActivityNodesTests extends MolizTest implements Execution
 		if(outvalues.get(0).values.size() != 2) {
 			return false;
 		}
-		if(outvalues.get(0).values.get(0) != testactivity.o1) {
+		
+		Object_ o1_out = ((Reference)outvalues.get(0).values.get(0)).referent;
+		Object_ o2_out = ((Reference)outvalues.get(0).values.get(1)).referent;
+		if(o1_out != testactivity.o1) {
 			return false;
 		}
-		if(outvalues.get(0).values.get(1) != testactivity.o2) {
+		if(o2_out != testactivity.o2) {
 			return false;
 		}
-		Object_ o1_out = (Object_)outvalues.get(0).values.get(0);
-		Object_ o2_out = (Object_)outvalues.get(0).values.get(1);
+		
 		if(!((StringValue)o1_out.featureValues.get(0).values.get(0)).value.equals(testactivity.string1.value)) {
 			return false;
 		}

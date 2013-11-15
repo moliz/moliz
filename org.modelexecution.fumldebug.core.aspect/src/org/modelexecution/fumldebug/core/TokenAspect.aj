@@ -20,10 +20,11 @@ import fUML.Semantics.Activities.IntermediateActivities.TokenList;
 import fUML.Semantics.Loci.LociL1.Locus;
 import fUML.Semantics.Classes.Kernel.Value;
 import fUML.Semantics.Classes.Kernel.ExtensionalValue;
+import org.modelexecution.fumldebug.core.trace.tracemodel.ValueSnapshot;
 
 public aspect TokenAspect {
 
-	private pointcut valueAddedToLocusBecauseOfCopy() : call (void Locus.add(ExtensionalValue)) && withincode(Value ExtensionalValue.copy());
+	private pointcut valueAddedToLocusBecauseOfCopy() : call (void Locus.add(ExtensionalValue)) && withincode(Value ExtensionalValue.copy()) && cflow(execution(ValueSnapshot TraceHandler.createValueSnapshot(Value)));
 
 	/**
 	 * Prevent addition of copied value to locus
