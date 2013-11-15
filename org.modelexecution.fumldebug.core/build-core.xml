@@ -31,32 +31,39 @@ or by building a corresponding jar file directly.
 <project name="org.modelexecution.fumldebug.core" default="distribute" basedir=".">
 
 	<!-- Input locations -->
-	<property name="fumldebug.core.src.dir" value="src"/>
-	<property name="fumldebug.core.aspect.src.dir" value="../org.modelexecution.fumldebug.core.aspect/src"/>
-	<property name="fuml.jar.path" value="fuml.jar"/>
+	<property name="fumldebug.core.src.dir" value="src" />
+	<property name="fumldebug.core.aspect.src.dir" value="../org.modelexecution.fumldebug.core.aspect/src" />
+	<property name="fuml.jar.path" value="fuml.jar" />
+	<property name="modeldriven.alf" value="../../moliz.alf/org.modeldriven.alf/src" />
+	<property name="modeldriven.alf.gen" value="../../moliz.alf/org.modeldriven.alf/gen" />
+	<property name="modeldriven.alf.fuml.impl" value="../../moliz.alf/org.modeldriven.alf.fuml.impl/src" />
 
 	<!-- Target location of the output jar -->
-	<property name="target.dir" value="target"/>
-	<property name="dist.dir" value="../org.modelexecution.fumldebug/lib"/>
+	<property name="target.dir" value="target" />
+	<property name="dist.dir" value="../org.modelexecution.fumldebug/lib" />
 
 	<!-- Output naming -->
-	<property name="release.name" value="moliz-core"/>
+	<property name="release.name" value="moliz-core" />
 	<!-- note: you also have to change MANIFEST.MF of the plug-in containing ${dist.dir}
 	in order to make sure that this plug-in uses the created distribution jar after changing
 	the release suffix, because the release.suffix is part of the jar's file name and the
 	MANIFEST.MF refers to the jar through the file name. -->
-	<property name="release.suffix" value="1.0.0"/>
-	<property name="release.file" value="${release.name}-v${release.suffix}.jar"/>
-	<property name="release.path" value="${target.dir}/${release.file}"/>
+	<property name="release.suffix" value="1.0.0" />
+	<property name="release.file" value="${release.name}-v${release.suffix}.jar" />
+	<property name="release.path" value="${target.dir}/${release.file}" />
 
 	<!-- build libraries -->
-	<property name="build.lib.dir" value="build-libs"/>
-	<property name="build.lib.ajtools.path" value="${build.lib.dir}/aspectjtools.jar"/>
-	<property name="build.lib.ajrt.path" value="${build.lib.dir}/aspectjrt.jar"/>
-	<property name="build.lib.apache.commons.path" value="${build.lib.dir}/commons-logging.jar"/>
-	<property name="build.lib.emf.ecore" value="${build.lib.dir}/org.eclipse.emf.ecore_2.8.1.v20120911-0500.jar"/>
+	<property name="build.lib.dir" value="build-libs" />
+	<property name="build.lib.ajtools.path" value="${build.lib.dir}/aspectjtools.jar" />
+	<property name="build.lib.ajrt.path" value="${build.lib.dir}/aspectjrt.jar" />
+	<property name="build.lib.apache.commons.path" value="${build.lib.dir}/commons-logging.jar" />
+	<property name="build.lib.emf.ecore" value="${build.lib.dir}/org.eclipse.emf.ecore_2.8.1.v20120911-0500.jar" />
 	<property name="build.lib.emf.common" value="${build.lib.dir}/org.eclipse.emf.common_2.8.0.v20120911-0500.jar" />
-
+	<property name="build.lib.junit" value="${build.lib.dir}/junit.jar" />
+	<property name="build.lib.log4j" value="${build.lib.dir}/log4j.jar" />
+	<property name="build.lib.alf" value="${build.lib.dir}/alf-base.jar" />
+	<property name="build.lib.alf.fuml" value="${build.lib.dir}/alf-fuml.jar" />
+	
 	<!-- Task definition for aspectj ant tasks -->
 	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
 		<classpath>
@@ -76,7 +83,7 @@ or by building a corresponding jar file directly.
 
 	<target name="build" depends="init">
 		<echo>Building ${release.file}</echo>
-		<iajc outjar="${release.path}" source="1.5" target="1.5">
+		<iajc outjar="${release.path}" source="1.5">
 			<sourceroots>
 				<pathelement location="${fumldebug.core.src.dir}" />
 				<pathelement location="${fumldebug.core.aspect.src.dir}" />
@@ -89,13 +96,17 @@ or by building a corresponding jar file directly.
 				<pathelement location="${build.lib.apache.commons.path}" />
 				<pathelement location="${build.lib.emf.ecore}" />
 				<pathelement location="${build.lib.emf.common}" />
+				<pathelement location="${build.lib.junit}" />
+				<pathelement location="${build.lib.log4j}" />
+				<pathelement location="${build.lib.alf}" />
+				<pathelement location="${build.lib.alf.fuml}" />				
 			</classpath>
 		</iajc>
 	</target>
 
 	<target name="distribute" depends="build">
 		<echo>Copy ${release.file} to ${dist.dir}</echo>
-		<copy file="${release.path}" todir="${dist.dir}"/>
+		<copy file="${release.path}" todir="${dist.dir}" />
 	</target>
 
 </project>
