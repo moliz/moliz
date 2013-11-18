@@ -10,14 +10,18 @@
 package org.modelexecution.fumldebug.core;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
 import fUML.Semantics.Actions.BasicActions.CallBehaviorActionActivation;
+import fUML.Semantics.Actions.BasicActions.PinActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
 import fUML.Syntax.Actions.BasicActions.CallBehaviorAction;
 import fUML.Syntax.Activities.CompleteStructuredActivities.StructuredActivityNode;
+import fUML.Syntax.Activities.IntermediateActivities.ActivityFinalNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
@@ -81,7 +85,48 @@ public class StructuredActivityNodeExecutionStatus extends ActivityNodeExecution
 	@Override
 	public void handleEndOfExecution() {		
 		structuredActivityNodeActivation.sendOffers();	
+
+		// activated activity final nodes can influence the execution of an activity because tokens on output pins are destroyed
+		ActivityNodeActivation enabledActivityFinalNodeActivation = getEnabledActivityFinalNode();		
+		if(enabledActivityFinalNodeActivation != null) {
+			deleteTokensOfContainerStructuredActivityNodes();
+		}
+
 		super.handleEndOfExecution();
 		checkIfCanFireAgain();
+	}
+	
+	private void deleteTokensOfContainerStructuredActivityNodes() {
+		List<StructuredActivityNodeActivation> containerStructuredActivityNode = getContainerStructuredActivityNode(structuredActivityNodeActivation);
+		for(StructuredActivityNodeActivation activation : containerStructuredActivityNode) {
+			for(PinActivation pinActivation : activation.pinActivations) {
+				pinActivation.clearTokens();
+			}
+		}
+	}
+	
+	private List<StructuredActivityNodeActivation> getContainerStructuredActivityNode(StructuredActivityNodeActivation activation) {
+		List<StructuredActivityNodeActivation> container = new ArrayList<StructuredActivityNodeActivation>();
+		StructuredActivityNodeActivation containerNodeActivation = activation.group.containingNodeActivation;
+		if(containerNodeActivation != null) {
+			container.add(containerNodeActivation);
+			container.addAll(getContainerStructuredActivityNode(containerNodeActivation));
+		}
+		return container;
+	}
+	
+	private ActivityNodeActivation getEnabledActivityFinalNode() {
+		Set<ActivityNode> finalNodes = new HashSet<ActivityNode>();
+		for(ActivityNode enabledNode : activityExecutionStatus.getEnabledNodes()) {
+			if(enabledNode instanceof ActivityFinalNode)
+				finalNodes.add(enabledNode);
+		}
+						
+		for(ActivityNode finalNode : finalNodes) {
+			ActivityNodeActivation enabledActivation = this.activityExecutionStatus.getEnabledActivation(finalNode);
+			if(enabledActivation != null)
+				return enabledActivation;
+		}
+		return null;
 	}
 }
