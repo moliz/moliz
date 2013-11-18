@@ -4925,7 +4925,7 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 			readselftransition = ActivityFactory.createReadSelfAction(activityisenabled, "read self transition");
 			readisenabled = ActivityFactory.createReadStructuralFeatureAction(activityisenabled, "read is enabeld", prop_isEnabled);
 			
-			Parameter param_isEnabled = ActivityFactory.createParameter("isEnabled", ParameterDirectionKind.out);
+			Parameter param_isEnabled = ActivityFactory.createParameter(activityisenabled, "isEnabled", ParameterDirectionKind.out);
 			ParameterList params_isEnabled = new ParameterList();
 			params_isEnabled.add(param_isEnabled);
 			Operation op_isenabled = ActivityFactory.createOperation("isEnabled", params_isEnabled, activityisenabled, cl_transition);

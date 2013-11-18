@@ -15,6 +15,10 @@ import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValue;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValueList;
 import fUML.Syntax.Actions.BasicActions.CallAction;
 import fUML.Syntax.Actions.BasicActions.OutputPin;
+import fUML.Syntax.Actions.BasicActions.OutputPinList;
+import fUML.Syntax.Classes.Kernel.Parameter;
+import fUML.Syntax.Classes.Kernel.ParameterDirectionKind;
+import fUML.Syntax.Classes.Kernel.ParameterList;
 
 public class CallActionExecutionStatus extends ActivityNodeExecutionStatus {
 	
@@ -68,11 +72,33 @@ public class CallActionExecutionStatus extends ActivityNodeExecutionStatus {
 
 	private void obtainCallActionOutput() {
 		// START code from void CallActionActivation.doAction()
+		CallAction callAction = (CallAction) (callActionActivation.node);
+		OutputPinList resultPins = callAction.result;
+		
+		ParameterList parameters = calledActivityExecution.getBehavior().ownedParameter;
+		
 		ParameterValueList outputParameterValues = calledActivityExecution.getOutputParameterValues();
-		for (int j = 0; j < outputParameterValues.size(); j++) {
-			ParameterValue outputParameterValue = outputParameterValues.getValue(j);
-			OutputPin resultPin = ((CallAction) callActionActivation.node).result.getValue(j);
-			callActionActivation.putTokens(resultPin, outputParameterValue.values);
+
+		int pinNumber = 1;
+		int i = 1;
+		while (i <= parameters.size()) {
+			Parameter parameter = parameters.getValue(i - 1);
+			if ((parameter.direction == ParameterDirectionKind.inout)
+					| (parameter.direction == ParameterDirectionKind.out)
+					| (parameter.direction == ParameterDirectionKind.return_)) {
+				for (int j = 0; j < outputParameterValues.size(); j++) {
+					ParameterValue outputParameterValue = outputParameterValues
+							.getValue(j);
+					if (outputParameterValue.parameter == parameter) {
+						OutputPin resultPin = resultPins
+								.getValue(pinNumber - 1);
+						callActionActivation.putTokens(resultPin,
+								outputParameterValue.values);
+					}
+				}
+				pinNumber = pinNumber + 1;
+			}
+			i = i + 1;
 		}
 		// END code from void CallActionActivation.doAction()
 	}
