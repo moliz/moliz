@@ -28,6 +28,12 @@ either by running the entire fUML build:
   - remove all org.modeldriven.** except for org.modeldriven.fuml.FumlObject
 or by building a corresponding jar file directly.
 -->
+<!--
+TODO 
+Make sure that the following files are provided as in the fuml project:
+	DefaultFumlConfig.xml (jar: org/modeldriven/fuml/config, project: src/xml/config)
+	fUML_Library.xmi (jar: org/modeldriven/fuml/library, project: src/xmi/library) 
+-->
 <project name="org.modelexecution.fumldebug.core" default="distribute" basedir=".">
 
 	<!-- Input locations -->
