@@ -140,8 +140,15 @@ public class ActivityNodeExecutionStatus implements Comparable<ActivityNodeExecu
 				LoopNodeExecutionStatus loopNodeExecutionStatus = (LoopNodeExecutionStatus)containingStructuredNodeExecutionStatus;
 				loopNodeExecutionStatus.updateStatus();
 			} else {
-				StructuredActivityNodeExecutionStatus structuredActivityNodeExecutionStatus = (StructuredActivityNodeExecutionStatus)containingStructuredNodeExecutionStatus;
-				structuredActivityNodeExecutionStatus.updateStatus();
+				if (containingStructuredNodeExecutionStatus != null) {
+					StructuredActivityNodeExecutionStatus structuredActivityNodeExecutionStatus = (StructuredActivityNodeExecutionStatus)containingStructuredNodeExecutionStatus;
+					structuredActivityNodeExecutionStatus.updateStatus();
+				} else {
+					if(containingStructuredActivityNodeActivation.node.inStructuredNode != null) {
+						StructuredActivityNodeExecutionStatus structuredActivityNodeExecutionStatus = (StructuredActivityNodeExecutionStatus)activityExecutionStatus.getExecutingActivityNodeExecutionStatus(containingStructuredActivityNodeActivation.node.inStructuredNode);
+						structuredActivityNodeExecutionStatus.updateStatus();
+					}
+				}
 			}
 		}
 	}

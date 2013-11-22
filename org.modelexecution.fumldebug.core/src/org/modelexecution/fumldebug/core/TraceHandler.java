@@ -684,8 +684,9 @@ public class TraceHandler implements ExecutionEventListener {
 			if(node.inStructuredNode != null) {
 				StructuredActivityNode container = node.inStructuredNode;
 				StructuredActivityNodeExecution containerExecution = (StructuredActivityNodeExecution)activityExecution.getExecutionForEnabledNode(container);
-				containerExecution.getNestedNodeExecutions().add(activityNodeExecution);
-
+				if(containerExecution != null) {
+					containerExecution.getNestedNodeExecutions().add(activityNodeExecution);
+				}				
 			}
 		}			
 	}
