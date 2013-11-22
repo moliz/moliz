@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.modelexecution.fumldebug.core.ExecutionContext;
 import org.modelexecution.fumldebug.core.ExecutionEventListener;
@@ -23,8 +24,16 @@ import org.modelexecution.fumldebug.core.event.ActivityExitEvent;
 import org.modelexecution.fumldebug.core.event.Event;
 import org.modelexecution.fumldebug.core.util.ActivityFactory;
 
+import fUML.Semantics.Classes.Kernel.IntegerValue;
+import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValue;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValueList;
 import fUML.Syntax.Activities.IntermediateActivities.Activity;
+import fUML.Syntax.Classes.Kernel.Class_;
+import fUML.Syntax.Classes.Kernel.Operation;
+import fUML.Syntax.Classes.Kernel.Parameter;
+import fUML.Syntax.Classes.Kernel.ParameterDirectionKind;
+import fUML.Syntax.Classes.Kernel.ParameterList;
+import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
 /**
  * This test only verifies whether the events (and thus the aspects)
@@ -40,15 +49,27 @@ import fUML.Syntax.Activities.IntermediateActivities.Activity;
  */
 public class AspectsViaPluginTest implements ExecutionEventListener {
 	
+	private static final String ALF_LANGUAGE_NAME = ExecutionContext.ALF_LANGUAGE_NAME;
+	private static ExecutionContext executionContext;
+	
 	private List<Event> eventlist = new ArrayList<Event>();
 	
 	public AspectsViaPluginTest() {
-		ExecutionContext.getInstance().addEventListener(this);
+		executionContext = ExecutionContext.getInstance();
+		executionContext.addEventListener(this);
+		executionContext
+				.addAlfModelFilePathMapping("Libraries/**",
+						"platform:/plugin/org.modelexecution.fumldebug/Libraries/");
 	}
 
+	@Before
+	public void clearEventlist() {
+		eventlist.clear();
+	}
+	
 	@Test
 	public void testEventsWhenExecutingActivity() {
-		Activity activity = ActivityFactory.createActivity("Activity TestActivityExecution");
+		Activity activity = ActivityFactory.createActivity("Activity TestActivityExecution");		
 		ExecutionContext.getInstance().execute(activity, null, new ParameterValueList());
 		
 		assertEquals(2, eventlist.size());
@@ -56,6 +77,53 @@ public class AspectsViaPluginTest implements ExecutionEventListener {
 		assertEquals(activity, ((ActivityEntryEvent)eventlist.get(0)).getActivity());
 		assertTrue(eventlist.get(1) instanceof ActivityExitEvent);
 		assertEquals(activity, ((ActivityExitEvent)eventlist.get(1)).getActivity());		
+	}
+	
+	@Test
+	public void testAlf() {
+		Class_ c = ActivityFactory.createClass("Class");
+		
+		String alfCode = "return input + 1;";
+		Parameter inParameter = ActivityFactory.createParameter("input",
+				ParameterDirectionKind.in,
+				executionContext.getPrimitiveIntegerType());
+		Parameter outParameter = ActivityFactory.createParameter("",
+				ParameterDirectionKind.return_,
+				executionContext.getPrimitiveIntegerType());
+
+		OpaqueBehavior alfBehavior = new OpaqueBehavior();
+		alfBehavior.setName("test");
+		alfBehavior.language.add(ALF_LANGUAGE_NAME);
+		alfBehavior.ownedParameter.add(inParameter);
+		alfBehavior.ownedParameter.add(outParameter);
+		alfBehavior.body.add(alfCode);
+		c.addOwnedBehavior(alfBehavior);
+		
+		Parameter inParameter_operation = ActivityFactory.createParameter("input",
+				ParameterDirectionKind.in,
+				executionContext.getPrimitiveIntegerType());
+		Parameter outParameter_operation = ActivityFactory.createParameter("",
+				ParameterDirectionKind.return_,
+				executionContext.getPrimitiveIntegerType());
+		ParameterList parameters = new ParameterList();
+		parameters.add(inParameter_operation);
+		parameters.add(outParameter_operation);
+		
+		Operation createOperation = ActivityFactory.createOperation("test", parameters, alfBehavior, c);
+		alfBehavior.specification = createOperation;
+
+		ParameterValue parameterValue = new ParameterValue();
+		parameterValue.parameter = inParameter;
+		IntegerValue intValue = new IntegerValue();
+		intValue.type = executionContext.getPrimitiveIntegerType();
+		intValue.value = 1;
+		parameterValue.values.add(intValue);
+		ParameterValueList parameterValues = new ParameterValueList();
+		parameterValues.add(parameterValue);
+
+		ParameterValueList output =  executionContext.execute(alfBehavior, null, parameterValues);
+		int result =  ((IntegerValue)  output.get(0).values.get(0)).value;
+		assertEquals(2, result);
 	}
 	
 	@Override
