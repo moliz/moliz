@@ -12,10 +12,12 @@ package org.modelexecution.fumldebug.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
 import org.modeldriven.fuml.library.Library;
 import org.modeldriven.fuml.repository.Repository;
+import org.modelexecution.fumldebug.core.alf.AlfOpaqueBehaviorExecution;
 import org.modelexecution.fumldebug.core.trace.tracemodel.Trace;
 
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
@@ -65,6 +67,8 @@ public class ExecutionContext {
 
 	protected EventHandler eventHandler = new EventHandler(executionStatus);
 
+	private Map<String, String> alfModelFilePathMap = new HashMap<String, String>();
+
 	/**
 	 * Returns the singleton instance.
 	 * 
@@ -104,9 +108,7 @@ public class ExecutionContext {
 					OpaqueBehavior behavior) {
 				for (String language : behavior.language) {
 					if (language.equals(ALF_LANGUAGE_NAME)) {
-						OpaqueBehaviorExecution execution = new AlfOpaqueBehaviorExecution();
-						execution.types.add(behavior);
-						return execution;
+						return createAlfOpaqueBehavior(behavior);
 					}
 				}
 				return super.instantiateOpaqueBehaviorExecution(behavior);
@@ -117,6 +119,29 @@ public class ExecutionContext {
 		initializer.addBuiltInTypes();
 		initializer.addPrimitiveBehaviorExecutions();
 		return executionFactory;
+	}
+	
+	private AlfOpaqueBehaviorExecution createAlfOpaqueBehavior(
+			OpaqueBehavior behavior) {
+		AlfOpaqueBehaviorExecution execution = new AlfOpaqueBehaviorExecution();
+		execution.types.add(behavior);
+		addAlfModelFilePathMappings(execution);
+		return execution;
+	}
+
+	private void addAlfModelFilePathMappings(
+			AlfOpaqueBehaviorExecution execution) {
+		for (Entry<String, String> entry : alfModelFilePathMap.entrySet()) {
+			execution.addPathMapping(entry.getKey(), entry.getValue());
+		}
+	}
+
+	public void addAlfModelFilePathMapping(String fromPath, String toPath) {
+		alfModelFilePathMap.put(fromPath, toPath);
+	}
+
+	public void removeAlfModelFilePathMapping(String path) {
+		alfModelFilePathMap.remove(path);
 	}
 
 	/**
