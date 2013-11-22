@@ -20,6 +20,7 @@ import fUML.Syntax.Classes.Kernel.Operation;
 import fUML.Syntax.Classes.Kernel.Package;
 import fUML.Syntax.Classes.Kernel.Parameter;
 import fUML.Syntax.Classes.Kernel.ParameterDirectionKind;
+import fUML.Syntax.Classes.Kernel.ParameterList;
 import fUML.Syntax.Classes.Kernel.Property;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
@@ -28,7 +29,7 @@ public class ALFTest {
 
 	private static final String ALF_LANGUAGE_NAME = ExecutionContext.ALF_LANGUAGE_NAME;
 	private static ExecutionContext executionContext = ExecutionContext
-			.getInstance();
+			.getInstance();	
 
 	@Test
 	public void test1Plus1() {
@@ -92,11 +93,7 @@ public class ALFTest {
 
 		String alfCode = "p = new Person(); p.name = name; return p;";
 
-		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("createPerson");
-		alfBehavior.ownedParameter.add(inParameter);
-		alfBehavior.ownedParameter.add(outParameter);
-		alfBehavior.body.add(alfCode);
-		p.addPackagedElement(alfBehavior);
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createPerson", classPerson, inParameter, outParameter);
 
 		ParameterValueList parameterValues = createParameterValue(inParameter,
 				createValue("Philip"));
@@ -161,32 +158,21 @@ public class ALFTest {
 				executionContext.getPrimitiveStringType(), classPerson);
 		p.addPackagedElement(classPerson);
 
-		Operation operation = new Operation();
-		operation.upper = new UnlimitedNatural(1);
-		operation.name = "setPersonName";
-		operation.addOwnedParameter(ActivityFactory.createParameter("p",
-				ParameterDirectionKind.in, classPerson));
-		classGroup.addOwnedOperation(operation);
-		OpaqueBehavior behaviorAddPerson = createAlfOpaqueBehavior("setPersonName");
 		Parameter paramPerson4Behavior = ActivityFactory.createParameter("p",
 				ParameterDirectionKind.in, classPerson);
-		behaviorAddPerson.addOwnedParameter(paramPerson4Behavior);
-		behaviorAddPerson.body.add("p.name = \"lala\";");
-		classGroup.addOwnedBehavior(behaviorAddPerson);
-		p.addPackagedElement(behaviorAddPerson);
-
-		operation.addMethod(behaviorAddPerson);
-
+		OpaqueBehavior behaviorAddPerson = createAlfOpaqueBehavior("p.name = \"lala\";", "setPersonName", classGroup, paramPerson4Behavior);
+		((Operation)behaviorAddPerson.specification).upper = new UnlimitedNatural(1); 
+		
+		Parameter paramPerson4CallOparationBehavior = ActivityFactory.createParameter("p",
+				ParameterDirectionKind.in, classPerson);
+		OpaqueBehavior behaviorCallOperation = createAlfOpaqueBehavior("setPersonName(p);", "callSetPersonName", classGroup, paramPerson4CallOparationBehavior);
+		((Operation)behaviorCallOperation.specification).upper = new UnlimitedNatural(1); 
+		
 		Parameter outParameter = ActivityFactory.createParameter(
 				"createdPerson", ParameterDirectionKind.return_, classPerson);
-
 		String alfCode = "p = new Person(); g = new Group(); "
-				+ "g.setPersonName(p); return p;";
-
-		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("createPersonInNewGroup");
-		alfBehavior.addOwnedParameter(outParameter);
-		alfBehavior.body.add(alfCode);
-		p.addPackagedElement(alfBehavior);
+				+ "g.callSetPersonName(p); return p;";
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createPersonInNewGroup", classGroup, outParameter);
 
 		ParameterValueList output = executionContext.execute(alfBehavior, null,
 				new ParameterValueList());
@@ -202,7 +188,7 @@ public class ALFTest {
 		assertEquals(1, firstFeatureValue.values.size());
 		StringValue stringValue = (StringValue) firstFeatureValue.values.get(0);
 		assertEquals("lala", stringValue.value);
-	}
+	}	
 
 	@Test
 	public void testSizeFunctionOnPropertyList() {
@@ -223,11 +209,7 @@ public class ALFTest {
 
 		String alfCode = "return person.names->size();";
 
-		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("getNameCount");
-		alfBehavior.ownedParameter.add(inParameter);
-		alfBehavior.ownedParameter.add(outParameter);
-		alfBehavior.body.add(alfCode);
-		p.addPackagedElement(alfBehavior);
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "getNameCount", classPerson, inParameter, outParameter);
 
 		Object_ personObject = new Object_();
 		personObject.types.add(classPerson);
@@ -274,11 +256,7 @@ public class ALFTest {
 
 		String alfCode = "return group.persons->at(2);";
 
-		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("getFirstPerson");
-		alfBehavior.ownedParameter.add(inParameter);
-		alfBehavior.ownedParameter.add(outParameter);
-		alfBehavior.body.add(alfCode);
-		p.addPackagedElement(alfBehavior);
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "getFirstPerson", classGroup, inParameter, outParameter);
 
 		Object_ groupObject = new Object_();
 		groupObject.types.add(classGroup);
@@ -327,11 +305,7 @@ public class ALFTest {
 					"createdPerson", ParameterDirectionKind.return_,
 					classPerson);
 
-			OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("createPerson");
-			alfBehavior.ownedParameter.add(inParameter);
-			alfBehavior.ownedParameter.add(outParameter);
-			alfBehavior.body.add(alfCode);
-			p.addPackagedElement(alfBehavior);
+			OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createPerson", classPerson, inParameter, outParameter);
 
 			ParameterValueList parameterValues = createParameterValue(
 					inParameter, createValue("Philip"));
@@ -372,14 +346,11 @@ public class ALFTest {
 			Property propertyPersons = ActivityFactory.createProperty(
 					"persons", 0, 10, classPerson, classGroup);
 
-			OpaqueBehavior alfBehavior = createAlfOpaqueBehavior("createGroupWithOnePerson");
 			Parameter outParameter = ActivityFactory.createParameter(
 					"createdGroup", ParameterDirectionKind.return_, classGroup);
-			alfBehavior.body.add(alfCode);
-			alfBehavior.addOwnedParameter(outParameter);
-			classGroup.addOwnedBehavior(alfBehavior);
-			p.addPackagedElement(alfBehavior);
-
+			
+			OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createGroupWithOnePerson", classGroup, outParameter);
+			
 			ParameterValueList output = executionContext.execute(alfBehavior,
 					null, new ParameterValueList());
 
@@ -398,9 +369,143 @@ public class ALFTest {
 			assertType(personObject, classPerson);
 		}
 	}
+	
+	@Test
+	public void testNamespaceOfOpaqueBehavior() {
+		fUML.Syntax.Classes.Kernel.Package p = createPackage();
+
+		Class_ classPerson = ActivityFactory.createClass("Person");
+		p.addPackagedElement(classPerson);
+
+		Parameter outParameter = ActivityFactory.createParameter(
+				"createdPerson testNamespaceOfOpaqueBehavior", ParameterDirectionKind.return_,
+				classPerson);
+		
+		String alfCode = "return new Person();";
+
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createPerson - namespace test", classPerson, outParameter);
+
+		ParameterValueList output = executionContext.execute(alfBehavior, null,
+				null);
+
+		Value result = getFirstValue(output);
+		assertTrue(result instanceof Reference);
+
+		Object_ resultObject = resolveObjectReference(result);
+		assertType(resultObject, classPerson);
+	}
+	
+	@Test
+	public void testThisWithCasting() {
+		fUML.Syntax.Classes.Kernel.Package p = createPackage();
+
+		Class_ classPerson = ActivityFactory.createClass("Person");
+		Property propertyName = ActivityFactory.createProperty("name", 1, 1,
+				executionContext.getPrimitiveStringType(), classPerson);
+		p.addPackagedElement(classPerson);
+
+		Parameter inParameter = ActivityFactory.createParameter("name",
+				ParameterDirectionKind.in,
+				executionContext.getPrimitiveStringType());
+		Parameter outParameter = ActivityFactory.createParameter(
+				"createdPerson", ParameterDirectionKind.return_,
+				classPerson);
+		
+		String alfCode = "((Person)this).name = name; return (Person)this;";
+
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "initName - with casting", classPerson, inParameter, outParameter);
+
+		ParameterValueList parameterValues = createParameterValue(inParameter,
+				createValue("Philip"));
+		
+		Object_ object = new Object_();		
+		object.types.add(classPerson);
+		object.createFeatureValues();
+
+		ParameterValueList output = executionContext.execute(alfBehavior, object,
+				parameterValues);
+
+		Value result = getFirstValue(output);
+		assertTrue(result instanceof Reference);
+
+		Object_ resultObject = resolveObjectReference(result);
+		assertType(resultObject, classPerson);
+
+		assertEquals(1, resultObject.featureValues.size());
+		FeatureValue firstFeatureValue = resultObject.featureValues.get(0);
+		assertEquals(propertyName, firstFeatureValue.feature);
+		assertEquals(1, firstFeatureValue.values.size());
+		StringValue stringValue = (StringValue) firstFeatureValue.values.get(0);
+		assertEquals("Philip", stringValue.value);
+	}
+	
+	@Test
+	public void testThisWithoutCasting() {
+		fUML.Syntax.Classes.Kernel.Package p = createPackage();
+
+		Class_ classPerson = ActivityFactory.createClass("Person");
+		Property propertyName = ActivityFactory.createProperty("name", 1, 1,
+				executionContext.getPrimitiveStringType(), classPerson);
+		p.addPackagedElement(classPerson);
+
+		Parameter inParameter = ActivityFactory.createParameter("name",
+				ParameterDirectionKind.in,
+				executionContext.getPrimitiveStringType());
+		Parameter outParameter = ActivityFactory.createParameter("person",
+				ParameterDirectionKind.return_, classPerson);
+				
+		String alfCode = "this.name = name; return this;";
+		
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "initName - without casting", classPerson,
+				inParameter, outParameter);
+
+		ParameterValueList parameterValues = createParameterValue(inParameter,
+				createValue("Philip"));
+
+		Object_ object = new Object_();		
+		object.types.add(classPerson);
+		object.createFeatureValues();
+
+		ParameterValueList output = executionContext.execute(alfBehavior,
+				object, parameterValues);
+
+		Value result = getFirstValue(output);
+		assertTrue(result instanceof Reference);
+
+		Object_ resultObject = resolveObjectReference(result);
+		assertType(resultObject, classPerson);
+
+		assertEquals(1, resultObject.featureValues.size());
+		FeatureValue firstFeatureValue = resultObject.featureValues.get(0);
+		assertEquals(propertyName, firstFeatureValue.feature);
+		assertEquals(1, firstFeatureValue.values.size());
+		StringValue stringValue = (StringValue) firstFeatureValue.values.get(0);
+		assertEquals("Philip", stringValue.value);
+	}
 
 	// TODO add test for link creations
 	// e.g., "g = new Group(); p = Person(); PersonsInGroup.createLink(p, g); return p;";
+
+	private OpaqueBehavior createAlfOpaqueBehavior(String alfCode, String behaviorName,
+			Class_ owningClass, Parameter... parameters) {
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(behaviorName);
+		for (Parameter parameter : parameters)
+			alfBehavior.ownedParameter.add(parameter);
+		alfBehavior.body.add(alfCode);
+		owningClass.addOwnedBehavior(alfBehavior);
+
+		ParameterList parameters_operation = new ParameterList();
+		for (Parameter parameter : parameters) {
+			Parameter operationParameter = ActivityFactory.createParameter(
+					parameter.name, parameter.direction, parameter.type);
+			parameters_operation.add(operationParameter);
+		}
+
+		Operation operation = ActivityFactory.createOperation(alfBehavior.name,
+				parameters_operation, alfBehavior, owningClass);
+		alfBehavior.specification = operation;
+		return alfBehavior;
+	}
 
 	private ParameterValueList executeAlfOpaqueBehaviorWithOneIntegerInput(
 			String alfCode, int input) {
