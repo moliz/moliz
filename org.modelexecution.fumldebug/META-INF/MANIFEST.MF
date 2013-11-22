@@ -16,7 +16,7 @@ Bundle-ClassPath: .,
  lib/aspectjtools.jar,
  lib/alf.fuml.impl.jar,
  lib/stax-utils.jar,
- lib/alf_.jar
+ lib/alf.jar
 Export-Package: UMLPrimitiveTypes,
  fUML,
  fUML.Library,

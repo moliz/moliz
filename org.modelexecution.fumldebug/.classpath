@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/alf_.jar" sourcepath="/org.modeldriven.alf"/>
+	<classpathentry exported="true" kind="lib" path="lib/alf.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/aspectjrt.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/aspectjtools.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/moliz-core-v1.0.0.jar" sourcepath="/org.modelexecution.fumldebug.core"/>

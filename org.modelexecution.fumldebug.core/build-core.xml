@@ -67,8 +67,8 @@ Make sure that the following files are provided as in the fuml project:
 	<property name="build.lib.emf.common" value="${build.lib.dir}/org.eclipse.emf.common_2.8.0.v20120911-0500.jar" />
 	<property name="build.lib.junit" value="${build.lib.dir}/junit.jar" />
 	<property name="build.lib.log4j" value="${build.lib.dir}/log4j.jar" />
-	<property name="build.lib.alf" value="${build.lib.dir}/alf-base.jar" />
-	<property name="build.lib.alf.fuml" value="${build.lib.dir}/alf-fuml.jar" />
+	<property name="build.lib.alf" value="${build.lib.dir}/alf.jar" />
+	<property name="build.lib.alf.fuml" value="${build.lib.dir}/alf.fuml.impl.jar" />
 	
 	<!-- Task definition for aspectj ant tasks -->
 	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
