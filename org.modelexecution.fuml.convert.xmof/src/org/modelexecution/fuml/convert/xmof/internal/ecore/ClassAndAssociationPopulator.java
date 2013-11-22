@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.modelexecution.fuml.convert.impl.ConversionResultImpl;
 import org.modelexecution.fuml.convert.xmof.internal.IElementPopulator;
+import org.modelexecution.xmof.Syntax.Classes.Kernel.BehavioredEClass;
+import org.modelexecution.xmof.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 
 import fUML.Syntax.Classes.Kernel.AggregationKind;
 import fUML.Syntax.Classes.Kernel.Association;
@@ -43,6 +45,22 @@ public class ClassAndAssociationPopulator implements IElementPopulator {
 		addOperations(fumlClass, eClass, result);
 		addAssociationsAndSetTheirValues(fumlClass, eClass, result);
 		addAttributes(fumlClass, eClass, result);
+		addOwnedBehaviors(fumlClass, eClass, result);
+	}
+
+	private void addOwnedBehaviors(Class_ fumlClass, EClass eClass,
+			ConversionResultImpl result) {
+		if(eClass instanceof BehavioredEClass) {
+			BehavioredEClass behavioredEClass = (BehavioredEClass) eClass;			
+			for(Behavior behavior : behavioredEClass.getOwnedBehavior()) {
+				fumlClass.addOwnedBehavior((fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior)result.getFUMLElement(behavior));
+			}
+			Behavior classifierBehavior = behavioredEClass.getClassifierBehavior();
+			if(classifierBehavior != null) {
+				fumlClass.classifierBehavior = (fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior)result.getFUMLElement(classifierBehavior);
+			}
+		}
+		
 	}
 
 	private void addGeneralizations(Class_ fumlClass, EClass eClass,
