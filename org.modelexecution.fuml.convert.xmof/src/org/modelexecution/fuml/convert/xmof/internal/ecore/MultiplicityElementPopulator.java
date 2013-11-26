@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.modelexecution.fuml.convert.impl.ConversionResultImpl;
 import org.modelexecution.fuml.convert.xmof.internal.IElementPopulator;
 
+import UMLPrimitiveTypes.UnlimitedNatural;
 import fUML.Syntax.Actions.BasicActions.Pin;
 import fUML.Syntax.Classes.Kernel.Element;
+import fUML.Syntax.Classes.Kernel.Operation;
 import fUML.Syntax.Classes.Kernel.Parameter;
 import fUML.Syntax.Classes.Kernel.StructuralFeature;
 
@@ -41,7 +43,8 @@ public class MultiplicityElementPopulator implements IElementPopulator {
 	private boolean isFUMLMultiplicityElement(Element fumlElement) {
 		return fumlElement instanceof Parameter
 				|| fumlElement instanceof StructuralFeature
-				|| fumlElement instanceof Pin;
+				|| fumlElement instanceof Pin
+				|| fumlElement instanceof Operation;
 	}
 
 	private void setMultiplicity(Element fumlElement,
@@ -58,6 +61,10 @@ public class MultiplicityElementPopulator implements IElementPopulator {
 			Pin pin = (Pin) fumlElement;
 			pin.setLower(eTypedElement.getLowerBound());
 			pin.setUpper(eTypedElement.getUpperBound());
+		} else if (fumlElement instanceof Operation) {
+			Operation operation = (Operation) fumlElement;
+			operation.lower = eTypedElement.getLowerBound(); 
+			operation.upper = new UnlimitedNatural(eTypedElement.getUpperBound());			
 		}
 	}
 }
