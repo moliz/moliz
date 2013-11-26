@@ -13,6 +13,7 @@ import java.util.List;
 
 import fUML.Semantics.Actions.BasicActions.OutputPinActivation;
 import fUML.Semantics.Actions.BasicActions.OutputPinActivationList;
+import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionActivationGroup;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionActivationGroupList;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionRegionActivation;
@@ -52,8 +53,10 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 				ExpansionActivationGroup nextExpansionActivationGroup = determineNextExpansionActivationGroup(currentExpansionActivationGroup);				
 				expansionRegionActivation.runGroup(nextExpansionActivationGroup);
 			} else {
-				// execution of expansion region is finished
-				handleEndOfExecution();
+				if(!containsExecutingNode(currentExpansionActivationGroup)) {
+					// execution of expansion region is finished
+					handleEndOfExecution();
+				}
 			}
 		}
 	}
@@ -85,7 +88,7 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 				return true;
 			}
 		}
-
+		 		
 		// Check if an activity called by an call action contained in the
 		// activation group is still executing
 		List<ActivityExecutionStatus> directCalledExecutionStatuses = activityExecutionStatus.getDirectCalledExecutionStatuses();
@@ -102,6 +105,26 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 		}
 		return false;
 	}
+	
+	/**
+	 * Check if contained expansion region / structured activity node is executing
+	 * @param expansionActivationGroup
+	 * @return true, if contained node is executing
+	 */
+	private boolean containsExecutingNode(ExpansionActivationGroup expansionActivationGroup) {
+		for (ActivityNodeActivation nodeActivation : expansionActivationGroup.nodeActivations) {
+			if(nodeActivation instanceof ExpansionRegionActivation) {
+				ActivityNodeExecutionStatus status = this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);
+				if(status != null)
+					return true;
+			} else if(nodeActivation instanceof StructuredActivityNodeActivation) {
+				ActivityNodeExecutionStatus status = this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);				
+				if(status != null)
+					return true;
+			}
+		}
+		return false;		
+	}	
 
 	/**
 	 * Determines the expansion activation group of an expansion region to be
