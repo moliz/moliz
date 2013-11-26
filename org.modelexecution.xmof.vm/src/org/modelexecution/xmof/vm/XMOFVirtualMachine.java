@@ -79,11 +79,17 @@ public class XMOFVirtualMachine implements ExecutionEventListener {
 	}
 
 	private void initialize() {
+		configureAlfModelFilePathMapping();
 		initializeListeners();
 		convertMetamodel();
 		initializeInstanceMap();
 		replaceOpaqueBehaviors();
 		initializeModelSynchronizer();
+	}
+
+	private void configureAlfModelFilePathMapping() {
+		executionContext.addAlfModelFilePathMapping("Libraries/**", //$NON-NLS-1$
+				"platform:/plugin/org.modelexecution.fumldebug/Libraries/"); //$NON-NLS-1$
 	}
 
 	private void initializeListeners() {
