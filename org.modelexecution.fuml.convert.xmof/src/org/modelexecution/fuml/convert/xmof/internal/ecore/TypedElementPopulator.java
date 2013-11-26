@@ -15,10 +15,12 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.modelexecution.fuml.convert.impl.ConversionResultImpl;
 import org.modelexecution.fuml.convert.impl.ConversionStatusImpl;
 import org.modelexecution.fuml.convert.xmof.XMOFConverterPlugin;
 import org.modelexecution.fuml.convert.xmof.internal.IElementPopulator;
+import org.modelexecution.fumldebug.core.ExecutionContext;
 
 import fUML.Syntax.Activities.IntermediateActivities.ObjectNode;
 import fUML.Syntax.Classes.Kernel.Element;
@@ -66,10 +68,15 @@ public class TypedElementPopulator implements IElementPopulator {
 				setType(fumlElement, (Type) fumlType);
 			}
 		} else {
-			// TODO handle simple data types
-			// set up a package containing the simple data types in XMOFConverter,
-			// add the package imports to each package,
-			// and add the primitive types to the result map for EString, etc.
+			if(eType != null) {
+				if(eType.equals(EcorePackage.eINSTANCE.getEInt())) {
+					setType(fumlElement, ExecutionContext.getInstance().getPrimitiveIntegerType());
+				} else if(eType.equals(EcorePackage.eINSTANCE.getEBoolean())) {
+					setType(fumlElement, ExecutionContext.getInstance().getPrimitiveBooleanType());
+				} else if(eType.equals(EcorePackage.eINSTANCE.getEString())) {
+					setType(fumlElement, ExecutionContext.getInstance().getPrimitiveStringType());
+				}	
+			}
 		}
 	}
 
