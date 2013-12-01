@@ -44,7 +44,7 @@ import fUML.Syntax.Activities.IntermediateActivities.ActivityNodeList;
 import fUML.Syntax.Classes.Kernel.Element;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
-import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+import org.modelexecution.fumldebug.core.alf.AlfOpaqueBehaviorExecution; //TODO adjust build process
 
 public aspect ExecutionControlAspect {
 
