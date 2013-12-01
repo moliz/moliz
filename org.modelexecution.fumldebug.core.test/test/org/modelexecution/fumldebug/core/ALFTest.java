@@ -147,6 +147,45 @@ public class ALFTest {
 		StringValue value = (StringValue) getFirstValue(output);
 		assertEquals("Philiptest1", value.value);
 	}
+	
+	@Test
+	public void testCallingOperationOnObjects() {
+		fUML.Syntax.Classes.Kernel.Package p = createPackage();
+
+		Class_ classGroup = ActivityFactory.createClass("Group");
+		p.addPackagedElement(classGroup);
+
+		Class_ classPerson = ActivityFactory.createClass("Person");
+		Property propertyName = ActivityFactory.createProperty("name", 1, 1,
+				executionContext.getPrimitiveStringType(), classPerson);
+		p.addPackagedElement(classPerson);
+
+		Parameter paramPerson4Behavior = ActivityFactory.createParameter("p",
+				ParameterDirectionKind.in, classPerson);
+		OpaqueBehavior behaviorAddPerson = createAlfOpaqueBehavior("p.name = \"lala\";", "setPersonName", classGroup, paramPerson4Behavior);
+		((Operation)behaviorAddPerson.specification).upper = new UnlimitedNatural(1); 
+				
+		Parameter outParameter = ActivityFactory.createParameter(
+				"createdPerson", ParameterDirectionKind.return_, classPerson);
+		String alfCode = "p = new Person(); g = new Group(); "
+				+ "g.setPersonName(p); return p;";
+		OpaqueBehavior alfBehavior = createAlfOpaqueBehavior(alfCode, "createPersonInNewGroup", classGroup, outParameter);
+
+		ParameterValueList output = executionContext.execute(alfBehavior, null,
+				new ParameterValueList());
+
+		Value result = getFirstValue(output);
+		assertTrue(result instanceof Reference);
+
+		Object_ resultObject = resolveObjectReference(result);
+		assertType(resultObject, classPerson);
+
+		FeatureValue firstFeatureValue = resultObject.featureValues.get(0);
+		assertEquals(propertyName, firstFeatureValue.feature);
+		assertEquals(1, firstFeatureValue.values.size());
+		StringValue stringValue = (StringValue) firstFeatureValue.values.get(0);
+		assertEquals("lala", stringValue.value);
+	}
 
 	@Test
 	public void testCallingOperationsOnObjects() {
@@ -249,6 +288,83 @@ public class ALFTest {
 		assertEquals(1, nameFeatureValue.values.size());
 		assertEquals("lala",
 				((StringValue) nameFeatureValue.values.get(0)).value);
+	}
+	
+	@Test
+	public void testCallingOperationsInTwoForLoops() {
+		fUML.Syntax.Classes.Kernel.Package p = createPackage();
+
+		Class_ classPerson = ActivityFactory.createClass("Person");
+		Property propertyName = ActivityFactory.createProperty("name", 1, 1,
+				executionContext.getPrimitiveStringType(), classPerson);
+		p.addPackagedElement(classPerson);
+
+		Class_ classGroup = ActivityFactory.createClass("Group");
+		Property propertyLalaPersons = ActivityFactory.createProperty("lalapersons", 0,
+				-1, classPerson, classGroup);
+		Property propertyXyzPersons = ActivityFactory.createProperty("xyzpersons", 0,
+				-1, classPerson, classGroup);
+		p.addPackagedElement(classGroup);
+
+		OpaqueBehavior behaviorSetLalaPersonName = createAlfOpaqueBehavior(
+				"this.name = \"lala\";", "setLalaPersonName", classPerson);
+		((Operation) behaviorSetLalaPersonName.specification).upper = new UnlimitedNatural(
+				1);
+		
+		OpaqueBehavior behaviorSetXyzPersonName = createAlfOpaqueBehavior(
+				"this.name = \"xyz\";", "setXyzPersonName", classPerson);		
+		((Operation) behaviorSetXyzPersonName.specification).upper = new UnlimitedNatural(
+				1);
+
+		OpaqueBehavior behaviorCallOperation = createAlfOpaqueBehavior(
+				"for(Person p : this.lalapersons) {" +
+						"p.setLalaPersonName();" +
+				"}" +
+				"for(Person p : this.xyzpersons) {" +
+					"p.setXyzPersonName();" +
+				"}",
+				"setPersonName", classGroup);
+
+		Object_ objectGroup = new Object_();
+		objectGroup.types.add(classGroup);
+		objectGroup.createFeatureValues();
+		executionContext.getLocus().add(objectGroup);
+
+		Object_ objectLalaPerson = new Object_();
+		objectLalaPerson.types.add(classPerson);
+		objectLalaPerson.createFeatureValues();
+		executionContext.getLocus().add(objectLalaPerson);
+		Reference referenceLalaPerson = new Reference();
+		referenceLalaPerson.referent = objectLalaPerson;
+		ValueList valuesLalaPerson = new ValueList();
+		valuesLalaPerson.add(referenceLalaPerson);
+
+		objectGroup.setFeatureValue(propertyLalaPersons, valuesLalaPerson, 0);
+		
+		Object_ objectXyzPerson = new Object_();
+		objectXyzPerson.types.add(classPerson);
+		objectXyzPerson.createFeatureValues();
+		executionContext.getLocus().add(objectXyzPerson);
+		Reference referenceXyzPerson = new Reference();
+		referenceXyzPerson.referent = objectXyzPerson;
+		ValueList valuesXyzPerson = new ValueList();
+		valuesXyzPerson.add(referenceXyzPerson);
+
+		objectGroup.setFeatureValue(propertyXyzPersons, valuesXyzPerson, 0);
+
+		executionContext.execute(behaviorCallOperation, objectGroup, null);
+
+		FeatureValue nameFeatureValueLalaPerson = objectLalaPerson
+				.getFeatureValue(propertyName);
+		assertEquals(1, nameFeatureValueLalaPerson.values.size());
+		assertEquals("lala",
+				((StringValue) nameFeatureValueLalaPerson.values.get(0)).value);
+		
+		FeatureValue nameFeatureValueXyzPerson = objectXyzPerson
+				.getFeatureValue(propertyName);
+		assertEquals(1, nameFeatureValueXyzPerson.values.size());
+		assertEquals("xyz",
+				((StringValue) nameFeatureValueXyzPerson.values.get(0)).value);
 	}
 
 	@Test

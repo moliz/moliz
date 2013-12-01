@@ -44,6 +44,7 @@ import fUML.Syntax.Activities.IntermediateActivities.ActivityNodeList;
 import fUML.Syntax.Classes.Kernel.Element;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
 
 public aspect ExecutionControlAspect {
 
@@ -64,7 +65,7 @@ public aspect ExecutionControlAspect {
 	 *            Execution object of the executed behavior
 	 */
 	before(ActivityExecution execution) : activityExecutionInStepwiseExecutionMode(execution) {
-		handleActivityEntry(execution, null);
+		handleActivityEntry(execution, null, null);
 	}
 
 	/**
@@ -73,18 +74,24 @@ public aspect ExecutionControlAspect {
 	 * @param execution
 	 *            Execution object of the executed behavior
 	 */
-	before(ActivityExecution execution) : activityExecutionInExecutionMode(execution) {		
-		handleActivityEntry(execution, null);
+	before(ActivityExecution execution) : activityExecutionInExecutionMode(execution) && !cflow(execution(void CallActionActivation.doAction())) {		
+		handleActivityEntry(execution, null, null);
 		ActivityExecutionStatus activityExecutionStatus = ExecutionContext.getInstance().executionStatus.getActivityExecutionStatus(execution);
 		activityExecutionStatus.setWholeExecutionInResumeMode(true);
 	}
 
+	private pointcut activityExecutionByAlfOpaqueBehaviorExecution(ActivityExecution activityExecution, CallActionActivation callActionActivation, AlfOpaqueBehaviorExecution alfExecution) : activityExecution(activityExecution) && cflow(execution(void AlfOpaqueBehaviorExecution.execute(Activity, ParameterValueList, ParameterValueList)) && target(alfExecution)) && cflow(execution(void CallActionActivation.doAction()) && target(callActionActivation));
+	
+	before(ActivityExecution activityExecution, CallActionActivation callActionActivation, AlfOpaqueBehaviorExecution alfExecution) : activityExecutionByAlfOpaqueBehaviorExecution(activityExecution, callActionActivation, alfExecution) {
+		handleActivityEntry(activityExecution, callActionActivation, alfExecution);
+	}
+	
 	/**
 	 * Handling of first resume() call in case of execution mode.
 	 * 
 	 * @param execution
 	 */
-	after(ActivityExecution execution) : activityExecutionInExecutionMode(execution) {
+	after(ActivityExecution execution) : activityExecutionInExecutionMode(execution) && !cflow(execution(void CallActionActivation.doAction())) {
 		ActivityExecutionStatus activityExecutionStatus = ExecutionContext.getInstance().executionStatus.getActivityExecutionStatus(execution);
 		boolean hasEnabledNodes = false;
 		if(activityExecutionStatus != null) {
@@ -239,7 +246,8 @@ public aspect ExecutionControlAspect {
 	 */
 	private boolean callsOpaqueBehaviorExecution(CallActionActivation activation) {
 		if (activation.callExecutions.size() > 0) {
-			if (activation.callExecutions.get(activation.callExecutions.size() - 1) instanceof OpaqueBehaviorExecution) {
+			Execution execution = activation.callExecutions.get(activation.callExecutions.size() - 1);
+			if (execution instanceof OpaqueBehaviorExecution && !(execution instanceof AlfOpaqueBehaviorExecution)) {
 				return true;
 			}
 		}
@@ -424,6 +432,7 @@ public aspect ExecutionControlAspect {
 		ExpansionRegionExecutionStatus expansionRegionExecutionStatus = (ExpansionRegionExecutionStatus)getActivityNodeExecutionStatus(expansionRegionActivation);
 		expansionRegionExecutionStatus.updateStatus();
 	}
+	
 	/**
 	 * Execution of ActionActivation.sendOffers() in the execution context of
 	 * ActionActivation.fire(TokenList)
@@ -512,11 +521,11 @@ public aspect ExecutionControlAspect {
 			CallActionActivation activation) : call(void Execution.execute()) && withincode(void CallActionActivation.doAction()) && target(execution) && this(activation);
 
 	before(ActivityExecution execution, CallActionActivation activation) : callActivityExecutionExecute(execution, activation) {
-		handleActivityEntry(execution, activation);
+		handleActivityEntry(execution, activation, null);
 	}
 	
-	private void handleActivityEntry(ActivityExecution execution, CallActionActivation callerNodeActivation) {
-		ExecutionContext.getInstance().executionStatus.addActivityExecution(execution, callerNodeActivation);
+	private void handleActivityEntry(ActivityExecution execution, CallActionActivation callerNodeActivation, AlfOpaqueBehaviorExecution alfExecution) {
+		ExecutionContext.getInstance().executionStatus.addActivityExecution(execution, callerNodeActivation, alfExecution);
 	}
 
 	private void handleActivityExit(ActivityExecution execution) { 

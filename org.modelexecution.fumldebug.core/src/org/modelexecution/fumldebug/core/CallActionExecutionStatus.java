@@ -9,6 +9,8 @@
  */
 package org.modelexecution.fumldebug.core;
 
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityExecution;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValue;
@@ -45,9 +47,15 @@ public class CallActionExecutionStatus extends ActivityNodeExecutionStatus {
 		obtainCallActionOutput();
 		
 		// Destroy execution of the called activity				
-		calledActivityExecutionStatus.destroyActivityExecution();
-		callActionActivation.removeCallExecution(calledActivityExecution);
+		calledActivityExecutionStatus.destroyActivityExecution();	
 		
+		AlfOpaqueBehaviorExecution calledAlfExecution = calledActivityExecutionStatus.getAlfExecution();
+		if(calledAlfExecution == null) {
+			callActionActivation.removeCallExecution(calledActivityExecution);
+		} else {
+			callActionActivation.removeCallExecution(calledAlfExecution);
+		}
+				
 		// Notify about ActivityExitEvent
 		ExecutionContext.getInstance().eventHandler.handleActivityExit(calledActivityExecution);
 

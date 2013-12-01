@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityExecution;
 
@@ -53,9 +55,9 @@ public class ExecutionStatus {
 	 *            entry event of the execution
 	 * @return id of the added execution
 	 */
-	public int addActivityExecution(ActivityExecution activityExecution, CallActionActivation caller) {
+	public int addActivityExecution(ActivityExecution activityExecution, CallActionActivation caller, AlfOpaqueBehaviorExecution alfExecution) {
 		int executionID = getExecutionID(activityExecution);		
-		ActivityExecutionStatus status = new ActivityExecutionStatus(activityExecution, executionID);
+		ActivityExecutionStatus status = new ActivityExecutionStatus(activityExecution, executionID, alfExecution);
 		
 		activityExecutionStatuses.put(executionID, status);
 				

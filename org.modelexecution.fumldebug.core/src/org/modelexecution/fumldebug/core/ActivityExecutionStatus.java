@@ -15,8 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
 import fUML.Semantics.Actions.BasicActions.CallBehaviorActionActivation;
+import fUML.Semantics.Actions.BasicActions.CallOperationActionActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ConditionalNodeActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.LoopNodeActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
@@ -39,6 +42,7 @@ import fUML.Syntax.Activities.IntermediateActivities.ActivityEdge;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityParameterNode;
 import fUML.Syntax.Classes.Kernel.Element;
+import fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
 
 public class ActivityExecutionStatus {
@@ -69,9 +73,13 @@ public class ActivityExecutionStatus {
 	private HashMap<Token, Token> tokenOriginals = new HashMap<Token, Token>();
 	// Data structure for saving over which edge a token was sent
 	private HashMap<Token, List<ActivityEdge>> edgeTraversal = new HashMap<Token, List<ActivityEdge>>();
+
+	// The AlfOpaqueBehaviorExecution that caused this ActivityExecution
+	private AlfOpaqueBehaviorExecution alfExecution;
 	
-	public ActivityExecutionStatus(ActivityExecution activityExecution, int executionID) {
+	public ActivityExecutionStatus(ActivityExecution activityExecution, int executionID, AlfOpaqueBehaviorExecution alfExecution) {
 		this.activityExecution = activityExecution;
+		this.alfExecution = alfExecution;		
 		this.activity = (Activity)activityExecution.getBehavior();
 		this.executionID = executionID;
 	}
@@ -243,7 +251,7 @@ public class ActivityExecutionStatus {
 			status = new LoopNodeExecutionStatus(this, (LoopNodeActivation)activation, activationIndex);
 		} else if(activation instanceof StructuredActivityNodeActivation) {
 			status = new StructuredActivityNodeExecutionStatus(this, (StructuredActivityNodeActivation)activation, activationIndex);
-		} else if(activation instanceof CallActionActivation && !(activation instanceof CallBehaviorActionActivation && ((CallBehaviorAction)activation.node).behavior instanceof OpaqueBehavior)) {
+		} else if(activation instanceof CallOperationActionActivation || (activation instanceof CallBehaviorActionActivation && (callsAlfOpaqueBehavior(activation) || callsActivity(activation)))) { 
 			status = new CallActionExecutionStatus(this, (CallActionActivation)activation, activationIndex);
 		} else if(activation instanceof ExpansionRegionActivation) {
 			status = new ExpansionRegionExecutionStatus(this, (ExpansionRegionActivation)activation, activationIndex);
@@ -251,6 +259,32 @@ public class ActivityExecutionStatus {
 			status = new ActivityNodeExecutionStatus(this, activation, activationIndex);
 		}
 		return status;
+	}
+	
+	private boolean callsActivity(ActivityNodeActivation activation) {
+		if(activation instanceof CallBehaviorActionActivation) {
+			Behavior behavior = getBehavior((CallBehaviorActionActivation)activation);
+			return behavior instanceof Activity;
+		}
+		return false;
+	}
+
+	private boolean callsAlfOpaqueBehavior(ActivityNodeActivation activation) {
+		if(activation instanceof CallBehaviorActionActivation) {
+			Behavior behavior = getBehavior((CallBehaviorActionActivation)activation);
+			if (behavior instanceof OpaqueBehavior) {
+				OpaqueBehavior opaqueBehavior = (OpaqueBehavior) behavior;
+				if(opaqueBehavior.language.size() > 0) {
+					return opaqueBehavior.language.get(0).equals(AlfOpaqueBehaviorExecution.ALF_LANGUAGE_NAME);
+				}				
+			}
+		}
+		return false;
+	}
+
+	private Behavior getBehavior(CallBehaviorActionActivation activation) {
+		CallBehaviorAction action = (CallBehaviorAction)activation.node;
+		return action.behavior;
 	}
 	
 	private int getNextNodeActivationIndex() {
@@ -446,5 +480,9 @@ public class ActivityExecutionStatus {
 
 	public Set<ActivityNode> getExecutingNodes() {
 		return this.executingActivityNodeExecutionStatuses.keySet();
+	}
+	
+	public AlfOpaqueBehaviorExecution getAlfExecution() {
+		return alfExecution;
 	}
 }

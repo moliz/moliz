@@ -13,6 +13,8 @@ package org.modelexecution.fumldebug.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
+
 import fUML.Semantics.Actions.BasicActions.ActionActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ConditionalNodeActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.LoopNodeActivation;
@@ -74,20 +76,21 @@ public class ActivityNodeExecutionStatus implements Comparable<ActivityNodeExecu
 		return 0;
 	}
 	
-	public void handleEndOfExecution() { 
-		ExecutionContext.getInstance().eventHandler.handleActivityNodeExit(activityNodeActivation);
+	public void handleEndOfExecution() {
+		ExecutionContext.getInstance().eventHandler
+				.handleActivityNodeExit(activityNodeActivation);
 
-//		if(!(activityNodeActivation.node instanceof CallAction)) {
-//			updateStatusOfContainingStructuredActivityNode();
-//		}
-				
+		// if(!(activityNodeActivation.node instanceof CallAction)) {
+		// updateStatusOfContainingStructuredActivityNode();
+		// }
+
 		ActivityNode node = activityNodeActivation.node;
 
-		if(updateStructuredNode(node)) {
+		if (updateStructuredNode(node)) {
 			updateStatusOfContainingStructuredActivityNode();
 		}
-		
-		activityExecutionStatus.removeExecutingActivation(node);			
+
+		activityExecutionStatus.removeExecutingActivation(node);
 	}
 
 	private boolean updateStructuredNode(ActivityNode node) {
@@ -95,7 +98,7 @@ public class ActivityNodeExecutionStatus implements Comparable<ActivityNodeExecu
 		if(node instanceof CallAction) {
 			if (node instanceof CallBehaviorAction) {
 				Behavior behavior = ((CallBehaviorAction)node).behavior;
-				if(behavior instanceof OpaqueBehavior) {
+				if(behavior instanceof OpaqueBehavior && !isAlfBehavior(behavior)) {
 					updateStructuredNode = true;
 				}
 			}
@@ -105,6 +108,18 @@ public class ActivityNodeExecutionStatus implements Comparable<ActivityNodeExecu
 		return updateStructuredNode;
 	}
 	
+	private boolean isAlfBehavior(Behavior behavior) {
+		if(behavior instanceof OpaqueBehavior) {
+			OpaqueBehavior opaqueBehavior = (OpaqueBehavior) behavior;
+			if(opaqueBehavior.language.size() > 0) {
+				if(opaqueBehavior.language.get(0).equals(AlfOpaqueBehaviorExecution.ALF_LANGUAGE_NAME)) {
+					return true;
+				}
+			}			
+		}
+		return false;
+	}
+
 	protected void checkIfCanFireAgain() {
 		if(!(activityNodeActivation instanceof ActionActivation)) {
 			return;
