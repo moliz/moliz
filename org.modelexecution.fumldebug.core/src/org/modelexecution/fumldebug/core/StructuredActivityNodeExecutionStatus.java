@@ -129,4 +129,8 @@ public class StructuredActivityNodeExecutionStatus extends ActivityNodeExecution
 		}
 		return null;
 	}
+	
+	public boolean finishedExecution() {
+		return !hasStructuredActivityNodeEnabledChildNodes();
+	}
 }

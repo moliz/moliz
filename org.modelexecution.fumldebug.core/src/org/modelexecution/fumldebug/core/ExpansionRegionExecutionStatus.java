@@ -46,19 +46,26 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 		boolean groupHasEnabledNode = hasExpansionActivationGroupEnabledNodes(currentExpansionActivationGroup);
 		if (!groupHasEnabledNode) {
 			// no enabled node exists in current executed expansion activation group
-			if (currentExpansionActivationGroup.index < expansionRegionActivation.activationGroups.size()) {
+			if (hasUnexecutedActivationGroups()) {
 				// terminate expansion activation group
 				currentExpansionActivationGroup.terminateAll();
 				// further expansion activation groups have to be executed
 				ExpansionActivationGroup nextExpansionActivationGroup = determineNextExpansionActivationGroup(currentExpansionActivationGroup);				
 				expansionRegionActivation.runGroup(nextExpansionActivationGroup);
 			} else {
-				if(!containsExecutingNode(currentExpansionActivationGroup)) {
-					// execution of expansion region is finished
-					handleEndOfExecution();
-				}
+				// execution of expansion region is finished
+				handleEndOfExecution();
 			}
 		}
+	}
+
+	private boolean hasUnexecutedActivationGroups() {
+		ExpansionActivationGroup currentExpansionActivationGroup = getCurrentExpansionActivationGroup();
+
+		if(currentExpansionActivationGroup == null) {
+			return false;
+		}
+		return currentExpansionActivationGroup.index < expansionRegionActivation.activationGroups.size();
 	}
 
 	private ExpansionActivationGroup getCurrentExpansionActivationGroup() {
@@ -103,6 +110,11 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 				}
 			}
 		}
+		
+		// Check if a contained structured activity node is executing
+		if(containsExecutingNode(expansionActivationGroup))
+			return true;
+		
 		return false;
 	}
 	
@@ -114,13 +126,15 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 	private boolean containsExecutingNode(ExpansionActivationGroup expansionActivationGroup) {
 		for (ActivityNodeActivation nodeActivation : expansionActivationGroup.nodeActivations) {
 			if(nodeActivation instanceof ExpansionRegionActivation) {
-				ActivityNodeExecutionStatus status = this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);
+				ExpansionRegionExecutionStatus status = (ExpansionRegionExecutionStatus)this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);
 				if(status != null)
-					return true;
+					if(!status.finishedExecution())
+						return true;
 			} else if(nodeActivation instanceof StructuredActivityNodeActivation) {
-				ActivityNodeExecutionStatus status = this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);				
+				StructuredActivityNodeExecutionStatus status = (StructuredActivityNodeExecutionStatus)this.activityExecutionStatus.getExecutingActivityNodeExecutionStatus(nodeActivation.node);
 				if(status != null)
-					return true;
+					if(!status.finishedExecution())
+						return true;
 			}
 		}
 		return false;		
@@ -192,6 +206,18 @@ public class ExpansionRegionExecutionStatus extends ActivityNodeExecutionStatus 
 		expansionRegionActivation.sendOffers();
 				
 		super.handleEndOfExecution();
+	}
+	
+	public boolean finishedExecution() {
+		ExpansionActivationGroup currentExpansionActivationGroup = getCurrentExpansionActivationGroup();
+
+		if(currentExpansionActivationGroup == null)
+			return true;
+		
+		if(hasExpansionActivationGroupEnabledNodes(currentExpansionActivationGroup) || hasUnexecutedActivationGroups())
+			return false;
+
+		return true;
 	}
 
 }
