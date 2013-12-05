@@ -17,7 +17,10 @@ import org.modelexecution.fumldebug.core.ClauseExecutionStatus.ClauseExecutionSt
 
 import fUML.Semantics.Activities.CompleteStructuredActivities.ClauseActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ConditionalNodeActivation;
+import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
+import fUML.Semantics.Classes.Kernel.BooleanValue;
 import fUML.Semantics.Loci.LociL1.ChoiceStrategy;
+import fUML.Syntax.Actions.BasicActions.CallBehaviorAction;
 import fUML.Syntax.Actions.BasicActions.OutputPin;
 import fUML.Syntax.Actions.BasicActions.OutputPinList;
 import fUML.Syntax.Activities.CompleteStructuredActivities.Clause;
@@ -25,7 +28,9 @@ import fUML.Syntax.Activities.CompleteStructuredActivities.ClauseList;
 import fUML.Syntax.Activities.CompleteStructuredActivities.ConditionalNode;
 import fUML.Syntax.Activities.CompleteStructuredActivities.ExecutableNode;
 import fUML.Syntax.Activities.CompleteStructuredActivities.ExecutableNodeList;
+import fUML.Syntax.Activities.CompleteStructuredActivities.StructuredActivityNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
+import fUML.Syntax.Activities.IntermediateActivities.ActivityNodeList;
 
 public class ConditionalNodeExecutionStatus extends StructuredActivityNodeExecutionStatus { 
 
@@ -55,19 +60,22 @@ public class ConditionalNodeExecutionStatus extends StructuredActivityNodeExecut
 		List<ClauseExecutionStatus> clausesWithTestStarted = getClauseExecutionStatusesInState(ClauseExecutionState.TESTSTARTED);
 		List<ClauseExecutionStatus> clausesWithBodyStarted = getClauseExecutionStatusesInState(ClauseExecutionState.BODYSTARTED);
 		
-		for(ClauseExecutionStatus ClauseExecutionStatus : clausesWithTestStarted) {
-			if(!activityExecutionStatus.isAnyNodeEnabled(new ArrayList<ActivityNode>(ClauseExecutionStatus.getClauseActivation().clause.test))) {
-				ClauseExecutionStatus.setStatus(ClauseExecutionState.TESTFINISHED);
-				if(ClauseExecutionStatus.getClauseActivation().getDecision().value == true) {
-					ClauseExecutionStatus.setTestFulfilled();
-					ClauseExecutionStatus.getClauseActivation().selectBody();
+		for(ClauseExecutionStatus clauseExecutionStatus : clausesWithTestStarted) {
+			if(clauseExecutionStatus.getClauseActivation().getDecision() != null) {
+				if (!containsTestEnabledNode(clauseExecutionStatus.getClauseActivation()) && !containsConditionalNodeEnabledNode()) {
+					clauseExecutionStatus.setStatus(ClauseExecutionState.TESTFINISHED);
+					BooleanValue decision = clauseExecutionStatus.getClauseActivation().getDecision();
+					if(decision.value == true) {
+						clauseExecutionStatus.setTestFulfilled();
+						clauseExecutionStatus.getClauseActivation().selectBody();
+					}
 				}
 			}
 		}
 
-		for(ClauseExecutionStatus ClauseExecutionStatus : clausesWithBodyStarted) {
-			if(!activityExecutionStatus.isAnyNodeEnabled(new ArrayList<ActivityNode>(ClauseExecutionStatus.getClauseActivation().clause.body))) {
-				ClauseExecutionStatus.setStatus(ClauseExecutionState.BODYFINISHED);
+		for(ClauseExecutionStatus clauseExecutionStatus : clausesWithBodyStarted) {
+			if(!containsBodyEnabledNode(clauseExecutionStatus.getClauseActivation()) && !containsConditionalNodeEnabledNode()) {
+				clauseExecutionStatus.setStatus(ClauseExecutionState.BODYFINISHED);
 			}
 		}	
 		
@@ -80,11 +88,57 @@ public class ConditionalNodeExecutionStatus extends StructuredActivityNodeExecut
 				startTestOfClauses(successorClausesToBeEvaluated);
 			} else {
 				startBodyOfSelectedClause();
+				updateStatus();
 			}
 		} else if(anyClauseFinishedBody) {
 			ClauseActivation selectedClause = getClauseActivationWithExecutedBody();
 			finishConditionalNodeExecution(selectedClause);
 		}	
+	}
+
+	private boolean containsConditionalNodeEnabledNode() {
+		return containsEnabledNode(getNodesContainedByConditionalNodeExceptClauses());
+	}
+	
+	private ActivityNodeList getNodesContainedByConditionalNodeExceptClauses() {
+		ConditionalNode conditionalNode = (ConditionalNode)this.conditionalNodeActivation.node;
+		ActivityNodeList nodes = new ActivityNodeList();
+		nodes.addAll(conditionalNode.node);
+		for(Clause clause : conditionalNode.clause) {
+			nodes.removeAll(clause.body);
+			nodes.removeAll(clause.test);
+		}
+		return nodes;
+	}
+
+	private boolean containsBodyEnabledNode(ClauseActivation clauseActivation) {
+		ActivityNodeList bodyNodes = new ActivityNodeList();
+		bodyNodes.addAll(clauseActivation.clause.body);
+		return containsEnabledNode(bodyNodes);
+	}
+	
+	private boolean containsTestEnabledNode(ClauseActivation clauseActivation) {
+		ActivityNodeList testNodes = new ActivityNodeList();
+		testNodes.addAll(clauseActivation.clause.test);
+		return containsEnabledNode(testNodes);
+	}
+	
+	private boolean containsEnabledNode(ActivityNodeList nodeList) {
+		List<ActivityNode> containedNodes = new ArrayList<ActivityNode>(nodeList);		
+		List<ActivityNode> enabledNodes = new ArrayList<ActivityNode>(activityExecutionStatus.getEnabledNodes());
+		if (containedNodes.removeAll(enabledNodes))
+			return true;
+		for(ActivityNode node : containedNodes) {
+			if(node instanceof CallBehaviorAction || node instanceof StructuredActivityNode) {
+				ActivityNodeActivation executingActivation = activityExecutionStatus.getExecutingActivation(node);
+				if(executingActivation != null) {
+					if(conditionalNodeActivation.activationGroup.nodeActivations.contains(executingActivation)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	private boolean anyClauseStartedBody() {

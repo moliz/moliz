@@ -66,6 +66,7 @@ import fUML.Syntax.Actions.IntermediateActions.ReadSelfAction;
 import fUML.Syntax.Actions.IntermediateActions.ReadStructuralFeatureAction;
 import fUML.Syntax.Actions.IntermediateActions.TestIdentityAction;
 import fUML.Syntax.Actions.IntermediateActions.ValueSpecificationAction;
+import fUML.Syntax.Activities.CompleteStructuredActivities.StructuredActivityNode;
 import fUML.Syntax.Activities.ExtraStructuredActivities.ExpansionKind;
 import fUML.Syntax.Activities.ExtraStructuredActivities.ExpansionRegion;
 import fUML.Syntax.Activities.IntermediateActivities.Activity;
@@ -74,6 +75,7 @@ import fUML.Syntax.Activities.IntermediateActivities.ActivityFinalNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNode;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityNodeList;
 import fUML.Syntax.Activities.IntermediateActivities.ActivityParameterNode;
+import fUML.Syntax.Activities.IntermediateActivities.ControlFlow;
 import fUML.Syntax.Activities.IntermediateActivities.DecisionNode;
 import fUML.Syntax.Activities.IntermediateActivities.ForkNode;
 import fUML.Syntax.Activities.IntermediateActivities.InitialNode;
@@ -134,7 +136,288 @@ public class DebugTest extends MolizTest implements ExecutionEventListener{
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	@Test
+	public void testReenteringCallAction() {
+		Activity activity2 = ActivityFactory.createActivity("activity2");
+		InitialNode initialNode_activity2 = ActivityFactory.createInitialNode(activity2, "initial activity 2");
+		Activity activity1 = ActivityFactory.createActivity("activity1");		
+		CallBehaviorAction callBehaviorAction = ActivityFactory.createCallBehaviorAction(activity1, "call activity2", activity2);
+		InitialNode initialNode1 = ActivityFactory.createInitialNode(activity1, "initial 1");
+		InitialNode initialNode2 = ActivityFactory.createInitialNode(activity1, "initial 2");
+		MergeNode mergeNode = ActivityFactory.createMergeNode(activity1, "merge");
+		ActivityFactory.createControlFlow(activity1, initialNode1, mergeNode);
+		ActivityFactory.createControlFlow(activity1, initialNode2, mergeNode);
+		ActivityFactory.createControlFlow(activity1, mergeNode, callBehaviorAction);
+		
+		ExecutionContext executionContext = ExecutionContext.getInstance();
+		executionContext.executeStepwise(activity1, null, null);
+		int activityexecutionID = ((ActivityEntryEvent) eventlist.get(0)).getActivityExecutionID();
+		
+		executionContext.nextStep(activityexecutionID, initialNode1);
+		executionContext.nextStep(activityexecutionID, mergeNode);
+		executionContext.nextStep(activityexecutionID, callBehaviorAction);
+		executionContext.nextStep(activityexecutionID, initialNode2);
+		executionContext.nextStep(activityexecutionID, mergeNode);
+		assertEquals(0, executionContext.getEnabledNodes(activityexecutionID).size());	
+		
+		ActivityEntryEvent activityEntry = null;
+		ActivityExitEvent activityExit = null;
+		ActivityNodeEntryEvent nodeEntry = null;
+		ActivityNodeExitEvent nodeExit = null;
+		SuspendEvent suspend = null;
+		int i=0;
+		
+		activityEntry = (ActivityEntryEvent)eventlist.get(i++);
+		assertEquals(activity1, activityEntry.getActivity());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(activity1, suspend.getLocation());
+		
+		// initial 1
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(initialNode1, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(initialNode1, nodeEntry.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(initialNode1, suspend.getLocation());
+		
+		// merge
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(mergeNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(mergeNode, nodeEntry.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(mergeNode, suspend.getLocation());
+		
+		// call entry
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(callBehaviorAction, nodeEntry.getNode());
+		
+		// activity 2 entry
+		activityEntry = (ActivityEntryEvent)eventlist.get(i++);
+		assertEquals(activity2, activityEntry.getActivity());
+		int activity2executionID = activityEntry.getActivityExecutionID();
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(activity2, suspend.getLocation());
+		
+		// initial 2
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(initialNode2, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(initialNode2, nodeEntry.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(initialNode2, suspend.getLocation());
+		
+		// merge
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(mergeNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(mergeNode, nodeEntry.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(mergeNode, suspend.getLocation());
+		
+		executionContext.nextStep(activity2executionID, initialNode_activity2);
+		executionContext.resume(activityexecutionID);
+		
+		// initial activity2
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(initialNode_activity2, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(initialNode_activity2, nodeEntry.getNode());
+		
+		// activity 2 exit
+		activityExit = (ActivityExitEvent)eventlist.get(i++);
+		assertEquals(activity2, activityExit.getActivity());
+		
+		// call exit
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(callBehaviorAction, nodeExit.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(callBehaviorAction, suspend.getLocation());
+		
+		// call entry
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(callBehaviorAction, nodeEntry.getNode());
+		
+		// activity 2 entry
+		activityEntry = (ActivityEntryEvent)eventlist.get(i++);
+		assertEquals(activity2, activityEntry.getActivity());
+		
+		// initial activity 2
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(initialNode_activity2, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(initialNode_activity2, nodeEntry.getNode());
 
+		// activity 2 exit
+		activityExit = (ActivityExitEvent)eventlist.get(i++);
+		assertEquals(activity2, activityExit.getActivity());
+		
+		// call exit
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(callBehaviorAction, nodeExit.getNode());
+		
+		// activity 1 exit
+		activityExit = (ActivityExitEvent)eventlist.get(i++);
+		assertEquals(activity1, activityExit.getActivity());
+		
+		assertEquals(i, eventlist.size());
+	}
+	
+//	@Test
+//	public void testReenteringMergeNode() { // TODO
+//		Activity activity = ActivityFactory.createActivity("activity1");
+//		InitialNode initialNode = ActivityFactory.createInitialNode(activity, "initial");
+//		ForkNode forkNode = ActivityFactory.createForkNode(activity, "fork");
+//		MergeNode mergeNode = ActivityFactory.createMergeNode(activity, "merge");
+//		CreateObjectAction createObjectAction = ActivityFactory.createCreateObjectAction(activity, "create", ActivityFactory.createClass("class"));
+//		ActivityFactory.createControlFlow(activity, initialNode, forkNode);
+//		ActivityFactory.createControlFlow(activity, forkNode, mergeNode);
+//		ActivityFactory.createControlFlow(activity, forkNode, mergeNode);
+//		ActivityFactory.createControlFlow(activity, mergeNode, createObjectAction);
+//		
+//		ExecutionContext executionContext = ExecutionContext.getInstance();
+//		executionContext.executeStepwise(activity, null, null);
+//		int activityexecutionID = ((ActivityEntryEvent) eventlist.get(0)).getActivityExecutionID();
+//		
+//		executionContext.nextStep(activityexecutionID, initialNode);
+//		executionContext.nextStep(activityexecutionID, forkNode);
+//		executionContext.nextStep(activityexecutionID, mergeNode);
+//		executionContext.nextStep(activityexecutionID, mergeNode);
+//		executionContext.nextStep(activityexecutionID, createObjectAction);
+//		executionContext.nextStep(activityexecutionID, createObjectAction);		
+//	}
+	
+	@Test
+	public void testActivityFinalNode() {
+		Class_ cl = ActivityFactory.createClass("Class");
+		Activity activity = ActivityFactory.createActivity("testActivityFinalNode");
+		CreateObjectAction createObjectAction1 = ActivityFactory.createCreateObjectAction(activity, "create1", cl);
+		CreateObjectAction createObjectAction2 = ActivityFactory.createCreateObjectAction(activity, "create2", cl);
+		ForkNode forkNode = ActivityFactory.createForkNode(activity, "fork");
+		ActivityFinalNode activityFinalNode = ActivityFactory.createActivityFinalNode(activity, "final");
+		ActivityFactory.createControlFlow(activity, createObjectAction1, forkNode);
+		ActivityFactory.createControlFlow(activity, forkNode, activityFinalNode);
+		ActivityFactory.createControlFlow(activity, forkNode, createObjectAction2);
+		
+		ExecutionContext executionContext = ExecutionContext.getInstance();
+		executionContext.executeStepwise(activity, null, null);
+		int activityexecutionID = ((ActivityEntryEvent) eventlist.get(0)).getActivityExecutionID();
+		
+		executionContext.nextStep(activityexecutionID, createObjectAction1);
+		executionContext.nextStep(activityexecutionID, forkNode);
+		executionContext.nextStep(activityexecutionID, activityFinalNode);
+		
+		List<ActivityNode> enabledNodes = executionContext.getEnabledNodes(activityexecutionID);
+		assertEquals(0, enabledNodes.size());
+		
+		// test events
+		SuspendEvent suspend = null;
+		ActivityNodeEntryEvent nodeEntry  = null;
+		ActivityNodeExitEvent nodeExit  = null;
+		ActivityExitEvent activityExit = null;
+		
+		int i=1;
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(activity, suspend.getLocation());
+		
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, nodeEntry.getNode());				
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, nodeExit.getNode());		
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, suspend.getLocation());
+		
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(forkNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(forkNode, nodeExit.getNode());		
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(forkNode, suspend.getLocation());
+		
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(activityFinalNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(activityFinalNode, nodeExit.getNode());		
+		
+		activityExit = (ActivityExitEvent)eventlist.get(i++);
+		assertEquals(activity, activityExit.getActivity());
+		
+		assertEquals(i, eventlist.size());
+	}
+	
+	@Test
+	public void testActivityFinalNodeInStructuredActivityNode() {
+		Class_ cl = ActivityFactory.createClass("Class");
+		Activity activity = ActivityFactory.createActivity("testActivityFinalNodeInStructuredActivityNode");
+		CreateObjectAction createObjectAction1 = ActivityFactory.createCreateObjectAction("create1", cl);
+		CreateObjectAction createObjectAction2 = ActivityFactory.createCreateObjectAction("create2", cl);
+		ForkNode forkNode = ActivityFactory.createForkNode("fork");
+		ActivityFinalNode activityFinalNode = ActivityFactory.createActivityFinalNode("final");		
+		
+		ControlFlow e1 = ActivityFactory.createControlFlow(createObjectAction1, forkNode);
+		ControlFlow e2 = ActivityFactory.createControlFlow(forkNode, activityFinalNode);
+		ControlFlow e3 = ActivityFactory.createControlFlow(forkNode, createObjectAction2);
+		
+		StructuredActivityNode structuredActivityNode = ActivityFactory.createStructuredActivityNode(activity, "structuredNode");		
+		ActivityFactory.addEdgesToStructuredActivityNode(structuredActivityNode, e1, e2, e3);
+		ActivityFactory.addNodesToStructuredActivityNode(structuredActivityNode, createObjectAction1, createObjectAction2, forkNode, activityFinalNode);
+		
+		ExecutionContext executionContext = ExecutionContext.getInstance();
+		executionContext.executeStepwise(activity, null, null);
+		int activityexecutionID = ((ActivityEntryEvent) eventlist.get(0)).getActivityExecutionID();
+		
+		executionContext.nextStep(activityexecutionID, structuredActivityNode);
+		executionContext.nextStep(activityexecutionID, createObjectAction1);
+		executionContext.nextStep(activityexecutionID, forkNode);
+		executionContext.nextStep(activityexecutionID, activityFinalNode);
+		
+		List<ActivityNode> enabledNodes = executionContext.getEnabledNodes(activityexecutionID);
+		assertEquals(0, enabledNodes.size());
+		
+		// test events
+		SuspendEvent suspend = null;
+		ActivityNodeEntryEvent nodeEntry  = null;
+		ActivityNodeExitEvent nodeExit  = null;
+		ActivityExitEvent activityExit = null;
+		
+		int i=1;
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(activity, suspend.getLocation());
+
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(structuredActivityNode, nodeEntry.getNode());
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(structuredActivityNode, suspend.getLocation());
+		
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, nodeExit.getNode());		
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(createObjectAction1, suspend.getLocation());
+		
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(forkNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(forkNode, nodeExit.getNode());		
+		suspend = (SuspendEvent)eventlist.get(i++);
+		assertEquals(forkNode, suspend.getLocation());
+
+		nodeEntry = (ActivityNodeEntryEvent)eventlist.get(i++);
+		assertEquals(activityFinalNode, nodeEntry.getNode());
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(activityFinalNode, nodeExit.getNode());	
+		
+		nodeExit = (ActivityNodeExitEvent)eventlist.get(i++);
+		assertEquals(structuredActivityNode, nodeExit.getNode());	
+
+		activityExit = (ActivityExitEvent)eventlist.get(i++);
+		assertEquals(activity, activityExit.getActivity());
+
+		assertEquals(i, eventlist.size());
+	}
+	
 	@Test
 	public void testExpansionRegionWithInputPin() {
 		Class_ cl = ActivityFactory.createClass("Person");

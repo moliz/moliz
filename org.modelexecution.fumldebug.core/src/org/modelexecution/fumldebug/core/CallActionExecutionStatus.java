@@ -65,6 +65,8 @@ public class CallActionExecutionStatus extends ActivityNodeExecutionStatus {
 		// Call sendOffer() from the CallAction			
 		callActionActivation.sendOffers();
 
+		callActionActivation.firing = false;
+		
 		// Check if can fire again
 		this.checkIfCanFireAgain();
 		

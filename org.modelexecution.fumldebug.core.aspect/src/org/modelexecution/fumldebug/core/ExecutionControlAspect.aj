@@ -9,6 +9,8 @@
  */
 package org.modelexecution.fumldebug.core;
 
+import org.modelexecution.fumldebug.core.alf.AlfOpaqueBehaviorExecution;
+
 import fUML.Semantics.Actions.BasicActions.ActionActivation;
 import fUML.Semantics.Actions.BasicActions.CallActionActivation;
 import fUML.Semantics.Actions.BasicActions.CallBehaviorActionActivation;
@@ -17,12 +19,12 @@ import fUML.Semantics.Actions.BasicActions.OutputPinActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ClauseActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ClauseActivationList;
 import fUML.Semantics.Activities.CompleteStructuredActivities.ConditionalNodeActivation;
-import fUML.Semantics.Activities.CompleteStructuredActivities.LoopNodeActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionActivationGroup;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionRegionActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityEdgeInstance;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityExecution;
+import fUML.Semantics.Activities.IntermediateActivities.ActivityFinalNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivationGroup;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivationList;
@@ -33,6 +35,8 @@ import fUML.Semantics.Activities.IntermediateActivities.ObjectNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.TokenList;
 import fUML.Semantics.Classes.Kernel.Object_;
 import fUML.Semantics.Classes.Kernel.Value;
+import fUML.Semantics.Classes.Kernel.BooleanValue;
+import fUML.Semantics.Classes.Kernel.ValueList;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.Execution;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.OpaqueBehaviorExecution;
 import fUML.Semantics.CommonBehaviors.BasicBehaviors.ParameterValueList;
@@ -44,7 +48,6 @@ import fUML.Syntax.Activities.IntermediateActivities.ActivityNodeList;
 import fUML.Syntax.Classes.Kernel.Element;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.Behavior;
 import fUML.Syntax.CommonBehaviors.BasicBehaviors.OpaqueBehavior;
-import org.modelexecution.fumldebug.core.alf.AlfOpaqueBehaviorExecution; //TODO adjust build process
 
 public aspect ExecutionControlAspect {
 
@@ -376,8 +379,7 @@ public aspect ExecutionControlAspect {
 		}
 
 		// Handle activity node exit event
-		if (!(  (activation instanceof CallOperationActionActivation) || 
-				(activation instanceof CallBehaviorActionActivation && ((CallBehaviorAction) activation.node).behavior instanceof Activity) || 
+		if (!(  isCallOfActivity(activation) || 
 				(activation instanceof StructuredActivityNodeActivation) )) {
 			// (1) in the case of a call operation action or a call behavior action
 			// which calls an activity, the exit event is issued when the called
@@ -385,8 +387,9 @@ public aspect ExecutionControlAspect {
 			// (2) in the case of a structured activity node the exit event is issued
 			// when no contained nodes are enabled
 			handleActivityNodeExit(activation);
+		} else if (isCallOfActivity(activation)) {
+			((CallActionActivation)activation).firing = true;
 		}
-		
 		
 		if(activation instanceof StructuredActivityNodeActivation) { 
 			// For an structured activity node this advice is executed right after its execution started
@@ -400,12 +403,22 @@ public aspect ExecutionControlAspect {
 		}
 
 		// Handle suspension
-		if (activation.getActivityExecution().getTypes().size() == 0) {
+		if (activation.getActivityExecution().getTypes().size() == 0) {			
 			// Activity was already destroyed, i.e., the Activity already
 			// finished. This can happen in the case of existing breakpoints in
 			// resume mode.
 			return;
 		}
+		
+		if (activation instanceof ActivityFinalNodeActivation) { 
+			if(activation.group.activityExecution != null) {
+				handleActivityExit(activation.group.activityExecution);
+				return;
+			} else if(activation.group.containingNodeActivation != null) {				
+				handleActivityNodeExit(activation.group.containingNodeActivation);
+			}
+		}
+		
 		ActivityExecutionStatus activityExecutionStatus = ExecutionContext.getInstance().executionStatus.getActivityExecutionStatus(activation.getActivityExecution());
 		boolean hasEnabledNodes = activityExecutionStatus.hasEnabledNodesIncludingCallees();
 		if (!hasEnabledNodes) {
@@ -418,6 +431,11 @@ public aspect ExecutionControlAspect {
 			}
 			handleSuspension(activation.getActivityExecution(), activation.node);
 		}
+	}
+	
+	private boolean isCallOfActivity(ActivityNodeActivation activation) {
+		return (activation instanceof CallOperationActionActivation)
+				|| (activation instanceof CallBehaviorActionActivation && ((CallBehaviorAction) activation.node).behavior instanceof Activity);
 	}
 	
 	private void updateStructuredActivityNode(StructuredActivityNodeActivation structuredActivityNodeActivation) {
@@ -564,7 +582,7 @@ public aspect ExecutionControlAspect {
 		ActivityExecutionStatus activityExecutionStatus = ExecutionContext.getInstance().executionStatus.getActivityExecutionStatus(execution);
 		activityExecutionStatus.handleSuspension(location);
 	}
-
+	
 	/*
 	 * Decision nodes
 	 */
@@ -691,32 +709,54 @@ public aspect ExecutionControlAspect {
 		conditionalNodeExecutionStatus.clauseStartsTest(clauseActivation);
 	}	
 
+	/**
+	 * If multiple decision values for a clause exist, the last one should be considered as final decision value
+	 */
+	private pointcut clauseGetDecision(ClauseActivation clauseActivation) : call(BooleanValue ClauseActivation.getDecision()) && target(clauseActivation);
+	
+	BooleanValue around(ClauseActivation clauseActivation) : clauseGetDecision(clauseActivation) {
+		ValueList deciderValues = clauseActivation.conditionalNodeActivation
+				.getPinValues(clauseActivation.clause.decider);
+
+		BooleanValue deciderValue = null;
+		if (deciderValues.size() > 0) {
+			deciderValue = (BooleanValue) (deciderValues.getValue(deciderValues.size()-1));
+		}
+
+		return deciderValue;
+	}
+	
 	/*
 	 * Loop nodes
 	 */
 	
-	private pointcut loopNodeTerminatesAll() : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void LoopNodeActivation.doStructuredActivity());
-	
-	/**
-	 * Prevents the method LoopNodeActivation.doStructuredActivity() from terminating all contained nodes.
-	 */
-	void around() : loopNodeTerminatesAll() { 		
-		return; 
-	}
-
-	private pointcut loopNodeStartsTestFirst(LoopNodeActivation activation) : call(boolean LoopNodeActivation.runTest()) && withincode(void LoopNodeActivation.doStructuredActivity()) && target(activation);
-	
-	before(LoopNodeActivation activation) : loopNodeStartsTestFirst(activation) {
-		LoopNodeExecutionStatus loopNodeExecutionStatus = getLoopNodeExecutionStatus(activation);
-		loopNodeExecutionStatus.loopNodeStartsTest();
-	}
-	
-	private pointcut loopNodeStartsBodyFirst(LoopNodeActivation activation) : call(void LoopNodeActivation.runBody()) && withincode(void LoopNodeActivation.doStructuredActivity()) && target(activation);
-	
-	before(LoopNodeActivation activation) : loopNodeStartsBodyFirst(activation) {
-		LoopNodeExecutionStatus loopNodeExecutionStatus = getLoopNodeExecutionStatus(activation);
-		loopNodeExecutionStatus.loopNodeStartsBody();
-	}
+//	private pointcut loopNodeTerminatesAll() : call (void ActivityNodeActivationGroup.terminateAll()) && withincode(void LoopNodeActivation.doStructuredActivity());
+//	
+//	/**
+//	 * Prevents the method LoopNodeActivation.doStructuredActivity() from terminating all contained nodes.
+//	 */
+//	void around() : loopNodeTerminatesAll() { 		
+//		return; 
+//	}
+//
+//	private pointcut loopNodeStartsTestFirst(LoopNodeActivation activation) : call(boolean LoopNodeActivation.runTest()) && withincode(void LoopNodeActivation.doStructuredActivity()) && target(activation);
+//	
+//	before(LoopNodeActivation activation) : loopNodeStartsTestFirst(activation) {
+//		LoopNodeExecutionStatus loopNodeExecutionStatus = getLoopNodeExecutionStatus(activation);
+//		loopNodeExecutionStatus.loopNodeStartsTest();
+//	}
+//	
+//	private pointcut loopNodeStartsBodyFirst(LoopNodeActivation activation) : call(void LoopNodeActivation.runBody()) && withincode(void LoopNodeActivation.doStructuredActivity()) && target(activation);
+//	
+//	before(LoopNodeActivation activation) : loopNodeStartsBodyFirst(activation) {
+//		LoopNodeExecutionStatus loopNodeExecutionStatus = getLoopNodeExecutionStatus(activation);
+//		loopNodeExecutionStatus.loopNodeStartsBody();
+//	}
+//	
+//	private LoopNodeExecutionStatus getLoopNodeExecutionStatus(LoopNodeActivation conditionalNodeActivation) {
+//		LoopNodeExecutionStatus loopNodeExecutionStatus = (LoopNodeExecutionStatus)getActivityNodeExecutionStatus(conditionalNodeActivation);
+//		return loopNodeExecutionStatus;
+//	}
 	
 	private ActivityNodeExecutionStatus getActivityNodeExecutionStatus(ActivityNodeActivation activityNodeActivation) {
 		ActivityExecutionStatus activityExecutionStatus = ExecutionContext.getInstance().executionStatus.getActivityExecutionStatus(activityNodeActivation.getActivityExecution());
@@ -728,9 +768,5 @@ public aspect ExecutionControlAspect {
 		ConditionalNodeExecutionStatus conditionalNodeExecutionStatus = (ConditionalNodeExecutionStatus)getActivityNodeExecutionStatus(conditionalNodeActivation);
 		return conditionalNodeExecutionStatus;
 	}
-	
-	private LoopNodeExecutionStatus getLoopNodeExecutionStatus(LoopNodeActivation conditionalNodeActivation) {
-		LoopNodeExecutionStatus loopNodeExecutionStatus = (LoopNodeExecutionStatus)getActivityNodeExecutionStatus(conditionalNodeActivation);
-		return loopNodeExecutionStatus;
-	}
+
 }

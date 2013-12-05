@@ -160,6 +160,12 @@ public class ActivityFactory {
 		return finalnode;
 	}	
 	
+	public static ActivityFinalNode createActivityFinalNode(String name) {
+		ActivityFinalNode finalnode = new ActivityFinalNode();
+		finalnode.setName(name);
+		return finalnode;
+	}
+	
 	public static ForkNode createForkNode(Activity activity, String name) {
 		ForkNode forknode = createForkNode(name);	
 		forknode.activity = activity;

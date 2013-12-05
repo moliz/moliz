@@ -86,6 +86,11 @@ public class StructuredActivityNodeExecutionStatus extends ActivityNodeExecution
 	public void handleEndOfExecution() {		
 		structuredActivityNodeActivation.sendOffers();	
 
+		for(ActivityNode node : ((StructuredActivityNode)structuredActivityNodeActivation.node).node) {
+			activityExecutionStatus.removeExecutingActivation(node);
+			activityExecutionStatus.removeEnabledActivation(node);
+		}
+		
 		// activated activity final nodes can influence the execution of an activity because tokens on output pins are destroyed
 		ActivityNodeActivation enabledActivityFinalNodeActivation = getEnabledActivityFinalNode();		
 		if(enabledActivityFinalNodeActivation != null) {

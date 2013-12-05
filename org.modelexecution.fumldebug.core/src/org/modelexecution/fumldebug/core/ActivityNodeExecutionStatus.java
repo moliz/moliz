@@ -16,11 +16,8 @@ import java.util.List;
 import org.modeldriven.alf.fuml.impl.environment.AlfOpaqueBehaviorExecution;
 
 import fUML.Semantics.Actions.BasicActions.ActionActivation;
-import fUML.Semantics.Activities.CompleteStructuredActivities.ConditionalNodeActivation;
-import fUML.Semantics.Activities.CompleteStructuredActivities.LoopNodeActivation;
 import fUML.Semantics.Activities.CompleteStructuredActivities.StructuredActivityNodeActivation;
 import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionActivationGroup;
-import fUML.Semantics.Activities.ExtraStructuredActivities.ExpansionRegionActivation;
 import fUML.Semantics.Activities.IntermediateActivities.ActivityNodeActivation;
 import fUML.Semantics.Activities.IntermediateActivities.TokenList;
 import fUML.Semantics.Loci.LociL1.SemanticVisitor;
@@ -145,13 +142,13 @@ public class ActivityNodeExecutionStatus implements Comparable<ActivityNodeExecu
 		ActionActivation containingStructuredActivityNodeActivation = getContainingStructuredActivityNodeActivation();
 		if(containingStructuredActivityNodeActivation != null) {
 			ActivityNodeExecutionStatus containingStructuredNodeExecutionStatus = activityExecutionStatus.getExecutingActivityNodeExecutionStatus(containingStructuredActivityNodeActivation.node);
-			if(containingStructuredActivityNodeActivation instanceof ExpansionRegionActivation) {
+			if(containingStructuredNodeExecutionStatus instanceof ExpansionRegionExecutionStatus) {
 				ExpansionRegionExecutionStatus expansionRegionExecutionStatus = (ExpansionRegionExecutionStatus)containingStructuredNodeExecutionStatus;
 				expansionRegionExecutionStatus.updateStatus();
-			} else if(containingStructuredActivityNodeActivation instanceof ConditionalNodeActivation) {
+			} else if(containingStructuredNodeExecutionStatus instanceof ConditionalNodeExecutionStatus) {
 				ConditionalNodeExecutionStatus conditionalNodeExecutionStatus = (ConditionalNodeExecutionStatus)containingStructuredNodeExecutionStatus;
 				conditionalNodeExecutionStatus.updateStatus();
-			} else if(containingStructuredActivityNodeActivation instanceof LoopNodeActivation) {
+			} else if(containingStructuredNodeExecutionStatus instanceof LoopNodeExecutionStatus) {
 				LoopNodeExecutionStatus loopNodeExecutionStatus = (LoopNodeExecutionStatus)containingStructuredNodeExecutionStatus;
 				loopNodeExecutionStatus.updateStatus();
 			} else {

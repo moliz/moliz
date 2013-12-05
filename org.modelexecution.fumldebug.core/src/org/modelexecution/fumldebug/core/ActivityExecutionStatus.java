@@ -160,9 +160,12 @@ public class ActivityExecutionStatus {
 		return enabledNodes;
 	}
 	
-	public ActivityNodeActivation getExecutingActivation(ActivityNode node) { 		
+	public ActivityNodeActivation getExecutingActivation(ActivityNode node) {
+		ActivityNodeActivation activation = null;
 		ActivityNodeExecutionStatus status = getExecutingActivityNodeExecutionStatus(node);
-		ActivityNodeActivation activation = status.getActivityNodeActivation();
+		if(status != null) {
+			activation = status.getActivityNodeActivation();
+		}
 		return activation;
 	}
 	
@@ -179,10 +182,10 @@ public class ActivityExecutionStatus {
 		ActivityNodeExecutionStatus status = enabledActivityNodeExecutionStatuses.get(node);
 		TokenList tokens = status.removeWaitingTokens();
 		if(status.getWaitingTokens().size() == 0) {
-			enabledActivityNodeExecutionStatuses.remove(node);
+			removeEnabledActivation(node);
 		}
 		return tokens;
-	}
+	}	
 	
 	/** 
 	 * @return true if the execution has enabled nodes
@@ -241,6 +244,10 @@ public class ActivityExecutionStatus {
 		executingActivityNodeExecutionStatuses.remove(node);
 	}
 	
+	public void removeEnabledActivation(ActivityNode node) {
+		enabledActivityNodeExecutionStatuses.remove(node);
+		enabledNodesSinceLastStep.remove(node);
+	}
 	
 	private ActivityNodeExecutionStatus createActivityNodeExecutionStatus(ActivityNodeActivation activation) {
 		int activationIndex = getNextNodeActivationIndex();
@@ -386,7 +393,8 @@ public class ActivityExecutionStatus {
 		return nodeEnabled;
 	}
 	
-	public boolean isAnyNodeEnabled(List<ActivityNode> nodes) {
+	public boolean isAnyNodeEnabled(List<ActivityNode> nodes) { 
+		//TODO consider structured activity nodes --> look into conditional node for implementing loop node
 		List<ActivityNode> nodes_ = new ArrayList<ActivityNode>(nodes);
 		List<ActivityNode> enabledNodes = new ArrayList<ActivityNode>(this.getEnabledNodes());
 		if(nodes_.removeAll(enabledNodes)) {
@@ -412,6 +420,8 @@ public class ActivityExecutionStatus {
 	public void handleEndOfExecution() { 
 		obtainActivityOutput();
 		
+		clearNodeExecutionStatuses();
+		
 		ActivityNodeExecutionStatus callerNodeExecutionStatus = getActivityCallerNoderExecutionStatus();
 		if (callerNodeExecutionStatus instanceof CallActionExecutionStatus) {
 			CallActionExecutionStatus callerActionExecutionStatus = (CallActionExecutionStatus)callerNodeExecutionStatus;
@@ -425,6 +435,12 @@ public class ActivityExecutionStatus {
 
 			ExecutionContext.getInstance().executionStatus.removeActivityExecution(executionID);
 		}
+	}
+
+	private void clearNodeExecutionStatuses() {
+		enabledActivityNodeExecutionStatuses.clear();
+		enabledNodesSinceLastStep.clear();
+		executingActivityNodeExecutionStatuses.clear();
 	}
 	
 	public void destroyActivityExecution() {
