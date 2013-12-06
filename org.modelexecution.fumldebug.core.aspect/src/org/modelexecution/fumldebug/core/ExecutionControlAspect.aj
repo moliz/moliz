@@ -83,7 +83,10 @@ public aspect ExecutionControlAspect {
 		activityExecutionStatus.setWholeExecutionInResumeMode(true);
 	}
 
-	private pointcut activityExecutionByAlfOpaqueBehaviorExecution(ActivityExecution activityExecution, CallActionActivation callActionActivation, AlfOpaqueBehaviorExecution alfExecution) : activityExecution(activityExecution) && cflow(execution(void AlfOpaqueBehaviorExecution.execute(Activity, ParameterValueList, ParameterValueList)) && target(alfExecution)) && cflow(execution(void CallActionActivation.doAction()) && target(callActionActivation));
+	/**
+	 * Handling of activity entry for alf opaque behavior executions
+	 */
+	private pointcut activityExecutionByAlfOpaqueBehaviorExecution(ActivityExecution activityExecution, CallActionActivation callActionActivation, AlfOpaqueBehaviorExecution alfExecution) : activityExecution(activityExecution) && cflow(execution(void AlfOpaqueBehaviorExecution.doBody(ParameterValueList, ParameterValueList)) && target(alfExecution)) && cflow(execution(void CallActionActivation.doAction()) && target(callActionActivation));
 	
 	before(ActivityExecution activityExecution, CallActionActivation callActionActivation, AlfOpaqueBehaviorExecution alfExecution) : activityExecutionByAlfOpaqueBehaviorExecution(activityExecution, callActionActivation, alfExecution) {
 		handleActivityEntry(activityExecution, callActionActivation, alfExecution);
